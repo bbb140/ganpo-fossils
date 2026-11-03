@@ -1,0 +1,63 @@
+/* ===== 基础重置 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== 占位色板（D岗之后会改） ===== */
+:root {
+  --color-primary: #333;
+  --color-bg: #fff;
+  --color-text: #222;
+  --color-border: #ddd;
+}
+
+body {
+  font-family: sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+/* ===== 顶部导航 ===== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+nav .logo {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+nav ul {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+/* ===== 主体区域 ===== */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  min-height: 60vh;
+}
+
+/* ===== 页脚 ===== */
+footer {
+  text-align: center;
+  padding: 24px;
+  border-top: 1px solid var(--color-border);
+  font-size: 14px;
+  color: #666;
+}
