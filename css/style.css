@@ -1,63 +1,237 @@
-/* ===== 基础重置 ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ===== 1. 基础重置 ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ===== 占位色板（D岗之后会改） ===== */
+/* ===== 2. 色板 ===== */
 :root {
-  --color-primary: #333;
-  --color-bg: #fff;
-  --color-text: #222;
-  --color-border: #ddd;
+  --c-primary: #2E5E4E;
+  --c-text: #222;
+  --c-bg: #fff;
+  --c-surface: #f5f5f0;
+  --c-border: #ddd;
 }
 
 body {
-  font-family: sans-serif;
-  color: var(--color-text);
-  background: var(--color-bg);
-  line-height: 1.6;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: var(--c-text);
+  background: var(--c-bg);
+  line-height: 1.7;
 }
 
-/* ===== 顶部导航 ===== */
-nav {
+/* ===== 3. 顶部导航 ===== */
+header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 40px;
-  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--c-border);
+  background: var(--c-surface);
 }
 
 nav .logo {
   font-weight: bold;
-  font-size: 18px;
+  color: var(--c-primary);
+  text-decoration: none;
 }
 
 nav ul {
   display: flex;
-  gap: 24px;
+  gap: 1.5rem;
   list-style: none;
 }
 
 nav a {
   text-decoration: none;
-  color: var(--color-primary);
+  color: var(--c-text);
 }
 
-/* ===== 主体区域 ===== */
+/* ===== 4. 主体容器 ===== */
 main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px;
-  min-height: 60vh;
+  padding: 2rem;
 }
 
-/* ===== 页脚 ===== */
+/* ===== 5. Hero 区 ===== */
+.hero {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: var(--c-surface);
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: 1.8rem;
+  color: var(--c-primary);
+  margin-bottom: .75rem;
+}
+
+/* ===== 6. 数据速览条 ===== */
+.stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  flex: 1;
+  text-align: center;
+  padding: 1.5rem 0;
+  background: var(--c-surface);
+  border-radius: 6px;
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 2rem;
+  color: var(--c-primary);
+}
+
+.stat-card span {
+  font-size: .9rem;
+  color: #666;
+}
+
+/* ===== 7. 四大地层区卡片 ===== */
+.region-cards {
+  margin-bottom: 2.5rem;
+}
+
+.region-cards h2 {
+  margin-bottom: 1rem;
+}
+
+.card-wrap {
+  display: flex;
+  gap: 1rem;
+}
+
+.card {
+  flex: 1;
+  padding: 2rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: var(--c-text);
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+}
+
+/* ===== 8. 地层区详情区块 ===== */
+.region-block {
+  padding: 2rem 0;
+  border-top: 1px solid var(--c-border);
+  scroll-margin-top: 80px;
+}
+
+.region-block h2 {
+  margin-bottom: .75rem;
+  color: var(--c-primary);
+}
+
+.region-block p {
+  margin-bottom: 1rem;
+}
+
+.table-placeholder {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.table-placeholder th,
+.table-placeholder td {
+  border: 1px solid var(--c-border);
+  padding: .6rem;
+  text-align: left;
+}
+
+.table-placeholder th {
+  background: var(--c-surface);
+}
+
+.species-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.species-cards div {
+  flex: 1 1 200px;
+  padding: 1.5rem;
+  border: 1px dashed var(--c-border);
+  text-align: center;
+}
+
+/* ===== 9. 页脚 ===== */
 footer {
   text-align: center;
-  padding: 24px;
-  border-top: 1px solid var(--color-border);
-  font-size: 14px;
+  padding: 1.5rem;
+  border-top: 1px solid var(--c-border);
+  font-size: .85rem;
   color: #666;
+  background: var(--c-surface);
+}
+
+/* ===== 10. 地图页 ===== */
+#map {
+  height: 600px;
+  border: 1px solid var(--c-border);
+}
+
+/* ===== 11. 物种静态列表 ===== */
+.species-list-title {
+  margin: 2rem 0 1rem;
+  color: var(--c-primary);
+}
+
+#species-list {
+  border-top: 1px solid var(--c-border);
+}
+
+.species-row {
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.species-row em {
+  font-style: italic;
+}
+
+.species-row p {
+  font-size: .9rem;
+  color: #666;
+}
+
+/* ===== 12. 下载页 ===== */
+.dl-cards {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.dl-card {
+  flex: 1;
+  padding: 2rem;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.dl-card h3 {
+  color: var(--c-primary);
+  margin-bottom: .5rem;
+}
+
+.dl-card a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .5rem 1.5rem;
+  border: 1px solid var(--c-primary);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--c-primary);
+}
+
+.note {
+  font-size: .9rem;
+  color: #555;
 }

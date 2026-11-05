@@ -5,28 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>产地地图 - 赣鄱石语</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="assets/leaflet/leaflet.css">
 </head>
 <body>
 
-  <nav>
-    <div class="logo">赣鄱石语</div>
-    <ul>
-      <li><a href="index.html">首页</a></li>
-      <li><a href="region.html">四大地层区</a></li>
-      <li><a href="map.html">产地地图</a></li>
-      <li><a href="species.html">化石图鉴</a></li>
-      <li><a href="download.html">数据下载</a></li>
-    </ul>
-  </nav>
+  <header>
+    <nav>
+      <a class="logo" href="index.html">赣鄱石语</a>
+      <ul>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="map.html">产地地图</a></li>
+        <li><a href="download.html">数据下载</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
-    <h1>产地地图</h1>
-    <p>地图内容占位</p>
+    <!-- 地图区域 -->
+    <div id="map"></div>
+
+    <!-- 本区代表物种 -->
+    <h2 class="species-list-title">本区代表物种</h2>
+    <div id="species-list">
+      <p class="note">【占位：物种列表，Step 4 渲染】</p>
+    </div>
   </main>
 
   <footer>
-    <p>赣鄱石语项目组 | 数据来源声明占位</p>
+    <p>数据来源：《江西省古生物化石保护规划（2016—2025年）》等 | 赣鄱石语项目组</p>
   </footer>
 
+  <script src="assets/leaflet/leaflet.js"></script>
+  <script src="js/map.js"></script>
 </body>
 </html>
