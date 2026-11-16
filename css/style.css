@@ -17,7 +17,16 @@ body {
   line-height: 1.7;
 }
 
+/* 新增：图片不撑破容器 */
+img { max-width: 100%; display: block; }
+
 /* ===== 3. 顶部导航 ===== */
+/* 新增：让导航压住 Leaflet 内部图层（Leaflet 控件 z-index 高达 1000） */
+header {
+  position: relative;
+  z-index: 10;
+}
+
 header nav {
   display: flex;
   justify-content: space-between;
@@ -68,12 +77,13 @@ main {
 /* ===== 6. 数据速览条 ===== */
 .stats {
   display: flex;
+  flex-wrap: wrap;              /* 改：窄屏换行，不再挤成一条 */
   gap: 1rem;
   margin-bottom: 2.5rem;
 }
 
 .stat-card {
-  flex: 1;
+  flex: 1 1 140px;              /* 改：原来 flex:1 在手机上会把数字挤爆 */
   text-align: center;
   padding: 1.5rem 0;
   background: var(--c-surface);
@@ -91,7 +101,19 @@ main {
   color: #666;
 }
 
-/* ===== 7. 四大地层区卡片 ===== */
+/* 口径说明：数字是全省规划口径，不是本站收录量。缺了这句，109 和 32 条地图会被当成矛盾 */
+.stat-note {
+  margin: -1.6rem 0 2.4rem;
+  font-size: .85rem;
+  line-height: 1.75;
+  color: #666;
+  border-left: 3px solid var(--c-primary, #1F5C99);
+  padding-left: .75rem;
+}
+
+.stat-note strong { color: #333; }
+
+/* ===== 7. 四大保护分区卡片 ===== */
 .region-cards {
   margin-bottom: 2.5rem;
 }
@@ -102,11 +124,12 @@ main {
 
 .card-wrap {
   display: flex;
+  flex-wrap: wrap;              /* 改：四个卡片窄屏两两换行 */
   gap: 1rem;
 }
 
 .card {
-  flex: 1;
+  flex: 1 1 160px;              /* 改 */
   padding: 2rem 1rem;
   text-align: center;
   text-decoration: none;
@@ -161,6 +184,37 @@ main {
   text-align: center;
 }
 
+/* 卡片内容由 js/main.js 填充：门类 + 条数 + 代表记录，不写死物种名 */
+.species-cards .taxa-card {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  border-style: solid;
+  border-color: #dcdcd4;
+  border-left: 3px solid var(--c-primary);
+  background: #fbfbf7;
+}
+.taxa-card strong { font-size: 1rem; color: var(--c-primary); }
+.taxa-card span { font-size: .85rem; color: #666; }
+.taxa-card em {
+  font-style: normal;
+  font-size: .78rem;
+  color: #8a8a80;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 导语与空行 */
+.region-lead { color: #555; font-size: .92rem; }
+.empty-row { color: #999; text-align: center; }
+
+/* 产地表：数据行悬停高亮，长名称换行不撑破 */
+.table-placeholder tbody tr:hover { background: #f7f7f0; }
+.table-placeholder td { vertical-align: top; }
+
 /* ===== 9. 页脚 ===== */
 footer {
   text-align: center;
@@ -172,9 +226,75 @@ footer {
 }
 
 /* ===== 10. 地图页 ===== */
+/* 10.1 检索栏（js/filter.js 驱动，选项不写死在 HTML） */
+.filter-bar {
+  margin-bottom: .75rem;
+  padding: .75rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+}
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.filter-row input,
+.filter-row select,
+.filter-row button {
+  font: inherit;
+  font-size: .9rem;
+  padding: .45rem .6rem;
+  border: 1px solid #c9c9c1;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--c-text);
+  min-width: 0;
+}
+.filter-row input {
+  flex: 2 1 220px;              /* 关键词占最大宽度 */
+}
+.filter-row select {
+  flex: 1 1 120px;
+}
+.filter-row input:focus,
+.filter-row select:focus,
+.filter-row button:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 1px;
+}
+.btn-reset {
+  flex: 0 0 auto;
+  cursor: pointer;
+  background: #fff;
+  color: var(--c-primary);
+  border-color: var(--c-primary);
+}
+.btn-reset:hover { background: var(--c-primary); color: #fff; }
+
+.filter-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  align-items: baseline;
+  margin-top: .5rem;
+  font-size: .85rem;
+  color: #555;
+}
+.filter-meta #flt-count { font-weight: 600; color: var(--c-primary); }
+.filter-hint:empty { display: none; }
+.filter-hint { color: #777; }
+.filter-hint.ok { color: #2E7D5B; }
+.filter-hint.warn { color: #C62828; }
+
 #map {
+  width: 100%;                  /* 新增 */
   height: 600px;
   border: 1px solid var(--c-border);
+  border-radius: 6px;           /* 新增：瓦片不溢出圆角 */
+  overflow: hidden;             /* 新增 */
+  position: relative;           /* 新增：把 Leaflet 内部 z-index 关进自己的层叠上下文 */
+  z-index: 0;
 }
 
 /* ===== 11. 物种静态列表 ===== */
@@ -204,12 +324,13 @@ footer {
 /* ===== 12. 下载页 ===== */
 .dl-cards {
   display: flex;
+  flex-wrap: wrap;              /* 改 */
   gap: 1rem;
   margin: 2rem 0;
 }
 
 .dl-card {
-  flex: 1;
+  flex: 1 1 180px;              /* 改 */
   padding: 2rem;
   border: 1px solid var(--c-border);
   border-radius: 6px;
@@ -234,4 +355,375 @@ footer {
 .note {
   font-size: .9rem;
   color: #555;
+}
+
+/* ===== 13. 无坐标产地列表（新增，配合 map.js） ===== */
+#no-coord-list {
+  list-style: none;
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: #555;
+}
+
+#no-coord-list li {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+#no-coord-list .tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 5px;
+  font-size: 11px;
+  color: #EF6C00;
+  border: 1px solid #EF6C00;
+  border-radius: 3px;
+}
+
+#no-coord-list .ok { color: #2E7D32; }
+
+/* ===== 14. 响应式（新增，对应 Step 2「375px 不崩版」验收） ===== */
+@media (max-width: 768px) {
+  main { padding: 1rem; }
+
+  header nav { padding: .75rem 1rem; }
+  nav ul { gap: 1rem; }
+
+  .hero { padding: 2rem 1rem; }
+  .hero h1 { font-size: 1.4rem; }
+
+  .stats {
+    display: grid;                       /* 手机上一行两个，比四个挤一条清楚 */
+    grid-template-columns: 1fr 1fr;
+  }
+  .stat-card strong { font-size: 1.5rem; }
+
+  #map { height: 55vh; }                 /* 不再占满整屏，下面的物种列表可见 */
+
+  /* 筛选栏：手机上两列下拉，关键词独占一行 */
+  .filter-row input { flex: 1 1 100%; }
+  .filter-row select { flex: 1 1 calc(50% - .25rem); }
+  .filter-row button { flex: 0 0 auto; padding: .45rem .9rem; }
+
+  /* 五列的产地表格横向滚动，不撑破页面 */
+  .table-placeholder {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+/* 地图免责声明 */
+.map-disclaimer {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #6b6b6b;
+  background: #faf9f4;
+  border-left: 3px solid #EF9F27;
+  padding: 8px 10px;
+  border-radius: 0 3px 3px 0;
+}
+
+/* 没有近似坐标时整块不显示，不留空白 */
+.map-disclaimer:empty { display: none; }
+
+/* 地图页：当前结果的门类聚合（js/filter.js 填充） */
+.taxa-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  align-items: center;
+}
+.taxa-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .35rem;
+  padding: .3rem .6rem;
+  border: 1px solid #dcdcd4;
+  border-radius: 999px;
+  background: #fbfbf7;
+  font-size: .85rem;
+}
+.taxa-chip strong { color: var(--c-primary); font-weight: 600; }
+.taxa-chip span { color: #8a8a80; font-size: .78rem; }
+.taxa-summary .note {
+  flex: 1 1 100%;
+  font-size: .8rem;
+  color: #8a8a80;
+}
+
+/* 下载页：字段说明与使用限制 */
+.dl-section {
+  margin: 2rem 0 .75rem;
+  font-size: 1.05rem;
+  color: var(--c-primary);
+}
+.table-wrap { overflow-x: auto; }
+.field-dict td:first-child { white-space: nowrap; font-weight: 600; }
+.field-dict td:nth-child(2) { white-space: nowrap; color: #666; }
+.cite {
+  padding: .75rem 1rem;
+  background: var(--c-surface);
+  border-left: 3px solid var(--c-primary);
+  font-size: .9rem;
+}
+.dl-notes { padding-left: 1.2rem; font-size: .9rem; color: #555; }
+.dl-notes li { margin: .35rem 0; }
+
+/* ===== 12. 产地名录（list.html） ===== */
+.page-title {
+  font-size: 1.5rem;
+  color: var(--c-primary);
+  margin-bottom: .5rem;
+}
+.list-lead {
+  color: #555;
+  font-size: .95rem;
+  margin-bottom: 1rem;
+}
+.list-lead strong { color: var(--c-primary); }
+
+/* 当前页导航高亮 */
+nav a.active { color: var(--c-primary); border-bottom: 2px solid var(--c-primary); }
+
+/* 表格：32 行要一眼扫得动，行高压紧、斑马纹、悬停给反馈 */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+.data-table th,
+.data-table td {
+  border-bottom: 1px solid #e8e8e2;
+  padding: .5rem .55rem;
+  text-align: left;
+  vertical-align: top;
+}
+.data-table thead th {
+  position: sticky;                     /* 长表格滚动时表头不跑 */
+  top: 0;
+  background: var(--c-surface);
+  border-bottom: 2px solid #d8d8d0;
+  font-weight: 600;
+  font-size: .85rem;
+  color: #444;
+  white-space: nowrap;
+  z-index: 1;
+}
+.data-table tbody tr:nth-child(even) { background: #fcfcfa; }
+.data-table tbody tr:hover { background: #f2f6f3; }
+.data-table tbody tr:focus {
+  outline: 2px solid var(--c-primary);
+  outline-offset: -2px;
+}
+.data-table .c-code { white-space: nowrap; color: #6b6b6b; font-size: .82rem; }
+.data-table .c-name { font-weight: 600; min-width: 9em; }
+.data-table .col-act { white-space: nowrap; text-align: center; }
+
+/* 可排序列：默认给个小提示，排过序的列加箭头 */
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable:hover { color: var(--c-primary); }
+th.sortable.sorted { color: var(--c-primary); }
+th.sortable.sorted::after {
+  content: attr(data-dir);
+  margin-left: .25rem;
+  font-size: .7rem;
+}
+
+/* 大区色点：与地图点位、图例同一套色值（fields.js 的 AREA_COLOR） */
+.zone-dot {
+  display: inline-block;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  margin-right: .35rem;
+  vertical-align: baseline;
+}
+.zone-sub { color: #8a8a80; font-size: .82rem; }
+
+/* 徽标：精度档、数据状态 */
+.badge {
+  display: inline-block;
+  padding: .05rem .4rem;
+  border-radius: 3px;
+  font-size: .78rem;
+  white-space: nowrap;
+}
+.badge-soft { background: #fdf1e3; color: #9a5b12; border: 1px solid #f0dcc2; }
+.badge-ok   { background: #e8f5ee; color: #2E7D5B; border: 1px solid #cbe6d8; }
+.badge-plain { background: #f2f2ec; color: #555; border: 1px solid #e2e2d8; }
+.acc-km { display: block; color: #9a9a90; font-size: .75rem; margin-top: .1rem; }
+
+.row-go {
+  display: inline-block;
+  padding: .1rem .5rem;
+  border: 1px solid #cfd8d2;
+  border-radius: 3px;
+  color: var(--c-primary);
+  text-decoration: none;
+  font-size: .82rem;
+}
+.row-go:hover { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+
+/* 底部口径说明：表格里"精度"列必须配这段，否则会被当成实测点 */
+.list-note {
+  margin-top: 1rem;
+  padding: .75rem 1rem;
+  background: var(--c-surface);
+  border-left: 3px solid #EF6C00;
+  font-size: .85rem;
+  color: #555;
+  line-height: 1.7;
+}
+.list-note strong { color: #9a5b12; }
+
+.btn-ghost {
+  background: #fff !important;
+  color: var(--c-primary) !important;
+  border: 1px solid #cfd8d2 !important;
+}
+
+@media (max-width: 768px) {
+  .list-page { padding: 1rem; }
+  .page-title { font-size: 1.25rem; }
+  /* 手机上藏掉两列次要信息，表格不用横向拖太久 */
+  .col-hide-sm { display: none; }
+  .data-table { font-size: .85rem; }
+  .data-table th, .data-table td { padding: .45rem .4rem; }
+  .data-table .c-name { min-width: 7em; }
+}
+
+/* ===== 13. 详情侧栏（js/detail.js 挂在 #map 内部） ===== */
+.gbsy-detail {
+  position: absolute;
+  top: 10px; right: 10px; bottom: 10px;
+  width: 350px;
+  max-width: calc(100% - 20px);
+  z-index: 1100;                        /* 高过 Leaflet 控件（1000），留在 #map 层叠上下文内 */
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, .97);
+  border: 1px solid #d8d8d0;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .22);
+  font-size: .92rem;
+  line-height: 1.65;
+  overflow: hidden;
+}
+.gbsy-detail[hidden] { display: none !important; }  /* display:flex 会盖掉默认 hidden，必须显式压回 */
+
+.gbsy-detail .d-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: .5rem;
+  padding: .9rem 1rem .6rem;
+  border-bottom: 1px solid #ecece4;
+}
+.gbsy-detail .d-title {
+  font-size: 1.05rem;
+  color: var(--c-primary);
+  line-height: 1.4;
+}
+.gbsy-detail .d-code {
+  display: block;
+  font-size: .78rem;
+  color: #8a8a80;
+  letter-spacing: .02em;
+}
+.gbsy-detail .d-close {
+  flex: 0 0 auto;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #999;
+  cursor: pointer;
+  padding: .1rem .35rem;
+  border-radius: 4px;
+}
+.gbsy-detail .d-close:hover { background: #f0f0ea; color: #444; }
+
+.gbsy-detail .d-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  padding: .6rem 1rem 0;
+}
+.gbsy-detail .d-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: .12rem .5rem;
+  border: 1px solid #e2e2d8;
+  border-radius: 999px;
+  background: #f7f7f2;
+  font-size: .8rem;
+  color: #555;
+}
+.gbsy-detail .d-badge-area::before {
+  content: "";
+  display: inline-block;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--dot, #9E9E9E);
+  margin-right: .35rem;
+}
+.gbsy-detail .d-badge-status { background: #f2f2ec; color: #6b6b6b; }
+
+.gbsy-detail .d-list {
+  flex: 1 1 auto;
+  overflow-y: auto;                     /* 字段多，列表区自己滚 */
+  padding: .6rem 1rem .4rem;
+  margin: 0;
+}
+.gbsy-detail .d-row {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  gap: .5rem;
+  padding: .32rem 0;
+  border-bottom: 1px dashed #ecece4;
+}
+.gbsy-detail .d-row:last-child { border-bottom: none; }
+.gbsy-detail dt {
+  color: #8a8a80;
+  font-size: .82rem;
+}
+.gbsy-detail dd { margin: 0; word-break: break-word; }
+
+.gbsy-detail .d-note {
+  display: block;
+  font-size: .78rem;
+  color: #9a9a90;
+  line-height: 1.5;
+}
+.gbsy-detail .d-note strong { color: #9a5b12; }
+.gbsy-detail .d-pending { color: #9E9E9E; }
+
+.gbsy-detail .d-foot {
+  padding: .6rem 1rem .8rem;
+  border-top: 1px solid #ecece4;
+  background: #fbfbf7;
+}
+.gbsy-detail .d-disc {
+  font-size: .78rem;
+  color: #9a5b12;
+  margin-bottom: .4rem;
+}
+.gbsy-detail .d-golist {
+  display: inline-block;
+  font-size: .85rem;
+  color: var(--c-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--c-primary);
+  padding-bottom: .05rem;
+}
+.gbsy-detail .d-golist:hover { opacity: .8; }
+
+/* 手机：右侧栏改成底部抽屉，高度不超过 62%，可向上滑看全文 */
+@media (max-width: 768px) {
+  .gbsy-detail {
+    top: auto; left: 10px; right: 10px; bottom: 10px;
+    width: auto;
+    max-height: 62%;
+    border-radius: 10px;
+  }
 }

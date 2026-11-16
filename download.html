@@ -14,6 +14,7 @@
       <ul>
         <li><a href="index.html">首页</a></li>
         <li><a href="map.html">产地地图</a></li>
+<li><a href="list.html">产地名录</a></li>
         <li><a href="download.html">数据下载</a></li>
       </ul>
     </nav>
@@ -25,18 +26,52 @@
     <div class="dl-cards">
       <div class="dl-card">
         <h3>产地数据库</h3>
-        <p class="note">109 处化石产地档案（CSV）</p>
-        <a href="#">下载 CSV</a>
+        <p class="note">已收录 32 条产地记录（规划口径全省 109 处），16 字段，CSV 格式（UTF-8 带 BOM，Excel 可直接打开）</p>
+        <a href="data/sites.csv" download>下载 CSV</a>
       </div>
       <div class="dl-card">
-        <h3>图鉴数据</h3>
-        <p class="note">属种名录与文献信息（CSV）</p>
-        <a href="#">下载 CSV</a>
+        <h3>保护分区统计表</h3>
+        <p class="note">4 大区 / 12 小区 + 3 个其它行，含覆盖范围与分级数量，CSV 格式</p>
+        <a href="data/表1_分区基本特征.csv" download>下载 CSV</a>
       </div>
     </div>
 
-    <p class="note">【占位：数据使用说明与引用格式，B 岗提供】</p>
-    <p class="note">数据来源：《江西省古生物化石保护规划（2016—2025年）》等。</p>
+    <h2 class="dl-section">字段说明</h2>
+    <div class="table-wrap">
+      <table class="table-placeholder field-dict">
+        <thead><tr><th>字段</th><th>含义</th><th>取值 / 说明</th></tr></thead>
+        <tbody>
+          <tr><td>记录编号</td><td>站内唯一编号</td><td>JX-大区码-小区码-序号；第 2 段对应四大区，第 3 段对应保护小区</td></tr>
+          <tr><td>产地名称</td><td>产地标准名</td><td>规划点名的名称，或文献中的常用名</td></tr>
+          <tr><td>保护分区（大区）</td><td>所属大区</td><td>赣西北 / 赣东北 / 赣西 / 赣东南</td></tr>
+          <tr><td>分区小区</td><td>所属保护小区</td><td>12 个标准小区之一；另有「其它（…）」与「未定（…）」</td></tr>
+          <tr><td>所在市（县）</td><td>行政区</td><td>地级市＋县（市、区）</td></tr>
+          <tr><td>主要化石门类</td><td>化石类别</td><td>笔石、三叶虫、腕足类、恐龙蛋等，多项以顿号分隔</td></tr>
+          <tr><td>地质年代</td><td>产出层位年代</td><td>纪 / 世级为主，个别到群、组</td></tr>
+          <tr><td>赋存地层（组/群）</td><td>地层单位</td><td>正式岩石地层单位名；未查到者标「待补（无公开来源）」</td></tr>
+          <tr><td>产地保护级别</td><td>世界级 / 国家级 / 省级</td><td><strong>逐条级别在《附表 4》，未随规划正文公开，本站统一标注「待核定」</strong></td></tr>
+          <tr><td>保护区状态</td><td>是否已建保护区</td><td>「无」表示当前未设保护区，不是缺数据</td></tr>
+          <tr><td>经度（°E）/ 纬度（°N）</td><td>坐标</td><td>WGS84（CGCS2000 与之一致）</td></tr>
+          <tr><td>坐标精度</td><td>坐标性质</td><td><strong>全部为行政区政府驻地占位</strong>：乡级约 5–10 km、县级约 20–30 km、市级约 60–100 km、地名级约 20–30 km</td></tr>
+          <tr><td>数据状态</td><td>核验程度</td><td>已核实（文献）/ 小区级（表1）/ 仅规划点名（待补文献）/ 部分待确认</td></tr>
+          <tr><td>数据来源（文献/页码）</td><td>出处</td><td>期刊、专著、政府答复或规划条款编号（S11 为规划正文）</td></tr>
+          <tr><td>备注</td><td>核验记录</td><td>矛盾点、归属推定理由、待办事项</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="dl-section">引用格式</h2>
+    <p class="cite">赣鄱石语项目组. 江西省古生物化石产地数据库（v1.2）[DB/OL]. 2026. 数据基础：《江西省古生物化石保护规划（2016—2025 年）》.</p>
+
+    <h2 class="dl-section">使用限制</h2>
+    <ul class="dl-notes">
+      <li>坐标仅为行政驻地占位，<strong>不得作为实测坐标引用</strong>，也不得用于实地定位、边界划定或工程选址。</li>
+      <li>逐条保护级别未公开，引用级别请注明「小区级汇总」，不要写成单条产地级别。</li>
+      <li>规划原文与《附表 4》未公开，本站部分条目依据规划点名与公开文献整理，引用时请回溯原始出处。</li>
+      <li>用于教学、科普与研究时请保留本说明；商用请先联系项目组。</li>
+    </ul>
+
+    <p class="note">数据来源：《江西省古生物化石保护规划（2016—2025年）》及所列期刊文献。</p>
   </main>
 
   <footer>

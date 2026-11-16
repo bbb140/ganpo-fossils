@@ -14,6 +14,7 @@
       <ul>
         <li><a href="index.html">首页</a></li>
         <li><a href="map.html">产地地图</a></li>
+        <li><a href="list.html">产地名录</a></li>
         <li><a href="download.html">数据下载</a></li>
       </ul>
     </nav>
@@ -24,20 +25,25 @@
     <!-- ① Hero 区 -->
     <section class="hero">
       <h1>江西省古生物化石资源专题科普平台</h1>
-      <p>【占位：一句话定位，B 岗提供】</p>
+      <p>以《江西省古生物化石保护规划（2016—2025 年）》为底本，把全省 4 大保护分区、109 处重要化石产地做成可检索、可定位的公开档案。</p>
     </section>
 
-    <!-- ② 数据速览条 -->
+    <!-- ② 数据速览条：四个数字来自《保护规划（2016—2025年）》全省口径 -->
     <section class="stats">
-      <div class="stat-card"><strong>109</strong><span>处产地</span></div>
-      <div class="stat-card"><strong>16</strong><span>个门类</span></div>
-      <div class="stat-card"><strong>2000+</strong><span>属种</span></div>
-      <div class="stat-card"><strong>5</strong><span>重点保护区</span></div>
+      <div class="stat-card"><strong>109</strong><span>处重要化石产地</span></div>
+      <div class="stat-card"><strong>5</strong><span>处世界级产地</span></div>
+      <div class="stat-card"><strong>20</strong><span>处国家级产地</span></div>
+      <div class="stat-card"><strong>4</strong><span>处规划保护区</span></div>
     </section>
+    <!-- 口径必须写在这里：四个数字是全省规划口径，不是本站收录量，两者不能混 -->
+    <p class="stat-note">以上为《江西省古生物化石保护规划（2016—2025 年）》全省口径。
+      本站已收录 <strong id="stat-total">—</strong> 条产地记录，覆盖 12 个保护小区中的
+      <strong id="stat-zones">—</strong> 个；逐条保护级别尚待核定，故地图按保护分区着色、不按级别着色。
+      <a href="map.html">进入产地地图 →</a></p>
 
-    <!-- ③ 四大地层区卡片 -->
+    <!-- ③ 四大保护分区卡片 -->
     <section class="region-cards">
-      <h2>四大地层区</h2>
+      <h2>四大保护分区</h2>
       <div class="card-wrap">
         <a class="card" href="#region-nw">赣西北</a>
         <a class="card" href="#region-ne">赣东北</a>
@@ -46,60 +52,46 @@
       </div>
     </section>
 
-    <!-- ④ 赣西北 -->
-    <section id="region-nw" class="region-block">
-      <h2>赣西北 · 【占位：副标题，B 岗提供】</h2>
-      <p>【占位：导语，B 岗提供】</p>
+    <!-- ④ 四个分区：内容全部由 js/main.js 从 data/sites.json 渲染
+         不再写死任何数字/产地名，数据更新后刷新即变 -->
+    <section id="region-nw" class="region-block" data-region="赣西北">
+      <h2>赣西北</h2>
+      <p class="region-lead">正在载入…</p>
       <table class="table-placeholder">
-        <tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>保护级别</th></tr>
-        <tr><td>【占位】</td><td>【占位】</td><td>【占位】</td><td>【占位】</td><td>【占位】</td></tr>
+        <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
+        <tbody></tbody>
       </table>
-      <div class="species-cards">
-        <div>【占位：代表物种 1】</div>
-        <div>【占位：代表物种 2】</div>
-      </div>
+      <div class="species-cards"></div>
     </section>
 
-    <!-- ④ 赣东北 -->
-    <section id="region-ne" class="region-block">
-      <h2>赣东北 · 【占位：副标题，B 岗提供】</h2>
-      <p>【占位：导语，B 岗提供】</p>
+    <section id="region-ne" class="region-block" data-region="赣东北">
+      <h2>赣东北</h2>
+      <p class="region-lead">正在载入…</p>
       <table class="table-placeholder">
-        <tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>保护级别</th></tr>
-        <tr><td>【占位】</td><td>【占位】</td><td>【占位】</td><td>【占位】</td><td>【占位】</td></tr>
+        <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
+        <tbody></tbody>
       </table>
-      <div class="species-cards">
-        <div>【占位：代表物种 1】</div>
-        <div>【占位：代表物种 2】</div>
-      </div>
+      <div class="species-cards"></div>
     </section>
 
-    <!-- ④ 赣西 -->
-    <section id="region-w" class="region-block">
-      <h2>赣西 · 【占位：副标题，B 岗提供】</h2>
-      <p>【占位：导语，B 岗提供】</p>
+    <section id="region-w" class="region-block" data-region="赣西">
+      <h2>赣西</h2>
+      <p class="region-lead">正在载入…</p>
       <table class="table-placeholder">
-        <tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>保护级别</th></tr>
-        <tr><td>【占位】</td><td>【占位】</td><td>【占位】</td><td>【占位】</td><td>【占位】</td></tr>
+        <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
+        <tbody></tbody>
       </table>
-      <div class="species-cards">
-        <div>【占位：代表物种 1】</div>
-        <div>【占位：代表物种 2】</div>
-      </div>
+      <div class="species-cards"></div>
     </section>
 
-    <!-- ④ 赣东南 -->
-    <section id="region-se" class="region-block">
-      <h2>赣东南 · 晚白垩世红盆</h2>
-      <p>【占位：导语，B 岗提供】</p>
+    <section id="region-se" class="region-block" data-region="赣东南">
+      <h2>赣东南</h2>
+      <p class="region-lead">正在载入…</p>
       <table class="table-placeholder">
-        <tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>保护级别</th></tr>
-        <tr><td>【占位】</td><td>【占位】</td><td>【占位】</td><td>【占位】</td><td>【占位】</td></tr>
+        <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
+        <tbody></tbody>
       </table>
-      <div class="species-cards">
-        <div>【占位：代表物种 1】</div>
-        <div>【占位：代表物种 2】</div>
-      </div>
+      <div class="species-cards"></div>
     </section>
 
   </main>
@@ -108,5 +100,8 @@
     <p>数据来源：《江西省古生物化石保护规划（2016—2025年）》等 | 赣鄱石语项目组</p>
   </footer>
 
+  <!-- fields.js 必须最先加载：main.js 的字段别名全来自它 -->
+  <script src="js/fields.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

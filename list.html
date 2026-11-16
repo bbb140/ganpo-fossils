@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产地名录 - 赣鄱石语</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="logo" href="index.html">赣鄱石语</a>
+      <ul>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="map.html">产地地图</a></li>
+        <li><a href="list.html" class="active">产地名录</a></li>
+        <li><a href="download.html">数据下载</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="list-page">
+
+    <h1 class="page-title">产地名录</h1>
+    <!-- 数字由 js/list.js 填充：条数、覆盖小区数，不写死 -->
+    <p class="list-lead">
+      已收录 <strong id="lst-total">—</strong> 条产地记录，覆盖
+      <strong id="lst-zones">—</strong> 个保护小区。
+      点击任意一行可在地图上定位该产地；编号、名称、市县等列头可点击排序。
+    </p>
+
+    <!-- 检索条：与地图页同一套字段，选项从数据里生成 -->
+    <section class="filter-bar" aria-label="名录检索与筛选">
+      <div class="filter-row">
+        <input id="lst-q" type="search" autocomplete="off"
+               placeholder="搜产地 / 县市 / 门类 / 地层 / 编号" aria-label="关键词检索">
+        <select id="lst-area" aria-label="按大区筛选"><option value="">全部大区</option></select>
+        <select id="lst-zone" aria-label="按小区筛选"><option value="">全部小区</option></select>
+        <select id="lst-acc" aria-label="按坐标精度筛选"><option value="">全部精度</option></select>
+        <select id="lst-status" aria-label="按数据状态筛选"><option value="">全部状态</option></select>
+        <button id="lst-reset" type="button" class="btn-reset">重置</button>
+        <button id="lst-csv" type="button" class="btn-reset btn-ghost">导出当前结果</button>
+      </div>
+      <p class="filter-meta">
+        <span id="lst-count">共 0 条</span>
+        <span id="lst-hint" class="filter-hint"></span>
+      </p>
+    </section>
+
+    <div class="table-wrap">
+      <table class="data-table" id="lst-table">
+        <thead>
+          <tr>
+            <th class="sortable" data-key="code">编号</th>
+            <th class="sortable" data-key="name">产地名称</th>
+            <th class="sortable" data-key="county">所在市县</th>
+            <th class="sortable" data-key="zone">大区 / 小区</th>
+            <th class="sortable" data-key="age">地质年代</th>
+            <th class="sortable" data-key="taxa">主要门类</th>
+            <th class="sortable col-hide-sm" data-key="strata">赋存地层</th>
+            <th class="sortable" data-key="acc">坐标精度</th>
+            <th class="sortable col-hide-sm" data-key="dstat">数据状态</th>
+            <th class="col-act">地图</th>
+          </tr>
+        </thead>
+        <tbody id="lst-tbody">
+          <tr><td colspan="10" class="note">正在载入…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 口径说明：不能只写在弹卡里，表格也要交代，否则"精度"列会被误读 -->
+    <p class="list-note">
+      坐标精度列：<strong>全部记录为行政区政府驻地占位值</strong>（乡级 5–10 km、县级 20–30 km、
+      市级 60–100 km），不是产地实测点位，<strong>不得作为实测坐标引用</strong>。
+      逐条保护级别在规划《附表 4》中，该表未随正文公开，故名录不设级别列，
+      级别汇总见 <a href="download.html">数据下载</a>。
+    </p>
+
+  </main>
+
+  <footer>
+    <p>数据来源：《江西省古生物化石保护规划（2016—2025年）》等 | 赣鄱石语项目组</p>
+  </footer>
+
+  <!-- fields.js 必须最先加载：列名兼容规则与四色配色全在它里面 -->
+  <script src="js/fields.js"></script>
+  <script src="js/list.js"></script>
+</body>
+</html>

@@ -1,41 +1,70 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>产地地图 - 赣鄱石语</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="assets/leaflet/leaflet.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产地地图 - 赣鄱石语</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="assets/leaflet/leaflet.css">
 </head>
 <body>
+<header>
+<nav>
+<a class="logo" href="index.html">赣鄱石语</a>
+<ul>
+<li><a href="index.html">首页</a></li>
+<li><a href="map.html" class="active">产地地图</a></li>
+<li><a href="list.html">产地名录</a></li>
+<li><a href="download.html">数据下载</a></li>
+</ul>
+</nav>
+</header>
 
-  <header>
-    <nav>
-      <a class="logo" href="index.html">赣鄱石语</a>
-      <ul>
-        <li><a href="index.html">首页</a></li>
-        <li><a href="map.html">产地地图</a></li>
-        <li><a href="download.html">数据下载</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <!-- 地图区域 -->
-    <div id="map"></div>
-
-    <!-- 本区代表物种 -->
-    <h2 class="species-list-title">本区代表物种</h2>
-    <div id="species-list">
-      <p class="note">【占位：物种列表，Step 4 渲染】</p>
+<main>
+  <!-- ① 检索与筛选：选项由 js/filter.js 从数据生成，不在 HTML 里写死 -->
+  <section class="filter-bar" aria-label="产地检索与筛选">
+    <div class="filter-row">
+      <input id="flt-q" type="search" autocomplete="off"
+             placeholder="搜产地 / 县市 / 门类 / 地层 / 编号" aria-label="关键词检索">
+      <select id="flt-area" aria-label="按大区筛选"><option value="">全部大区</option></select>
+      <select id="flt-zone" aria-label="按小区筛选"><option value="">全部小区</option></select>
+      <select id="flt-acc" aria-label="按坐标精度筛选"><option value="">全部精度</option></select>
+      <select id="flt-status" aria-label="按数据状态筛选"><option value="">全部状态</option></select>
+      <button id="flt-reset" type="button" class="btn-reset">重置</button>
     </div>
-  </main>
+    <p class="filter-meta">
+      <span id="flt-count">共 0 条</span>
+      <span id="flt-hint" class="filter-hint"></span>
+    </p>
+  </section>
 
-  <footer>
-    <p>数据来源：《江西省古生物化石保护规划（2016—2025年）》等 | 赣鄱石语项目组</p>
-  </footer>
+  <!-- ② 地图区域：高度由 css/style.css 的 #map 控制 -->
+  <div id="map"></div>
 
-  <script src="assets/leaflet/leaflet.js"></script>
-  <script src="js/map.js"></script>
+  <!-- 免责声明：文字由 map.js 自动填充，没有近似坐标时自动隐藏 -->
+  <p id="map-disclaimer" class="map-disclaimer"></p>
+
+  <!-- 无坐标记录列表：map.js 会往里写"坐标待补"条目 -->
+  <ul id="no-coord-list"></ul>
+
+  <!-- 当前筛选结果的简要统计：由 js/filter.js 填充
+       物种级数据（species.json）B 岗尚未提供，这里先按「门类」聚合，不编物种名 -->
+  <h2 class="species-list-title">当前结果的代表门类</h2>
+  <div id="species-list" class="taxa-summary">
+    <p class="note">筛选后自动更新。</p>
+  </div>
+</main>
+
+<footer>
+  <p>数据来源：《江西省古生物化石保护规划（2016—2025年）》等 | 赣鄱石语项目组</p>
+</footer>
+
+<!-- 脚本顺序：config → leaflet → map，三者缺一不可 -->
+<script src="js/config.js"></script>
+<script src="assets/leaflet/leaflet.js"></script>
+<script src="js/fields.js"></script>
+<script src="js/map.js"></script>
+<script src="js/filter.js"></script>
+<script src="js/detail.js"></script>
 </body>
 </html>

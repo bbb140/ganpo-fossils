@@ -1,0 +1,59 @@
+name: 部署到 GitHub Pages
+
+# 触发：推送到 main（改完内容 push 就自动上线）、或在 Actions 页面手动点一次
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Pages 部署所需权限，缺一不可
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一次只跑一个部署；新推送会取消还在跑的那个
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: 构建与校验
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 门禁：数据有错误就停在这里，不发布坏数据
+      - name: 校验数据（0 错误才继续）
+        run: python tools/validate_data.py
+
+      # 生成 dist/：内联数据（file:// 也能看）+ 资源版本号 + .nojekyll
+      - name: 构建静态站
+        run: python tools/build_offline.py --dist
+
+      - name: 配置 Pages
+        uses: actions/configure-pages@v5
+
+      - name: 上传构建产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    name: 发布
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 部署到 Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

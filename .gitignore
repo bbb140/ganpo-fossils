@@ -1,1 +1,28 @@
+# ===== 系统 =====
 .DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== 构建产物（由 tools/build_offline.py 生成，不入库）=====
+dist/
+赣鄱石语_离线演示版.zip
+data/sites.csv
+
+# ===== 内部工作稿（含「待确认」「未定」「A岗确认签字」列，不对外公开）=====
+data/分区小区归并表.csv
+data/回填表.csv
+给A岗_回填清单.html
+
+# ===== 备份与临时文件 =====
+*.bak
+*.bak-*
+*.bak.*
+*.backup
+*~
+*.next.json
+
+# ===== 工具临时产物 =====
+__pycache__/
+*.pyc
+tools/_*.png
+tools/_*.html
