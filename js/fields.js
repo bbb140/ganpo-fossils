@@ -49,30 +49,57 @@ function toNum(v) {
 }
 
 /* 各字段的别名表（英文优先，中文兜底）。
-   改这张表等于改"数据契约"——tools/validate_data.py 校验的是同一批列名。 */
+   改这张表等于改"数据契约"——tools/validate_data.py 校验的是同一批列名。
+   2026-11-16 v1.2（图册重建版）：A 岗改出英文 17 列（109 条），
+   英文别名全部排第一，旧中文列名保留——两版数据都能读。 */
 const F = {
   code:   ['id', '记录编号'],
   name:   ['name', '产地名称'],
   region: ['region', '保护分区（大区）', '保护分区', '大区'],
-  zone:   ['zone', '分区小区', '小区'],
-  county: ['county', '所在市（县）', '所在市县', '行政区'],
-  taxa:   ['taxa', '主要化石门类', '化石类型', '门类'],
-  age:    ['age', '地质年代', '年代'],
-  strata: ['strata', '赋存地层（组/群）', '赋存地层'],
-  level:  ['level', '产地保护级别', '保护级别'],
-  status: ['protect', '保护区状态'],
-  lon:    ['lon', 'lng', '经度（°E）', '经度'],
-  lat:    ['lat', '纬度（°N）', '纬度'],
-  acc:    ['acc', '坐标精度', '精度'],
-  dstat:  ['dstat', '数据状态'],
-  source: ['source', '数据来源（文献/页码）', '数据来源', '来源'],
-  note:   ['note', '备注']
+  zone:   ['subregion', 'zone', '分区小区', '小区'],
+  county: ['city_county', 'county', '所在市（县）', '所在市县', '行政区'],
+  detail: ['detail_location', '详细位置', '详址'],
+  taxa:   ['fossil_group', 'taxa', '主要化石门类', '化石类型', '门类'],
+  age:    ['geological_age', 'age', '地质年代', '年代'],
+  strata: ['stratum', 'strata', '赋存地层（组/群）', '赋存地层'],
+  level:  ['protection_level', 'level', '产地保护级别', '保护级别'],
+  status: ['protection_status', 'protect', '保护区状态'],
+  lon:    ['longitude', 'lon', 'lng', '经度（°E）', '经度'],
+  lat:    ['latitude', 'lat', '纬度（°N）', '纬度'],
+  acc:    ['coord_precision', 'acc', '坐标精度', '精度'],
+  dstat:  ['data_status', 'dstat', '数据状态'],
+  source: ['data_source', 'source', '数据来源（文献/页码）', '数据来源', '来源'],
+  note:   ['remarks', 'note', '备注']
 };
 
-/* 精度档 → 误差公里数。A岗 2026-11-08 确认 32 条全为行政驻地占位，
-   分档写进弹卡与列表，读者不用自己猜。 */
+/* v1.2 的空值写法是「无」而不是空串（stratum 98 条、detail_location 77 条填「无」）。
+   展示层统一用它过滤，避免读者看到一排"无"。 */
+function hasVal(v) {
+  const s = String(v === undefined || v === null ? '' : v).trim();
+  return s !== '' && s !== '无' && s !== '—' && s !== '-';
+}
+
+/* 保护级别配色（v1.2 起逐条级别可用：世界级5 / 国家级17 / 省级87）。
+   与地图、列表、图例共用。 */
+const LEVEL_COLOR = {
+  '世界级': '#8B0000',
+  '国家级': '#C62828',
+  '省级':   '#1565C0'
+};
+
+function colorByLevel(level) {
+  const s = String(level || '');
+  for (const k in LEVEL_COLOR) {
+    if (s.indexOf(k) > -1) return LEVEL_COLOR[k];
+  }
+  return '#9E9E9E';                      // 未定 / 未填 → 灰
+}
+
+/* 精度档 → 误差公里数。v1.2 档位：村级12 / 乡级8 / 县级61 / 市级19 / 地名级PBDB 9，
+   全部为行政驻地或地名占位（A岗：不估读、不编坐标）。 */
 function accErrorKm(acc) {
   const a = String(acc || '');
+  if (a.indexOf('村级') > -1) return '2–5 km';
   if (a.indexOf('乡级') > -1) return '5–10 km';
   if (a.indexOf('县级') > -1) return '20–30 km';
   if (a.indexOf('市级') > -1) return '60–100 km';
@@ -113,5 +140,7 @@ function colorByArea(region) {
 if (typeof window !== 'undefined') {
   window.GBSYFields = { field: field, pick: pick, F: F, toNum: toNum,
                         baseAcc: baseAcc, accErrorKm: accErrorKm, isApprox: isApprox,
-                        AREA_COLOR: AREA_COLOR, colorByArea: colorByArea };
+                        hasVal: hasVal,
+                        AREA_COLOR: AREA_COLOR, colorByArea: colorByArea,
+                        LEVEL_COLOR: LEVEL_COLOR, colorByLevel: colorByLevel };
 }

@@ -36,15 +36,38 @@ def _skip(name):
     return name in EXCLUDE_NAMES or any(p in name for p in EXCLUDE_PAT)
 
 
+# v1.2 英文字段 → 对外 CSV 中文表头（公众下载，中文更友好；顺序即导出顺序）
+CSV_HEADER = [
+    ("id", "编号"), ("name", "产地名称"), ("region", "保护分区（大区）"),
+    ("subregion", "分区小区"), ("city_county", "所在市（县）"),
+    ("detail_location", "详细位置"), ("fossil_group", "主要化石门类"),
+    ("geological_age", "地质年代"), ("stratum", "赋存地层（组/群）"),
+    ("protection_level", "产地保护级别"), ("protection_status", "保护区状态"),
+    ("longitude", "经度（°E）"), ("latitude", "纬度（°N）"),
+    ("coord_precision", "坐标精度"), ("data_status", "数据状态"),
+    ("data_source", "数据来源"), ("remarks", "备注"),
+]
+# 旧版中文 16 列原样导出（无映射时回退）
+LEGACY_KEYS = ["记录编号", "产地名称", "保护分区（大区）", "分区小区", "所在市（县）",
+               "主要化石门类", "地质年代", "赋存地层（组/群）", "产地保护级别",
+               "保护区状态", "经度（°E）", "纬度（°N）", "坐标精度", "数据状态",
+               "数据来源（文献/页码）", "备注"]
+
+
 def export_csv():
     with io.open(SITES, encoding="utf-8") as f:
         recs = json.load(f)
-    cols = list(recs[0].keys())
+    keys = list(recs[0].keys())
+    if set(dict(CSV_HEADER)) <= set(keys):          # v1.2 英文 17 列
+        out = [(k, zh) for k, zh in CSV_HEADER if k in keys]
+    else:                                           # 旧版中文 16 列原样
+        out = [(k, k) for k in keys]
     with io.open(SITES_CSV, "w", encoding="utf-8-sig", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=cols)
-        w.writeheader()
-        w.writerows(recs)
-    print("已导出 %s（%d 条 × %d 列）" % (SITES_CSV, len(recs), len(cols)))
+        w = csv.writer(f)
+        w.writerow([zh for _, zh in out])
+        for r in recs:
+            w.writerow([r.get(k, "") for k, _ in out])
+    print("已导出 %s（%d 条 × %d 列，中文表头）" % (SITES_CSV, len(recs), len(out)))
     return len(recs)
 
 

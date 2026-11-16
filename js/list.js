@@ -24,6 +24,11 @@
   const baseAcc = FD.baseAcc || function (a) { return String(a || ''); };
   const accErrorKm = FD.accErrorKm || function () { return ''; };
   const colorByArea = FD.colorByArea || function () { return '#9E9E9E'; };
+  const colorByLevel = FD.colorByLevel || function () { return '#9E9E9E'; };
+  const hasVal = FD.hasVal || function (v) {
+    const t = String(v == null ? '' : v).trim();
+    return t !== '' && t !== '无' && t !== '—' && t !== '-';
+  };
 
   const $ = function (id) {
     return (typeof document !== 'undefined' && document.getElementById)
@@ -88,6 +93,11 @@
     const zone = val(rec, 'zone');
     const acc = val(rec, 'acc') || '未标注';
     const measured = /实测|GPS/i.test(acc);
+    /* 级别（v2.9 有逐条真值）：带色显示，与地图点位同色 */
+    const lv = val(rec, 'level');
+    const lvOK = lv && lv.indexOf('待') < 0 && lv !== '无';
+    /* 状态全称太长（"图册主名录＋表1 分区归并（高置信）"），取括号内短词 */
+    const dstatShort = (val(rec, 'dstat').match(/（([^）]+)）/) || [])[1] || val(rec, 'dstat') || '—';
     return '<tr class="row" data-code="' + esc(code) + '" tabindex="0">' +
       '<td class="c-code">' + esc(code) + '</td>' +
       '<td class="c-name">' + esc(val(rec, 'name')) + '</td>' +
@@ -96,19 +106,22 @@
         esc(region || '—') + ' <span class="zone-sub">' + esc(shortZone(zone)) + '</span></td>' +
       '<td>' + esc(val(rec, 'age')) + '</td>' +
       '<td>' + esc(cut(val(rec, 'taxa'), 22)) + '</td>' +
-      '<td class="col-hide-sm">' + esc(cut(val(rec, 'strata'), 26)) + '</td>' +
+      '<td>' + (lvOK
+        ? '<span style="color:' + colorByLevel(lv) + ';font-weight:600">' + esc(lv) + '</span>'
+        : '<span class="zone-sub">待核定</span>') + '</td>' +
+      '<td class="col-hide-sm">' + esc(cut(hasVal(val(rec, 'strata')) ? val(rec, 'strata') : '—', 26)) + '</td>' +
       '<td><span class="badge ' + (measured ? 'badge-ok' : 'badge-soft') + '">' +
         esc(baseAcc(acc)) + '</span>' +
         '<span class="acc-km">' + esc(accErrorKm(acc)) + '</span></td>' +
       '<td class="col-hide-sm"><span class="badge badge-plain">' +
-        esc(val(rec, 'dstat') || '—') + '</span></td>' +
+        esc(dstatShort) + '</span></td>' +
       '<td class="col-act"><a class="row-go" href="map.html?code=' +
         encodeURIComponent(code) + '" title="在地图上定位">定位</a></td>' +
     '</tr>';
   }
 
   /* ---------- 下拉选项 ---------- */
-  const ACC_ORDER = ['实测', '乡级占位', '县级占位', '市级占位', '地名级'];
+  const ACC_ORDER = ['实测', '村级占位', '乡级占位', '县级占位', '市级占位', '地名级'];
   function fillSelect(sel, items, placeholder) {
     if (!sel) return;
     let html = '<option value="">' + placeholder + '</option>';
@@ -131,7 +144,7 @@
     if (tb) {
       tb.innerHTML = rows.length
         ? rows.map(rowHTML).join('')
-        : '<tr><td colspan="10" class="note">没有匹配的记录：换个关键词，或点「重置」看全部 ' +
+        : '<tr><td colspan="11" class="note">没有匹配的记录：换个关键词，或点「重置」看全部 ' +
           sites.length + ' 条。</td></tr>';
     }
 
@@ -182,8 +195,11 @@
   /* ---------- CSV 导出（当前筛选结果，不是全量） ---------- */
   const CSV_COLS = [
     ['code', '编号'], ['name', '产地名称'], ['county', '所在市县'],
-    ['region', '保护分区（大区）'], ['zone', '分区小区'], ['age', '地质年代'],
+    ['region', '保护分区（大区）'], ['zone', '分区小区'],
+    ['detail', '详细位置'], ['age', '地质年代'],
     ['taxa', '主要化石门类'], ['strata', '赋存地层（组/群）'],
+    ['level', '产地保护级别'],
+    ['lon', '经度（°E）'], ['lat', '纬度（°N）'],
     ['acc', '坐标精度'], ['dstat', '数据状态'], ['source', '数据来源'],
     ['note', '备注']
   ];
@@ -343,7 +359,7 @@
     console.error('[赣鄱石语] 名录数据读取失败：', err,
                   '｜若地址栏是 file:// 开头，请改用 dist/ 里带内联数据的版本');
     const tb = $('lst-tbody');
-    if (tb) tb.innerHTML = '<tr><td colspan="10" class="note">数据读取失败：' +
+    if (tb) tb.innerHTML = '<tr><td colspan="11" class="note">数据读取失败：' +
       '本地双击打开时浏览器禁止读 json，请用 dist/ 离线版或本地服务器。</td></tr>';
   });
 

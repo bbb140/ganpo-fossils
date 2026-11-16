@@ -21,6 +21,11 @@
   const baseAcc = FD.baseAcc || function (a) { return String(a || ''); };
   const accErrorKm = FD.accErrorKm || function () { return ''; };
   const colorByArea = FD.colorByArea || function () { return '#9E9E9E'; };
+  const colorByLevel = FD.colorByLevel || function () { return '#9E9E9E'; };
+  const hasVal = FD.hasVal || function (v) {
+    const t = String(v == null ? '' : v).trim();
+    return t !== '' && t !== '无' && t !== '—' && t !== '-';
+  };
 
   const PREFIX = 'gbsy-detail';
   let panel = null;          // 面板根节点（挂在 #map 里）
@@ -55,7 +60,8 @@
   }
   function plain(rec, key) {
     const v = val(rec, key);
-    return v ? esc(v) : '';
+    /* v1.2 空值写法是「无」——与空串同等对待，不渲染行 */
+    return hasVal(v) ? esc(v) : '';
   }
 
   /* ---------- 主体内容 ---------- */
@@ -68,23 +74,28 @@
     const measured = /实测|GPS/i.test(acc);
     const approx = !measured;
 
-    /* 级别口径：与图例同一句话，侧栏里再交代一次（不是每条都点图例） */
+    /* 级别口径（v2.9）：v1.2 有逐条真值（据图册名录判定），带色显示；
+       待确认是旧版数据的兜底情况 */
     const lvRaw = val(rec, 'level');
-    const lvHTML = (!lvRaw || lvRaw.indexOf('待确认') > -1 || lvRaw.indexOf('待核定') > -1)
-      ? '<span class="d-pending">待核定</span>' +
-        '<span class="d-note">逐条级别见规划《附表 4》，该表未随正文公开；' +
-        '级别汇总见数据下载页</span>'
-      : esc(lvRaw);
+    const lvOK = hasVal(lvRaw) && lvRaw.indexOf('待确认') < 0 && lvRaw.indexOf('待核定') < 0;
+    const lvHTML = lvOK
+      ? '<span style="color:' + colorByLevel(lvRaw) + ';font-weight:600">' + esc(lvRaw) + '</span>' +
+        '<span class="d-note">据《江西省古生物化石图册》名录逐条判定</span>'
+      : '<span class="d-pending">待核定</span>' +
+        '<span class="d-note">来源未逐条给出，级别汇总见数据下载页</span>';
 
-    /* 坐标：把"这是个占位值"说满——档位、误差、依据，三样缺一不可 */
+    /* 坐标：把"这是个占位值"说满——档位、误差、依据，三样缺一不可。
+       v1.2 两类占位：行政驻地（村/乡/县/市级）与地名级（PBDB 据公开地名定位） */
     const lon = val(rec, 'lon'), lat = val(rec, 'lat');
-    const coordHTML = (lon && lat)
+    const isPlace = acc.indexOf('地名') > -1;
+    const coordHTML = (hasVal(lon) && hasVal(lat))
       ? esc(lon + '°E, ' + lat + '°N') +
         '<span class="d-note">' +
         (measured
           ? '实测点位'
-          : '<strong>' + esc(baseAcc(acc)) + '</strong>：行政区政府驻地占位，' +
-            '误差约 ' + esc(accErrorKm(acc)) + '，非实测点位') +
+          : '<strong>' + esc(baseAcc(acc)) + '</strong>：' +
+            (isPlace ? '据公开地名（Paleobiology Database）定位' : '行政区政府驻地占位') +
+            '，误差约 ' + esc(accErrorKm(acc)) + '，非实测点位') +
         '</span>'
       : '';
 
@@ -97,17 +108,20 @@
         '<button type="button" class="d-close" data-act="close" aria-label="关闭详情">×</button>' +
       '</header>' +
 
-      /* 大区色点与地图点位同色（fields.js 的 AREA_COLOR） */
+      /* 徽标：第一枚与图上点位同色（v2.9 起地图按级别配色），
+         大区/小区/数据状态作为文字徽标 */
       '<div class="d-badges">' +
         '<span class="d-badge d-badge-area" style="--dot:' +
-          (undecided ? '#9E9E9E' : colorByArea(region)) + '">' +
-          esc(undecided ? '未定分区' : region || '—') + '</span>' +
+          (lvOK ? colorByLevel(lvRaw) : '#9E9E9E') + '">' +
+          esc(lvOK ? lvRaw : '待核定') + '</span>' +
+        '<span class="d-badge">' + esc(undecided ? '未定分区' : region || '—') + '</span>' +
         '<span class="d-badge">' + esc(zone || '小区未填') + '</span>' +
         '<span class="d-badge d-badge-status">' + esc(val(rec, 'dstat') || '状态未填') + '</span>' +
       '</div>' +
 
       '<dl class="d-list">' +
         row('所在市（县）', plain(rec, 'county')) +
+        row('详细位置', plain(rec, 'detail')) +
         row('地质年代', plain(rec, 'age')) +
         row('主要化石门类', plain(rec, 'taxa')) +
         row('赋存地层', plain(rec, 'strata')) +
@@ -119,7 +133,7 @@
       '</dl>' +
 
       '<footer class="d-foot">' +
-        '<p class="d-disc">本站坐标均为行政区政府驻地占位值，' +
+        '<p class="d-disc">本站坐标均为行政驻地或地名占位值，' +
           '不得作为实测坐标引用。</p>' +
         '<a class="d-golist" href="list.html?q=' + encodeURIComponent(code) + '"' +
           ' title="在名录中查看该产地">在名录中查看 →</a>' +

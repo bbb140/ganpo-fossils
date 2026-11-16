@@ -1,14 +1,12 @@
 /* ============================================================
-   js/map.js —— 赣鄱石语 · 江西化石产地地图（天地图版 v2.6）
-   v2.6 变更（A岗 2026-11-08 反馈落地）：
-   ① 32 条坐标全部为"行政区政府驻地"占位值（附表4/附图1未公开，
-      A岗不做估读不编坐标）——占位点改半透明+虚线描边，弹卡与图例
-      注明"行政驻地占位，精度约 X km"，绝不显示成实测点；
-   ② 小区"未定（清江盆地）"的点不着大区色，图上与图例均单列灰色；
-   ③ 精度档 → 误差公里数映射，写进弹卡（乡级 5–10 / 县级 20–30 /
-      市级 60–100 km）；
-   ④ 预留实测升级：A-05 按 1:20 万地质图核到实测后，凡坐标精度含
-      "实测"即自动画成实心点，无需改代码。
+   js/map.js —— 赣鄱石语 · 江西化石产地地图（天地图版 v2.9）
+   v2.9 变更（2026-11-16，v1.2 图册重建版 109 条全量数据）：
+   ① 逐条保护级别可用（世界级5 / 国家级17 / 省级87，据《江西省
+      古生物化石图册》名录逐条判定），COLOR_BY 切回 'level'——
+      这是 v2.5 时预留的路径，当时因 32 条全是"待确认"临时改大区；
+   ② 坐标精度新增两档：村级占位（12条，误差 2–5 km）、地名级PBDB
+      （9条，据 Paleobiology Database 地名定位）；
+   ③ 图例与免责句按新口径动态生成（仍为占位坐标，非实测）。
    依赖：js/config.js（key）、assets/leaflet/leaflet.js + leaflet.css
    数据：data/sites.json（A 岗导出，字段名带括号/单位也能认）
    容器：<div id="map"></div>，CSS 必须有高度
@@ -58,16 +56,14 @@ function readCodeParam() {
   }
 }
 
-/* 4.3 配色口径（v2.5）
-       现状：32 条记录的「产地保护级别」全部是"待确认"，唯一值 1 个。
-       逐条级别依赖《附表 4 产地一览表》，该表未随规划正文公开，短期补不上。
-       若仍按级别配色，整张图只有一种灰色，图例却列着世界级/国家级/省级三档
-       —— 这叫图例撒谎，评委第一次点开就会问。
-       改按保护分区（大区）配色：4 个大区 100% 有值，且与"4 大区 12 小区"的叙事一致。
-       逐条级别补齐后，把 COLOR_BY 改成 'level' 就能切回去，其余代码不用动。 */
-const COLOR_BY = 'area';                 // 'area' 按大区 | 'level' 按保护级别
+/* 4.3 配色口径（v2.9）
+       v1.2 图册重建版带来逐条保护级别（世界级 5 / 国家级 17 / 省级 87，
+       据图册名录判定），COLOR_BY 切回 'level'——红系三档是保护规划的
+       核心分类，信息量最大。切回大区配色只需把 'level' 改成 'area'，
+       图例计数两种模式都支持。 */
+const COLOR_BY = 'level';                // 'level' 按保护级别 | 'area' 按大区
 
-/* 4.4 四色配色表 → js/fields.js（AREA_COLOR / colorByArea），列表页共用 */
+/* 4.4 配色表 → js/fields.js（AREA_COLOR/colorByArea、LEVEL_COLOR/colorByLevel），列表页共用 */
 
 function markerColor(s) {
   /* 小区"未定"（如清江盆地）：A岗裁定不参与分区着色，单列灰色 */
@@ -78,27 +74,25 @@ function markerColor(s) {
     : colorByArea(field(s, F.region));
 }
 
-/* 5. 按保护级别配色（COLOR_BY='level' 时才用到）。待确认给灰——不能冒充成省级 */
-function colorByLevel(level) {
-  if (level.indexOf('世界') > -1) return '#8B0000';
-  if (level.indexOf('国家') > -1) return '#C62828';
-  if (level.indexOf('重点') > -1) return '#EF6C00';
-  if (level.indexOf('省') > -1) return '#1565C0';
-  return '#9E9E9E';                      // 待确认 / 空
-}
+/* 5. colorByLevel / colorByArea / 配色表 → js/fields.js（v2.9 统一，列表页同色） */
 
-/* 6. 信息卡：名称 + 编号 + 位置/年代 + 门类 + 级别 + 精度 + 来源 */
+/* 6. 信息卡（弹卡降级版，主展示走 detail.js 侧栏）：
+       名称 + 编号 + 位置/年代 + 门类 + 级别 + 精度 + 来源。
+       v1.2：级别有逐条真值（图册名录判定），直接上色显示；
+       「无」值字段不渲染（地层 98 条、详址 77 条填「无」）。 */
 function popupHTML(s) {
   const acc = field(s, F.acc);
   const approx = isApprox(acc);
   const accText = acc || '未标注';
-  /* 级别：数据里 32 条全是"待确认"，不能原样甩给读者，
-     要说清"为什么没有"——逐条级别在《附表 4》，未公开，只能给到小区级汇总 */
+  /* 级别：v1.2 有真值（世界级/国家级/省级）；旧版数据的"待确认"降级显示原因 */
   const lvRaw = field(s, F.level);
-  const lv = (!lvRaw || lvRaw.indexOf('待确认') > -1 || lvRaw.indexOf('待核定') > -1)
-    ? '<span style="color:#9E9E9E">待核定</span>' +
-      '<span style="font-size:11px;color:#999">（逐条级别见《附表 4》，未公开；现仅有小区级汇总）</span>'
-    : lvRaw;
+  const lvOK = lvRaw && lvRaw.indexOf('待确认') < 0 && lvRaw.indexOf('待核定') < 0 && lvRaw !== '无';
+  const lv = lvOK
+    ? '<span style="color:' + colorByLevel(lvRaw) + ';font-weight:600">' + lvRaw + '</span>'
+    : '<span style="color:#9E9E9E">待核定</span>' +
+      '<span style="font-size:11px;color:#999">（来源未逐条给出）</span>';
+  const detailLoc = field(s, F.detail);
+  const strata = field(s, F.strata);
   return '<div style="min-width:200px;line-height:1.6">' +
     '<b>' + field(s, F.name) + '</b><br>' +
     '<span style="font-size:12px;color:#888">' + field(s, F.code) + '</span><br>' +
@@ -106,12 +100,13 @@ function popupHTML(s) {
     '<span style="font-size:12px;color:#666">' +
       field(s, F.region) + ' / ' + field(s, F.zone) + '小区</span><br>' +
     '门类：' + field(s, F.taxa) + '<br>' +
-    '地层：' + field(s, F.strata) + '<br>' +
+    (hasVal(strata) ? '地层：' + strata + '<br>' : '') +
+    (hasVal(detailLoc) ? '详址：' + detailLoc + '<br>' : '') +
     '级别：' + lv + '<br>' +
     '位置：' + (approx
       ? '<span style="color:#EF6C00">' + (accText.indexOf('占位') > -1 || accText === '未标注'
           ? accText : accText + '（占位）') +
-        '　行政驻地，误差约 ' + accErrorKm(accText) + '，非实测点位</span>'
+        '　误差约 ' + accErrorKm(accText) + '，非实测点位</span>'
       : '<span style="color:#2E7D32">实测点位</span>') + '<br>' +
     '<span style="font-size:12px;color:#666">来源：' + field(s, F.source) + '</span>' +
     '</div>';
@@ -126,11 +121,11 @@ function openDetail(s, mk) {
   }
 }
 
-/* 6.0 精度分布摘要：把"市级占位 4 条、县级占位 18 条…"这类统计拼成一句话。
-       精度越粗，误差越大：乡级 5–10 km、县级 20–30 km、市级 60–100 km。
-       免责句必须说实数，不能只说"县级"——本项目实际混了四档。 */
+/* 6.0 精度分布摘要：把"村级占位 12 条、县级占位 61 条…"这类统计拼成一句话。
+       精度越粗，误差越大：村级 2–5 / 乡级 5–10 / 县级 20–30 / 市级 60–100 km。
+       免责句必须说实数，不能只说"县级"——本项目实际混了五档。 */
 function accBreakdown(accCount) {
-  const order = ['实测', '乡级占位', '县级占位', '市级占位', '地名级'];
+  const order = ['实测', '村级占位', '乡级占位', '县级占位', '市级占位', '地名级'];
   const rank = function (k) {
     for (let i = 0; i < order.length; i++) {
       if (k.indexOf(order[i]) > -1) return i;
@@ -168,9 +163,9 @@ function renderDisclaimer(approxCount, total, accCount) {
   }
 
   const bd = accBreakdown(accCount || {});
-  const core = '坐标取自产地所在行政区域人民政府驻地（占位），误差约 5–100 km，'
-             + '仅供分布示意，不得作为实测坐标引用。';
-  const shortText = '点位为行政驻地占位，误差约 5–100 km，不得作为实测坐标引用。';
+  const core = '坐标为行政驻地或地名占位（据图册名录与公开地名，非实地勘测），'
+             + '误差约 2–100 km，仅供分布示意，不得作为实测坐标引用。';
+  const shortText = '点位为行政驻地/地名占位，误差约 2–100 km，不得作为实测坐标引用。';
 
   const ctl = L.control({ position: 'bottomleft' });
   ctl.onAdd = function () {
@@ -185,9 +180,9 @@ function renderDisclaimer(approxCount, total, accCount) {
 
   if (note) {
     const head = (approxCount === total)
-      ? '本图共 ' + total + ' 条产地记录，点位全部为行政区驻地占位（' + bd + '）。'
+      ? '本图共 ' + total + ' 条产地记录，点位全部为占位坐标（' + bd + '）。'
       : '本图共 ' + total + ' 条产地记录，其中 ' + approxCount +
-        ' 条为行政区驻地占位（' + bd + '）。';
+        ' 条为占位坐标（' + bd + '）。';
     note.textContent = head + core;
   }
 
@@ -217,8 +212,9 @@ dataSource
     let shown = 0;
     let approxCount = 0;
     const missing = [];
-    const accCount = {};                       // 精度分布：{ '县级占位': 18, ... }
-    const areaCount = {};                      // 大区分布：{ '赣西北': 3, ... }
+    const accCount = {};                       // 精度分布：{ '县级占位': 61, ... }
+    const areaCount = {};                      // 大区分布：{ '赣西北': 14, ... }
+    const levelCount = {};                     // 级别分布：{ '省级': 87, ... }（v2.9 图例用）
     const points = [];                         // { rec, marker }：供检索/列表联动
     let levelPending = 0;                      // 级别未核定的条数
 
@@ -243,9 +239,13 @@ dataSource
       const undecided = zoneRaw.indexOf('未定') > -1 || reg.indexOf('未定') > -1;
       areaCount[undecided ? '未定' : reg] = (areaCount[undecided ? '未定' : reg] || 0) + 1;
 
-      // 级别核定情况：只要还带"待确认"就算没定，用于自检日志
+      // 级别统计：真值进 levelCount（图例显示），待确认进 levelPending（自检日志）
       const lvRaw = field(s, F.level);
-      if (!lvRaw || lvRaw.indexOf('待确认') > -1 || lvRaw.indexOf('待核定') > -1) levelPending++;
+      if (!lvRaw || lvRaw.indexOf('待确认') > -1 || lvRaw.indexOf('待核定') > -1 || lvRaw === '无') {
+        levelPending++;
+      } else {
+        levelCount[lvRaw] = (levelCount[lvRaw] || 0) + 1;
+      }
 
       /* 占位点样式（A岗要求）：半透明填充 + 同色虚线描边 = 一眼看出"不是实测"；
          实测点（未来 A-05 升级后出现）才是实心 + 白描边 */
@@ -280,7 +280,7 @@ dataSource
       }
       // 占位坐标要单独交代清楚，不能混在"有坐标"里糊过去
       if (approxCount > 0) {
-        html += '<li class="ok">其中 ' + approxCount + ' 条为行政驻地占位（' +
+        html += '<li class="ok">其中 ' + approxCount + ' 条为占位坐标（' +
                 accBreakdown(accCount) + '），图上以半透明虚线圆标示</li>';
       }
       box.innerHTML = html;
@@ -289,15 +289,18 @@ dataSource
     /* 7.2 免责声明（地图内 + 页面下方都写） */
     renderDisclaimer(approxCount, shown, accCount);
 
-    /* 7.2 图例回填：大区计数 + 占位/实测比 */
-    legendCounts = areaCount;
+    /* 7.2 图例回填：两种配色口径的计数都传（v2.9 主用级别，大区备用） */
+    legendCounts = COLOR_BY === 'level' ? levelCount : areaCount;
     legendStats = { placeholder: approxCount, total: shown };
-    renderLegend(areaCount);
+    renderLegend(legendCounts);
 
     /* 7.3 自检日志 */
     console.log('[赣鄱石语] 数据共 ' + sites.length + ' 条，上图 ' + shown +
-                ' 条（行政驻地占位 ' + approxCount + ' 条），无坐标 ' + missing.length + ' 条');
-    console.log('[赣鄱石语] 配色口径：' + COLOR_BY + '｜大区分布：' +
+                ' 条（占位 ' + approxCount + ' 条），无坐标 ' + missing.length + ' 条');
+    console.log('[赣鄱石语] 配色口径：' + COLOR_BY + '｜级别分布：' +
+                Object.keys(levelCount).map(function (k) {
+                  return k + ' ' + levelCount[k];
+                }).join('、') + '｜大区分布：' +
                 Object.keys(areaCount).map(function (k) {
                   return k + ' ' + areaCount[k];
                 }).join('、'));
@@ -319,7 +322,7 @@ dataSource
            数据是异步加载的，所以再派发一个 gbsy:ready 事件，
            让 js/filter.js、js/list.js 不用轮询。 */
     window.GBSY = {
-      version: '2.7',
+      version: '2.9',
       map: map,
       sites: sites,
       points: points,
@@ -393,10 +396,14 @@ function renderLegend(counts) {
   if (!legendDiv) return;
   let body = '';
   if (COLOR_BY === 'level') {
-    body =
-      '<div style="font-weight:bold;margin-bottom:2px">保护级别</div>' +
-      legendRow('#8B0000', '世界级') + legendRow('#C62828', '国家级') +
-      legendRow('#1565C0', '省级') + legendRow('#9E9E9E', '待确认');
+    body = '<div style="font-weight:bold;margin-bottom:2px">保护级别</div>';
+    for (const k in LEVEL_COLOR) {
+      const n = counts && counts[k] != null ? counts[k] : null;
+      body += legendRow(LEVEL_COLOR[k], k + (n == null ? '' : '　' + n));
+    }
+    if (counts && counts['待核定']) {
+      body += legendRow('#9E9E9E', '待核定　' + counts['待核定']);
+    }
   } else {
     body = '<div style="font-weight:bold;margin-bottom:2px">保护分区（大区）</div>';
     for (const k in AREA_COLOR) {
@@ -412,17 +419,17 @@ function renderLegend(counts) {
   const st = legendStats;
   const phText = st
     ? (st.placeholder === st.total
-        ? '全部点位为行政驻地占位（' + st.total + '/' + st.total + '，非实测）'
-        : '行政驻地占位 ' + st.placeholder + '/' + st.total + '（半透明虚线）')
-    : '点位为行政驻地占位（非实测）';
+        ? '全部点位为占位坐标（' + st.total + '/' + st.total + '，非实测）'
+        : '占位坐标 ' + st.placeholder + '/' + st.total + '（半透明虚线）')
+    : '点位为占位坐标（非实测）';
   legendDiv.innerHTML = body +
     '<div style="margin-top:4px;padding-top:4px;border-top:1px solid #ddd">' +
       '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;' +
       'border:2px dashed #555;background:rgba(85,85,85,.25);margin-right:5px"></span>' +
       phText + '</div>' +
-    '<div style="margin-top:3px;font-size:11px;color:#888;max-width:min(170px,34vw);' +
-      'line-height:1.45">逐条保护级别：均为待核定，' +
-      '暂不作配色依据（详见小区统计）</div>';
+    '<div style="margin-top:3px;font-size:11px;color:#888;max-width:min(180px,36vw);' +
+      'line-height:1.45">逐条级别据《江西省古生物化石图册》名录判定（世界级5 / ' +
+      '国家级17 / 省级87）；规划正文口径为 5/20/84，两套统计口径略有出入</div>';
 }
 
 function legendRow(color, label) {

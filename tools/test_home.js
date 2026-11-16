@@ -47,7 +47,7 @@ vm.runInThisContext(fs.readFileSync(path.join(BASE, 'js', 'main.js'), 'utf8'));
 setTimeout(() => {
   let ok = true;
   console.log('=== 首页四分区 ===');
-  const expect = { 赣西北: 3, 赣东北: 10, 赣西: 9, 赣东南: 10 };
+  const expect = { 赣西北: 14, 赣东北: 20, 赣西: 37, 赣东南: 38 };
   sections.forEach((s, i) => {
     const area = AREAS[i];
     const tb = s.parts.tbody.innerHTML || '';
@@ -62,9 +62,9 @@ setTimeout(() => {
 
   const total = stats['stat-total'].textContent;
   const zones = stats['stat-zones'].textContent;
-  const statOk = String(total) === '32' && Number(zones) === 11;
+  const statOk = String(total) === '109' && Number(zones) === 12;
   ok = ok && statOk;
-  console.log(`\n${statOk ? '✔' : '✘'} 速览条：${total} 条 / 覆盖 ${zones} 个小区（期望 32 / 11）`);
+  console.log(`\n${statOk ? '✔' : '✘'} 速览条：${total} 条 / 覆盖 ${zones} 个小区（期望 109 / 12）`);
 
   const empty = sections.some(s => (s.parts['.region-lead'].textContent || '').indexOf('正在载入') > -1);
   console.log(`${empty ? '✘' : '✔'} 无「正在载入」残留`);

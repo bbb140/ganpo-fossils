@@ -64,19 +64,19 @@ setTimeout(() => {
 
   const html = els['lst-tbody'].innerHTML || '';
   const rows = (html.match(/data-code="/g) || []).length;
-  chk('渲染行数', rows === 32, rows + ' 行（期望 32）');
+  chk('渲染行数', rows === 109, rows + ' 行（期望 109）');
   chk('无「正在载入」残留', html.indexOf('正在载入') < 0);
 
-  chk('统计头：条数 / 覆盖小区', els['lst-total'].textContent === 32 &&
-      Number(els['lst-zones'].textContent) === 11,
-      els['lst-total'].textContent + ' 条 / ' + els['lst-zones'].textContent + ' 个小区（期望 32 / 11）');
+  chk('统计头：条数 / 覆盖小区', els['lst-total'].textContent === 109 &&
+      Number(els['lst-zones'].textContent) === 12,
+      els['lst-total'].textContent + ' 条 / ' + els['lst-zones'].textContent + ' 个小区（期望 109 / 12）');
 
-  chk('计数文案', /显示 32 \/ 32 条/.test(els['lst-count'].textContent),
+  chk('计数文案', /显示 109 \/ 109 条/.test(els['lst-count'].textContent),
       els['lst-count'].textContent);
 
   /* 跳转链接：每行都要指向 map.html?code=… */
   const links = (html.match(/map\.html\?code=/g) || []).length;
-  chk('每行带地图定位链接', links === 32, links + ' 个');
+  chk('每行带地图定位链接', links === 109, links + ' 个');
 
   /* 排序：按名称升序、降序，首行应互换 */
   const st = L().state;
@@ -84,18 +84,18 @@ setTimeout(() => {
   const asc = L()._rows();
   st.dir = -1;
   const desc = L()._rows();
-  const nm = r => String(r['产地名称']);
+  const nm = r => String(r.name || r['产地名称'] || '');
   chk('按名称排序可反向', nm(asc[0]) !== nm(desc[0]),
       `升序首行「${nm(asc[0])}」/ 降序首行「${nm(desc[0])}」`);
 
   /* 筛选：与地图页 filter.js 必须同结果 */
   const cases = [
     [{ q: '笔石' }, 5, '关键词「笔石」'],
-    [{ q: '玉山' }, 5, '关键词「玉山」'],
-    [{ area: '赣西' }, 9, '大区=赣西（不能被赣西北吞）'],
-    [{ area: '赣西北' }, 3, '大区=赣西北'],
-    [{ acc: '市级占位' }, 4, '精度=市级占位'],
-    [{ status: '已核实（文献）' }, 9, '状态=已核实（文献）'],
+    [{ q: '玉山' }, 8, '关键词「玉山」'],
+    [{ area: '赣西' }, 37, '大区=赣西（不能被赣西北吞）'],
+    [{ area: '赣西北' }, 14, '大区=赣西北'],
+    [{ acc: '市级占位' }, 19, '精度=市级占位'],
+    [{ status: '图册主名录＋表1 分区归并（高置信）' }, 90, '状态=高置信'],
     [{ q: '不存在的词xyz' }, 0, '关键词无结果']
   ];
   cases.forEach(([patch, expect, label]) => {
@@ -116,8 +116,8 @@ setTimeout(() => {
   const csv = L().toCSV(L()._rows());
   const lines = csv.replace(/^\ufeff/, '').split('\r\n');
   chk('CSV 带 BOM', csv.charCodeAt(0) === 0xfeff);
-  chk('CSV 表头列数', lines[0].split('","').length === 12, lines[0].slice(0, 40) + '…');
-  chk('CSV 数据行数', lines.length === 33, (lines.length - 1) + ' 行（期望 32）');
+  chk('CSV 表头列数', lines[0].split('","').length === 16, lines[0].slice(0, 40) + '…');
+  chk('CSV 数据行数', lines.length === 110, (lines.length - 1) + ' 行（期望 109）');
 
   /* 大区色点：四色都应出现，且不含未定义色 */
   const AC = global.window.GBSYFields.AREA_COLOR;

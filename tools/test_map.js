@@ -82,26 +82,24 @@ setTimeout(() => {
   console.log('占位样式（虚线描边+半透明）：', placeholder.length + '/' + markers.length,
     placeholder.length === markers.length ? '✔' : '✘（应全部为占位样式）');
 
-  const legend = legendEls.map(e => e.innerHTML || '').find(h => h.indexOf('保护分区') > -1) || '';
+  const legend = legendEls.map(e => e.innerHTML || '').find(h => h.indexOf('保护级别') > -1) || '';
   console.log('\n=== 图例 ===');
-  console.log('含「保护分区（大区）」：', legend.indexOf('保护分区（大区）') > -1);
-  console.log('含四个大区名：', ['赣西北', '赣东北', '赣西', '赣东南']
-    .every(k => legend.indexOf(k) > -1));
-  console.log('含级别口径说明：', legend.indexOf('待核定') > -1);
-  console.log('含占位口径说明：', legend.indexOf('行政驻地占位') > -1);
-  console.log('仍残留"世界级"虚假档位：', legend.indexOf('世界级') > -1);
+  console.log('含「保护级别」标题：', legend.indexOf('保护级别') > -1);
+  console.log('三档级别带计数（5/17/87）：',
+    legend.indexOf('世界级　5') > -1 && legend.indexOf('国家级　17') > -1 && legend.indexOf('省级　87') > -1);
+  console.log('含图册口径说明：', legend.indexOf('图册') > -1);
+  console.log('含占位口径说明：', legend.indexOf('占位坐标') > -1);
 
   const dis = legendEls.map(e => e.textContent || '').find(t => t.indexOf('说明：') > -1) || '';
   console.log('\n=== 免责句 ===');
   console.log(dis ? '已渲染：' + dis : '缺失');
   console.log('含「不得作为实测坐标引用」：', dis.indexOf('不得作为实测坐标引用') > -1);
 
-  const ok = markers.length === 32 &&
-    Object.keys(colors).length === 4 &&
+  const ok = markers.length === 109 &&
+    colors['#8B0000'] === 5 && colors['#C62828'] === 17 && colors['#1565C0'] === 87 &&
     placeholder.length === markers.length &&
-    legend.indexOf('待核定') > -1 &&
-    legend.indexOf('行政驻地占位') > -1 &&
-    legend.indexOf('世界级') === -1 &&
+    legend.indexOf('省级　87') > -1 &&
+    legend.indexOf('占位坐标') > -1 &&
     dis.indexOf('不得作为实测坐标引用') > -1;
   console.log('\n结论：', ok ? '通过' : '不通过');
   process.exit(ok ? 0 : 1);
