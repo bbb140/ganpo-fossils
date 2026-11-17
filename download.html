@@ -30,6 +30,11 @@
         <a href="data/sites.csv" download>下载 CSV</a>
       </div>
       <div class="dl-card">
+        <h3>地理坐标文件（GeoJSON）</h3>
+        <p class="note">同样 109 处产地，点要素格式（WGS84，坐标顺序 [经度, 纬度]），QGIS / ArcGIS / 在线 GIS 可直接打开。每条附带 coord_approx（是否占位）与 coord_error_km（误差范围），避免把县城中心误当实测点。</p>
+        <a href="data/sites.geojson" download>下载 GeoJSON</a>
+      </div>
+      <div class="dl-card">
         <h3>保护分区统计表</h3>
         <p class="note">4 大区 / 12 小区 + 3 个其它行，含覆盖范围与分级数量，CSV 格式</p>
         <a href="data/表1_分区基本特征.csv" download>下载 CSV</a>
@@ -67,8 +72,7 @@
     <h2 class="dl-section">使用限制</h2>
     <ul class="dl-notes">
       <li>坐标均为行政驻地或地名占位（非实测），<strong>不得作为实测坐标引用</strong>，也不得用于实地定位、边界划定或工程选址。</li>
-      <li>逐条保护级别未公开，引用级别请注明「小区级汇总」，不要写成单条产地级别。</li>
-      <li>逐条信息据《图册》名录与《规划》正文整理；两者统计口径略有出入（级别 5/17/87 与 5/20/84），引用时请注明出处。</li>
+      <li>逐条信息据《图册》名录与《规划》正文整理；保护级别据《图册》逐条判定（世界级 5 / 国家级 17 / 省级 87），与《规划》正文口径（5/20/84）略有出入，引用时请注明所用口径。</li>
       <li>用于教学、科普与研究时请保留本说明；商用请先联系项目组。</li>
     </ul>
 

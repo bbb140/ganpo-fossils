@@ -727,3 +727,59 @@ th.sortable.sorted::after {
     border-radius: 10px;
   }
 }
+
+/* ===== 14. 物种图鉴卡片（B 岗 species.json 到位后启用） =====
+   首页 .species-cards 用 flex 卡片；地图页 #species-list 用同样的卡片但铺成多列。
+   无数据时这两处仍走门类聚合（.taxa-card / .taxa-chip），样式互不影响。 */
+.species-card {
+  flex: 1 1 240px;
+  min-width: 0;
+  padding: .9rem 1rem;
+  border: 1px solid #d8d8d0;
+  border-left: 3px solid var(--c-primary);
+  border-radius: 5px;
+  background: #fff;
+  text-align: left;
+  line-height: 1.6;
+}
+#species-list { display: flex; flex-wrap: wrap; gap: .75rem; align-items: stretch; }
+#species-list .species-card { flex: 1 1 280px; }
+.species-card .sp-cn {
+  display: inline-block;
+  font-size: 1.02rem;
+  color: var(--c-primary);
+}
+.species-card .sp-sci {
+  display: inline-block;
+  font-style: italic;
+  font-size: .92rem;
+  color: #333;
+}
+.species-card .sp-author { font-size: .78rem; color: #8a8a80; font-style: normal; }
+.species-card .sp-meta {
+  margin: .3rem 0 .35rem;
+  font-size: .8rem;
+  color: #6b6b6b;
+}
+.species-card .sp-feat {
+  margin: 0 0 .4rem;
+  font-size: .84rem;
+  color: #444;
+}
+.species-card .sp-link {
+  display: inline-block;
+  font-size: .8rem;
+  color: var(--c-primary);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--c-primary);
+}
+.species-card .sp-link:hover { opacity: .75; }
+.species-card .sp-ref {
+  margin-top: .35rem;
+  font-size: .73rem;
+  color: #9a9a90;
+  word-break: break-word;
+}
+@media (max-width: 768px) {
+  .species-card, #species-list .species-card { flex: 1 1 100%; }
+}

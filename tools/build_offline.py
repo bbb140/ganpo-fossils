@@ -19,6 +19,7 @@ import glob
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITES = os.path.join(BASE, "data", "sites.json")
+SPECIES = os.path.join(BASE, "data", "species.json")
 SITES_CSV = os.path.join(BASE, "data", "sites.csv")
 DIST = os.path.join(BASE, "dist")
 ZIP = os.path.join(BASE, "赣鄱石语_离线演示版.zip")
@@ -71,13 +72,39 @@ def export_csv():
     return len(recs)
 
 
+def _load_species():
+    """图鉴数据尚未到位时 species.json 是 0 字节或空数组，一律当 []，
+       页面自动回退到门类聚合，不等同于报错。"""
+    if not os.path.isfile(SPECIES) or os.path.getsize(SPECIES) == 0:
+        return []
+    try:
+        with io.open(SPECIES, encoding="utf-8") as f:
+            raw = f.read().strip()
+        if not raw:
+            return []
+        data = json.loads(raw)
+        if isinstance(data, list):
+            return data
+        if isinstance(data, dict):
+            for k in ("items", "species", "data"):
+                if isinstance(data.get(k), list):
+                    return data[k]
+        return []
+    except (ValueError, IOError):
+        return []
+
+
 def make_inline():
     with io.open(SITES, encoding="utf-8") as f:
         recs = json.load(f)
+    species = _load_species()
     js = ("/* 由 tools/build_offline.py 自动生成，请勿手改。\n"
           "   file:// 下浏览器禁止 fetch 本地 json，故把数据内联进来，双击即可看地图。 */\n"
           "window.SITES_DATA = " +
-          json.dumps(recs, ensure_ascii=False, indent=0) + ";\n")
+          json.dumps(recs, ensure_ascii=False, indent=0) + ";\n"
+          "/* B 岗图鉴：空数组时页面自动回退到门类聚合 */\n"
+          "window.SPECIES_DATA = " +
+          json.dumps(species, ensure_ascii=False, indent=0) + ";\n")
     return js
 
 
@@ -98,6 +125,8 @@ def content_version():
                 if fn.endswith((".css", ".js")) and not _skip(fn):
                     paths.append(os.path.join(src, fn))
     paths.append(SITES)
+    if os.path.isfile(SPECIES) and os.path.getsize(SPECIES) > 0:
+        paths.append(SPECIES)   # B 岗图鉴一到位，版本号即变，缓存自动失效
     for p in sorted(paths):
         with io.open(p, "rb") as f:
             h.update(f.read())
@@ -150,9 +179,10 @@ def build():
     with io.open(os.path.join(DIST, "js", "data-inline.js"), "w", encoding="utf-8") as f:
         f.write(make_inline())
 
-    # 在 map.js / main.js 之前插入数据脚本；已有就跳过
-    for page, anchor in (("map.html", '<script src="js/map.js"></script>'),
-                         ("index.html", '<script src="js/main.js"></script>'),
+    # 在 species.js / main.js / list.js 之前插入数据脚本；已有就跳过。
+    # 必须早于 species.js：它加载时即读 window.SPECIES_DATA，晚一步离线图鉴就读不到。
+    for page, anchor in (("map.html", '<script src="js/species.js"></script>'),
+                         ("index.html", '<script src="js/species.js"></script>'),
                          ("list.html", '<script src="js/list.js"></script>')):
         fp = os.path.join(DIST, page)
         if not os.path.isfile(fp):

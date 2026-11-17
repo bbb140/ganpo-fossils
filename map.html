@@ -47,8 +47,8 @@
   <!-- 无坐标记录列表：map.js 会往里写"坐标待补"条目 -->
   <ul id="no-coord-list"></ul>
 
-  <!-- 当前筛选结果的简要统计：由 js/filter.js 填充
-       物种级数据（species.json）B 岗尚未提供，这里先按「门类」聚合，不编物种名 -->
+  <!-- 当前筛选结果的物种概览：由 js/filter.js 填充
+       species.json 到位则显示图鉴卡片，否则按「门类」聚合兜底，不编物种名 -->
   <h2 class="species-list-title">当前结果的代表门类</h2>
   <div id="species-list" class="taxa-summary">
     <p class="note">筛选后自动更新。</p>
@@ -59,10 +59,10 @@
   <p>数据来源：《江西省古生物化石保护规划（2016—2025年）》等 | 赣鄱石语项目组</p>
 </footer>
 
-<!-- 脚本顺序：config → leaflet → map，三者缺一不可 -->
 <script src="js/config.js"></script>
 <script src="assets/leaflet/leaflet.js"></script>
 <script src="js/fields.js"></script>
+<script src="js/species.js"></script>
 <script src="js/map.js"></script>
 <script src="js/filter.js"></script>
 <script src="js/detail.js"></script>

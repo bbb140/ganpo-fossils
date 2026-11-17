@@ -86,7 +86,7 @@
     return c;
   }
 
-  /* ---- 当前结果的门类聚合（不编物种名，只汇总数据里已有的门类） ---- */
+  /* ---- 当前结果的物种概览：图鉴数据到位显示图鉴卡片，否则按门类聚合 ---- */
   function parts(v) {
     return String(v || '').split(/[、，,；;]/).map(function (x) { return x.trim(); })
       .filter(Boolean);
@@ -98,6 +98,11 @@
       box.innerHTML = '<p class="note">没有匹配的记录。</p>';
       return;
     }
+    /* 图鉴优先：有数据且本次筛选命中图鉴条目时，直接渲染图鉴卡片 */
+    const sp = window.GBSYSpecies;
+    if (sp && sp.has() && sp.renderCards(box, matched)) return;
+
+    /* 兜底：按「主要化石门类」聚合，不编物种名 */
     const c = {};
     matched.forEach(function (r) {
       parts(val(r, 'taxa')).forEach(function (t) { c[t] = (c[t] || 0) + 1; });
@@ -107,7 +112,7 @@
       return '<div class="taxa-chip"><strong>' + t + '</strong><span>' + c[t] + '</span></div>';
     }).join('') +
       '<p class="note">按「主要化石门类」聚合，共 ' + matched.length +
-      ' 条记录；物种级名录待 B 岗提供后替换。</p>';
+      ' 条记录；物种级名录待 B 岗数据到位后替换。</p>';
   }
 
   /* ---- 主流程 ---- */

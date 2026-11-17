@@ -11,7 +11,7 @@
 | `index.html` | 数据速览、四大保护分区（条数/小区构成/产地表/门类），全部由数据渲染 |
 | `map.html` | 天地图底图 + 109 处产地，按保护级别配色（世界级5/国家级17/省级87），支持关键词与四组筛选，点开右侧详情 |
 | `list.html` | 名录表格，可排序、可筛选、可导出 CSV，点行跳地图定位 |
-| `download.html` | 数据下载、16 个字段说明、引用格式、使用限制 |
+| `download.html` | 数据下载（CSV + GeoJSON）、17 个字段说明、引用格式、使用限制 |
 
 ## 本地看
 
@@ -30,10 +30,22 @@ python -m http.server 8000
 python tools/build_data.py --src 新表.xlsx          # 先看差异，不覆盖
 python tools/build_data.py --src 新表.xlsx --apply  # 确认后替换（自动备份到 data/backup/）
 python tools/validate_data.py                       # 6 组校验，0 错误才算过
+python tools/build_geojson.py                       # 从 sites.json 重生成 sites.geojson
 python tools/build_offline.py --dist                # 重建 dist 与离线包
 ```
 
 `validate_data.py` 同时是**字段契约**：A 岗改列名会直接报错，不会静默变空。
+
+### B 岗物种图鉴接入（当前待填）
+
+`data/species.json` 目前是空文件，首页物种卡与地图页物种区自动按「门类」聚合显示，不影响发布。
+B 岗数据到位后，直接把 15 条图鉴以 JSON 数组写入该文件（字段见 `js/species.js` 顶部注释：
+`genus/species/author_year/cn_name/age/region/taxa/classification/features/reference/tapho_link`，
+中文字段名也识别）。页面刷新即显示图鉴卡片，无需改任何 JS；再跑一次
+`python tools/build_offline.py --dist` 让离线版内联新数据即可。
+
+图鉴靠 `tapho_link`（产地编号，对应 sites.json 的 `id`）与产地关联，可点「地图定位」跳到该点；
+未填编号时按 `taxa` 门类做宽松匹配。整条不填不会编造学名。
 
 ## 部署
 
@@ -57,6 +69,8 @@ git push                                  # 之后：改完推就行
 ```
 css/ js/ *.html          源码（fields.js 是字段层，map/main/list/filter/detail 共用）
 data/sites.json          产地数据（v1.2 图册重建版：109 条 × 17 列英文键）
+data/sites.geojson       同一批 109 处的点要素版（WGS84，含占位/误差标记，供 GIS 用）
+data/species.json        物种图鉴（B 岗待填；空则自动回退到门类聚合）
 data/表1_分区基本特征.csv  规划表 1 的 15 行，109 口径的来源
 assets/leaflet/          Leaflet 1.9.4 本地化，不依赖 CDN
 tools/                   构建、校验、测试、部署脚本

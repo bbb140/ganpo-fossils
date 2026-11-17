@@ -110,20 +110,24 @@
         }
       }
 
-      /* 代表门类卡片：只写门类与条数，不编物种名（物种数据 B 岗另行提供） */
+      /* 代表门类卡片：B 岗图鉴数据到位则渲染图鉴，否则按门类聚合兜底 */
       const cards = sec.querySelector('.species-cards');
       if (cards) {
-        cards.innerHTML = taxaTop.length
-          ? taxaTop.map(function (t) {
-              const example = rows.filter(function (r) {
-                return get(r, F.taxa).indexOf(t.key) > -1;
-              })[0];
-              return '<div class="taxa-card"><strong>' + esc(t.key) + '</strong>' +
-                     '<span>' + t.n + ' 条记录</span>' +
-                     (example ? '<em>' + esc(get(example, F.name).slice(0, 18)) + '</em>' : '') +
-                     '</div>';
-            }).join('')
-          : '<div class="taxa-card"><span>门类待补</span></div>';
+        function fallbackCards() {
+          cards.innerHTML = taxaTop.length
+            ? taxaTop.map(function (t) {
+                const example = rows.filter(function (r) {
+                  return get(r, F.taxa).indexOf(t.key) > -1;
+                })[0];
+                return '<div class="taxa-card"><strong>' + esc(t.key) + '</strong>' +
+                       '<span>' + t.n + ' 条记录</span>' +
+                       (example ? '<em>' + esc(get(example, F.name).slice(0, 18)) + '</em>' : '') +
+                       '</div>';
+              }).join('')
+            : '<div class="taxa-card"><span>门类待补</span></div>';
+        }
+        const sp = window.GBSYSpecies;
+        if (!(sp && sp.has() && sp.renderCards(cards, rows))) fallbackCards();
       }
     });
 
@@ -145,8 +149,15 @@
         return r.json();
       });
 
+  let lastRecs = [];
   src.then(function (raw) {
     const recs = Array.isArray(raw) ? raw : (raw.sites || raw.data || []);
+    lastRecs = recs;
     render(recs);
   }).catch(fail);
+
+  /* 图鉴数据若晚到（fetch 比 sites 慢），数据就绪后重绘一次，避免停在门类聚合兜底 */
+  if (typeof document.addEventListener === 'function') {
+    document.addEventListener('gbsy:species', function () { render(lastRecs); });
+  }
 })();

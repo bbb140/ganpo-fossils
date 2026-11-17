@@ -1,0 +1,3505 @@
+{
+ "type": "FeatureCollection",
+ "name": "赣鄱石语·江西省古生物化石产地",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+  }
+ },
+ "metadata": {
+  "source": "《江西省古生物化石图册》《江西省古生物化石保护规划（2016—2025年）》",
+  "count": 109,
+  "coord_note": "所有坐标均为行政驻地或地名占位，非实测点位；coord_approx / coord_error_km 标明精度，不得作为实测坐标引用。"
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "id": "JX-00-00-001",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-001",
+    "name": "青草湖南华纪海相藻类化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古植物（微古植物）",
+    "geological_age": "南华纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第001号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-002",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.54,
+     29.03
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-002",
+    "name": "柘林晚震旦世原始类水母化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "修水县",
+    "detail_location": "永修柘林（第三章第一节）",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚震旦世",
+    "stratum": "皮园村组（Z2p）（据图册第三章正文）",
+    "protection_level": "国家级",
+    "protection_status": "省级地质公园、亟待保护",
+    "longitude": 114.54,
+    "latitude": 29.03,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第002号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "化石密度约5个/m²，个体直径一般8—10cm、最大18cm；产出于皮园村组（Z2p）硅质岩。注意：表3-0-1位置列作“修水县”，第三章第一节正文作“赣北永修柘林”，两处不一致，存疑待核（柘林水库在永修县）。｜11/16 分区：位置列表3-0-1 作「修水县」，第三章第一节正文作「永修柘林」；按表1「修水－武宁－德安一线」归赣西北·武宁，两处地名差异保留待核。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-003",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.3,
+     25.69
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-003",
+    "name": "高滩－水石寒武纪小型腕足类与双壳类化石产地",
+    "region": "赣东南",
+    "subregion": "崇义",
+    "city_county": "崇义县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "寒武纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.3,
+    "latitude": 25.69,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第003号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-004",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.04,
+     29.45
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-004",
+    "name": "观音堂早寒武世三叶虫化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "庐山市",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "早寒武世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 116.04,
+    "latitude": 29.45,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第004号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-005",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.18,
+     28.47
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-005",
+    "name": "能坞早奥陶世多门类动物化石产地",
+    "region": "赣东北",
+    "subregion": "玉山",
+    "city_county": "广丰县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "早奥陶世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 118.18,
+    "latitude": 28.47,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第005号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无｜11/16 分区：表1 玉山分布「南部跨广丰县」直接覆盖广丰，置信高。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-006",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.35,
+     28.77
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-006",
+    "name": "陈家坞早—中奥陶世笔石化石产地",
+    "region": "赣东北",
+    "subregion": "玉山",
+    "city_county": "玉山县",
+    "detail_location": "玉山县古城陈家坞（宁国组次层型）",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "中奥陶世",
+    "stratum": "宁国组（次层型）（据图册第三章正文）",
+    "protection_level": "国家级",
+    "protection_status": "未保护",
+    "longitude": 118.35,
+    "latitude": 28.77,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第006号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "中国笔石序列最完整的剖面之一，曾被国际古生物学会列为重点考察剖面。",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-007",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.24,
+     28.69
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-007",
+    "name": "白家坞中—晚奥陶世笔石化石产地",
+    "region": "赣东北",
+    "subregion": "玉山",
+    "city_county": "玉山县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚奥陶世",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "未保护",
+    "longitude": 118.24,
+    "latitude": 28.69,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第007号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-008",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.34,
+     28.57
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-008",
+    "name": "三学寺晚奥陶世多门类动物化石产地",
+    "region": "赣东北",
+    "subregion": "玉山",
+    "city_county": "玉山县",
+    "detail_location": "玉山县下镇三学寺",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "晚奥陶世",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "亟待保护",
+    "longitude": 118.34,
+    "latitude": 28.57,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第008号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "2007年6月14国26位科学家组成的考察团实地考察。",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-009",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.39,
+     28.63
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-009",
+    "name": "外村晚奥陶世多门类动物化石产地",
+    "region": "赣东北",
+    "subregion": "玉山",
+    "city_county": "玉山县",
+    "detail_location": "玉山县下镇外村（三衢山组次层型）",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚奥陶世",
+    "stratum": "三衢山组（次层型）（据图册第三章正文）",
+    "protection_level": "国家级",
+    "protection_status": "破坏较严重、亟待保护",
+    "longitude": 118.39,
+    "latitude": 28.63,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第009号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "晚奥陶世床板珊瑚与日射珊瑚的一个标准地区。",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-010",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.24,
+     28.69
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-010",
+    "name": "王家坝晚奥陶世—早志留世多门类动物化石产地",
+    "region": "赣东北",
+    "subregion": "玉山",
+    "city_county": "玉山县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚奥陶世—早志留世",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "未保护",
+    "longitude": 118.24,
+    "latitude": 28.69,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第010号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-011",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.3,
+     25.69
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-011",
+    "name": "樟木曲奥陶纪笔石化石产地",
+    "region": "赣东南",
+    "subregion": "崇义",
+    "city_county": "崇义县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "奥陶纪",
+    "stratum": "无",
+    "protection_level": "世界级",
+    "protection_status": "未保护",
+    "longitude": 114.3,
+    "latitude": 25.69,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第011号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-012",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.3,
+     25.69
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-012",
+    "name": "高草地晚奥陶世多门类动物化石产地",
+    "region": "赣东南",
+    "subregion": "崇义",
+    "city_county": "崇义县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚奥陶世",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "未保护",
+    "longitude": 114.3,
+    "latitude": 25.69,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第012号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-013",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.56,
+     29.88
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-013",
+    "name": "乐观奥陶纪多门类动物化石产地",
+    "region": "赣西北",
+    "subregion": "彭泽",
+    "city_county": "彭泽县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "奥陶纪",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "破坏较严重",
+    "longitude": 116.56,
+    "latitude": 29.88,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第013号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-014",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.09,
+     29.25
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-014",
+    "name": "新开岭晚奥陶世多门类动物化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "武宁县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚奥陶世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.09,
+    "latitude": 29.25,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第014号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-015",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.0,
+     26.81
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-015",
+    "name": "汗江－石口晚奥陶世笔石动物化石产地",
+    "region": "赣西",
+    "subregion": "吉安",
+    "city_county": "永新县",
+    "detail_location": "永新县汗江—石口",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚奥陶世",
+    "stratum": "无",
+    "protection_level": "世界级",
+    "protection_status": "未保护",
+    "longitude": 114.0,
+    "latitude": 26.81,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第015号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；规划第二十二条赣西科考线路点名「永新汗江－石口晚奥陶世笔石」",
+    "remarks": "中国奥陶纪重要地层剖面。",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-016",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.09,
+     29.25
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-016",
+    "name": "殿背早志留世多门类动物化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "武宁县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "早志留世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.09,
+    "latitude": 29.25,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第016号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-017",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.09,
+     29.25
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-017",
+    "name": "梨树窝早志留世笔石化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "武宁县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "早志留世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.09,
+    "latitude": 29.25,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第017号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-018",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.54,
+     29.03
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-018",
+    "name": "清水早志留世双壳类化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "修水县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "早志留世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.54,
+    "latitude": 29.03,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第018号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-019",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.18,
+     29.45
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-019",
+    "name": "夏家桥中志留世多门类动物化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "武宁县",
+    "detail_location": "武宁县夏家桥（坟头组）",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "中志留世",
+    "stratum": "坟头组（据图册第三章正文）",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.18,
+    "latitude": 29.45,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第019号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "剖面下部发现无颌类鱼化石和植物化石碎片。",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-020",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.69,
+     29.17
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-020",
+    "name": "西坑中志留世鱼类化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "修水县",
+    "detail_location": "修水县三都西坑",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "中志留世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.69,
+    "latitude": 29.17,
+    "coord_precision": "乡级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第020号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "产西坑盔甲鱼、江西修水鱼及棘鱼类碎片。",
+    "coord_approx": true,
+    "coord_error_km": "5–10 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-021",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.3,
+     25.69
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-021",
+    "name": "独栏桥早志留世藻类化石产地",
+    "region": "赣东南",
+    "subregion": "崇义",
+    "city_county": "崇义县",
+    "detail_location": "无",
+    "fossil_group": "微体古生物与古植物",
+    "geological_age": "早志留世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "国家森林公园",
+    "longitude": 114.3,
+    "latitude": 25.69,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第021号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-022",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.3,
+     25.69
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-022",
+    "name": "铅厂早石炭世动、植物化石产地",
+    "region": "赣东南",
+    "subregion": "崇义",
+    "city_county": "崇义县",
+    "detail_location": "无",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "早石炭世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.3,
+    "latitude": 25.69,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第022号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-023",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.29,
+     25.94
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-023",
+    "name": "峡山泥盆纪多门类动、植物化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "于都县",
+    "detail_location": "于都县峡山（峡山群层型地）",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "泥盆纪",
+    "stratum": "峡山群（层型地）（据图册第三章正文）",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.29,
+    "latitude": 25.94,
+    "coord_precision": "乡级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第023号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "5–10 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-024",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.86,
+     25.48
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-024",
+    "name": "鹅公头泥盆纪硅化木产地",
+    "region": "赣东南",
+    "subregion": "信丰",
+    "city_county": "信丰县",
+    "detail_location": "信丰县西牛鹅公头",
+    "fossil_group": "古植物",
+    "geological_age": "泥盆纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 114.86,
+    "latitude": 25.48,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第024号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "省内发现的最古老硅化木，直径达10—40cm。",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-025",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.36,
+     28.45
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-025",
+    "name": "上寨中泥盆世腕足类化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "高安县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "中泥盆世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.36,
+    "latitude": 28.45,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第025号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-026",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.94,
+     28.24
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-026",
+    "name": "高栋山晚泥盆世珊瑚化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "上高县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚泥盆世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "破坏较严重",
+    "longitude": 114.94,
+    "latitude": 28.24,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第026号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-027",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.56,
+     29.88
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-027",
+    "name": "双峰尖晚泥盆世植物化石产地",
+    "region": "赣西北",
+    "subregion": "彭泽",
+    "city_county": "彭泽县",
+    "detail_location": "无",
+    "fossil_group": "古植物",
+    "geological_age": "晚泥盆世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 116.56,
+    "latitude": 29.88,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第027号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-028",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.77,
+     28.16
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-028",
+    "name": "华山岭晚泥盆世—早石炭世植物化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "丰城市",
+    "detail_location": "无",
+    "fossil_group": "古植物",
+    "geological_age": "晚泥盆世—早石炭世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.77,
+    "latitude": 28.16,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第028号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-029",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.24,
+     26.95
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-029",
+    "name": "洋湖晚泥盆世—早石炭世动、植物化石产地",
+    "region": "赣西",
+    "subregion": "吉安",
+    "city_county": "永新县",
+    "detail_location": "无",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "晚泥盆世—早石炭世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.24,
+    "latitude": 26.95,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第029号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-030",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.96,
+     27.13
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-030",
+    "name": "杨家源早石炭世多门类动物化石产地",
+    "region": "赣西",
+    "subregion": "其它（莲花杨家源、分宜洪阳洞）",
+    "city_county": "莲花县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "早石炭世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 113.96,
+    "latitude": 27.13,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第030号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-031",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-031",
+    "name": "麻山早石炭世腕足类化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "早石炭世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第031号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-032",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.26,
+     25.93
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-032",
+    "name": "三门滩早石炭世动、植物化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "于都县",
+    "detail_location": "于都县罗坳三门滩（梓山组选层型）",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "早石炭世",
+    "stratum": "梓山组（选层型）（据图册第三章正文）",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.26,
+    "latitude": 25.93,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第032号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-033",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.73,
+     28.3
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-033",
+    "name": "叶家湾晚石炭世多门类动物化石产地",
+    "region": "赣东北",
+    "subregion": "其它（铅山叶家湾）",
+    "city_county": "铅山县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚石炭世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 117.73,
+    "latitude": 28.3,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第033号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-034",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.44,
+     28.38
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-034",
+    "name": "芳湖晚石炭世蜓类与珊瑚化石产地",
+    "region": "赣东北",
+    "subregion": "弋阳",
+    "city_county": "弋阳县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚石炭世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 117.44,
+    "latitude": 28.38,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第034号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-035",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.47,
+     25.83
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-035",
+    "name": "金鸡山石炭纪—二叠纪多门类动物化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "于都县",
+    "detail_location": "于都县禾丰盆地金鸡山",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "石炭纪—二叠纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "破坏严重、亟待保护",
+    "longitude": 115.47,
+    "latitude": 25.83,
+    "coord_precision": "地名级（PBDB）",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第035号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-036",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.36,
+     28.45
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-036",
+    "name": "鸡公岭早二叠世珊瑚、蜓类化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "高安市",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "早二叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 115.36,
+    "latitude": 28.45,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第036号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-037",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.63,
+     27.23
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-037",
+    "name": "小江边中二叠世动物化石产地",
+    "region": "赣西",
+    "subregion": "吉安",
+    "city_county": "安福县",
+    "detail_location": "安福县小江边（小江边组层型地）",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "中二叠世",
+    "stratum": "小江边组（层型地）（据图册第三章正文）",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 114.63,
+    "latitude": 27.23,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第037号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；规划第二十二条赣西科考线路点名「安福小江边二叠纪多门类动物」",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-038",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.15,
+     28.98
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-038",
+    "name": "甲路坞中二叠世腕足类化石产地",
+    "region": "赣东北",
+    "subregion": "乐平",
+    "city_county": "乐平市",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "中二叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "破坏严重",
+    "longitude": 117.15,
+    "latitude": 28.98,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第038号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-039",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.41,
+     25.95
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-039",
+    "name": "车头中二叠世动、植物化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "于都县",
+    "detail_location": "无",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "中二叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.41,
+    "latitude": 25.95,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第039号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-040",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.92,
+     25.39
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-040",
+    "name": "大桥晚二叠世植物化石产地",
+    "region": "赣东南",
+    "subregion": "信丰",
+    "city_county": "信丰县",
+    "detail_location": "信丰县大桥煤矿区",
+    "fossil_group": "古植物",
+    "geological_age": "晚二叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "待保护",
+    "longitude": 114.92,
+    "latitude": 25.39,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第040号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-041",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.77,
+     28.16
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-041",
+    "name": "仙姑岭晚二叠世动、植物化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "丰城市",
+    "detail_location": "无",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "晚二叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.77,
+    "latitude": 28.16,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第041号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-042",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.76,
+     29.3
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-042",
+    "name": "付山晚二叠世多门类动物化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "德安县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚二叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.76,
+    "latitude": 29.3,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第042号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-043",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.54,
+     29.03
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-043",
+    "name": "石岭下晚二叠世多门类动物化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "修水县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "晚二叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.54,
+    "latitude": 29.03,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第043号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-044",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.92,
+     25.18
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-044",
+    "name": "铁石口早三叠世双壳类与菊石化石产地",
+    "region": "赣东南",
+    "subregion": "信丰",
+    "city_county": "信丰县",
+    "detail_location": "信丰县铁石口",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "早三叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.92,
+    "latitude": 25.18,
+    "coord_precision": "乡级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第044号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "5–10 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-045",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.36,
+     26.45
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-045",
+    "name": "相城早三叠世双壳类与菊石化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "高安市",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "早三叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.36,
+    "latitude": 26.45,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第045号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-046",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.36,
+     26.45
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-046",
+    "name": "杨家早—中三叠世双壳类化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "高安市",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "中三叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.36,
+    "latitude": 26.45,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第046号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-047",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.69,
+     27.0
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-047",
+    "name": "安塘晚三叠世硅化木化石产地",
+    "region": "赣西",
+    "subregion": "吉安",
+    "city_county": "吉安县",
+    "detail_location": "吉安县安塘",
+    "fossil_group": "古植物",
+    "geological_age": "晚三叠世",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "破坏严重",
+    "longitude": 114.69,
+    "latitude": 27.0,
+    "coord_precision": "乡级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第047号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；规划第二十二条赣西科考线路点名「吉安安塘晚三叠世硅化木」",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "5–10 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-048",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.9,
+     27.04
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-048",
+    "name": "封山恒晚三叠世植物化石产地",
+    "region": "赣西",
+    "subregion": "吉安",
+    "city_county": "吉安县",
+    "detail_location": "无",
+    "fossil_group": "古植物",
+    "geological_age": "晚三叠世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.9,
+    "latitude": 27.04,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第048号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-049",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.87,
+     27.62
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-049",
+    "name": "安源晚三叠世动、植物化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "萍乡市安源（安源组层型地）",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "晚三叠世",
+    "stratum": "安源组（层型地）（据图册第三章正文）",
+    "protection_level": "国家级",
+    "protection_status": "国家矿山公园",
+    "longitude": 113.87,
+    "latitude": 27.62,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第049号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；规划第二十二条赣西科考线路点名「萍乡安源晚三叠世动植物」",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-050",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.44,
+     28.11
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-050",
+    "name": "多江晚三叠—早侏罗世动、植物化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "万载县",
+    "detail_location": "无",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "早侏罗世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.44,
+    "latitude": 28.11,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第050号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-051",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.9,
+     27.04
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-051",
+    "name": "楼下晚三叠—早侏罗世植物化石产地",
+    "region": "赣西",
+    "subregion": "吉安",
+    "city_county": "吉安县",
+    "detail_location": "无",
+    "fossil_group": "古植物",
+    "geological_age": "早侏罗世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.9,
+    "latitude": 27.04,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第051号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-052",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.0,
+     26.47
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-052",
+    "name": "赖村晚三叠—早侏罗世动、植物化石产地",
+    "region": "赣东南",
+    "subregion": "其它（于都赖村、广昌甘竹、万安狮岩）",
+    "city_county": "宁都县",
+    "detail_location": "无",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "早侏罗世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 116.0,
+    "latitude": 26.47,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（低置信待核）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第052号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无｜11/16 分区：图册作「宁都县赖村」，表1 其它行作「于都赖村」；按该其它行归入赣东南·其它，置信低，待附表4 核实。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-053",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.38,
+     28.67
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-053",
+    "name": "毛宅早侏罗世硅化木化石产地",
+    "region": "赣东北",
+    "subregion": "玉山",
+    "city_county": "玉山县",
+    "detail_location": "玉山县下镇毛宅",
+    "fossil_group": "古植物",
+    "geological_age": "早侏罗世",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "省级重点文物保护单位",
+    "longitude": 118.38,
+    "latitude": 28.67,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第053号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；规划第十条、第二十二条点名「玉山毛宅硅化木」",
+    "remarks": "已知单体最长达28.2m，下端直径1.3m。",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-054",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.91,
+     27.82
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-054",
+    "name": "水北早侏罗世植物化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "新余市",
+    "detail_location": "无",
+    "fossil_group": "多门类（复合）",
+    "geological_age": "早侏罗世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.91,
+    "latitude": 27.82,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第054号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-055",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.13,
+     27.23
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-055",
+    "name": "文峰早侏罗世硅化木产地",
+    "region": "赣西",
+    "subregion": "吉安",
+    "city_county": "吉水县",
+    "detail_location": "无",
+    "fossil_group": "古植物",
+    "geological_age": "早侏罗世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 115.13,
+    "latitude": 27.23,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第055号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-056",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.41,
+     25.95
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-056",
+    "name": "罗坳中侏罗世双壳类化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "于都县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "中侏罗世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "破坏严重",
+    "longitude": 115.41,
+    "latitude": 25.95,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第056号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-057",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.44,
+     28.38
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-057",
+    "name": "火把山早白垩世植物化石产地",
+    "region": "赣东北",
+    "subregion": "弋阳",
+    "city_county": "弋阳县",
+    "detail_location": "无",
+    "fossil_group": "古植物",
+    "geological_age": "早白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 117.44,
+    "latitude": 28.38,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第057号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-058",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.44,
+     28.38
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-058",
+    "name": "冷水坞早白垩世植物化石产地",
+    "region": "赣东北",
+    "subregion": "弋阳",
+    "city_county": "弋阳县",
+    "detail_location": "无",
+    "fossil_group": "古植物",
+    "geological_age": "早白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 117.44,
+    "latitude": 28.38,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第058号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-059",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.38,
+     28.88
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-059",
+    "name": "军山早白垩世硅化木化石产地",
+    "region": "赣东北",
+    "subregion": "乐平",
+    "city_county": "乐平市",
+    "detail_location": "乐平市名口镇流芳军山水库",
+    "fossil_group": "古植物",
+    "geological_age": "早白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 117.38,
+    "latitude": 28.88,
+    "coord_precision": "地名级（PBDB）",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第059号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "当地称“古木化石群”；乐安河河床约1km河段亦产硅化木。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-060",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.43,
+     28.92
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-060",
+    "name": "名口早白垩世硅化木化石产地",
+    "region": "赣东北",
+    "subregion": "乐平",
+    "city_county": "乐平市",
+    "detail_location": "乐平市名口镇",
+    "fossil_group": "古植物",
+    "geological_age": "早白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 117.43,
+    "latitude": 28.92,
+    "coord_precision": "乡级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第060号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；旧表「乐平名口早白垩世硅化木产地」表1 乐平小区（中生界次之，小区级）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "5–10 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-061",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.02,
+     27.63
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-061",
+    "name": "源南晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "芦溪县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 114.02,
+    "latitude": 27.63,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第061号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-062",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.02,
+     27.63
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-062",
+    "name": "葛溪晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "芦溪县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 114.02,
+    "latitude": 27.63,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第062号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-063",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-063",
+    "name": "文门坳晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第063号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-064",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-064",
+    "name": "萍乡卫校晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第064号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-065",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-065",
+    "name": "长溪晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第065号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-066",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-066",
+    "name": "院冲晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第066号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-067",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-067",
+    "name": "横板晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第067号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-068",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-068",
+    "name": "观丰晚白垩世恐龙化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第068号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-069",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-069",
+    "name": "高坑晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第069号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-070",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-070",
+    "name": "萍乡煤校新区晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第070号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-071",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     27.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-071",
+    "name": "白源晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "萍乡",
+    "city_county": "萍乡市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 113.88,
+    "latitude": 27.66,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第071号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-072",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.81,
+     25.73
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-072",
+    "name": "龙岭晚白垩世爬行动物化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "南康区",
+    "detail_location": "南康区龙岭中部（建设工地揭露）",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "世界级",
+    "protection_status": "已破坏",
+    "longitude": 114.81,
+    "latitude": 25.73,
+    "coord_precision": "乡级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第072号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；旧表「南康恐龙蛋化石产地」S2《华东地质》2025,45(4) 表2（图册 072 龙岭，县域一致，粒度不同）",
+    "remarks": "2010年9月至2011年12月建设工地出土，含“江西南康龙”。",
+    "coord_approx": true,
+    "coord_error_km": "5–10 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-073",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.76,
+     25.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-073",
+    "name": "贝山恐龙化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "南康区",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "缺失（原书未注明）",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "亟待保护",
+    "longitude": 114.76,
+    "latitude": 25.66,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第073号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-074",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.76,
+     25.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-074",
+    "name": "蓉江晚白垩世恐龙蛋化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "南康区",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 114.76,
+    "latitude": 25.66,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第074号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-075",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.76,
+     25.66
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-075",
+    "name": "龙华晚白垩世恐龙蛋化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "南康区",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 114.76,
+    "latitude": 25.66,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第075号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-076",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.96,
+     25.82
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-076",
+    "name": "五里亭晚白垩世爬行动物化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "赣州市",
+    "detail_location": "赣州市五里亭（赣州火车站所在地）",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "世界级",
+    "protection_status": "已破坏",
+    "longitude": 114.96,
+    "latitude": 25.82,
+    "coord_precision": "地名级（PBDB）",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第076号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "杨钟健（1965）于其南1.5km处发掘一整窝24枚恐龙蛋。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-077",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.93,
+     25.83
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-077",
+    "name": "沙河工业园晚白垩世爬行动物化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "赣州市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 114.93,
+    "latitude": 25.83,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第077号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-078",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.93,
+     25.83
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-078",
+    "name": "吉埠晚白垩世恐龙化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "赣州市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "世界级",
+    "protection_status": "亟待保护",
+    "longitude": 114.93,
+    "latitude": 25.83,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第078号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-079",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.93,
+     25.83
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-079",
+    "name": "蟠龙晚白垩世恐龙蛋化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "赣州市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 114.93,
+    "latitude": 25.83,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第079号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-080",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.93,
+     25.83
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-080",
+    "name": "湖边晚白垩世恐龙化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "赣州市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 114.93,
+    "latitude": 25.83,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第080号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-081",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.02,
+     25.86
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-081",
+    "name": "陈坑晚白垩世恐龙化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "赣县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 115.02,
+    "latitude": 25.86,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第081号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-082",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.02,
+     25.86
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-082",
+    "name": "茅店晚白垩世恐龙蛋化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "赣县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 115.02,
+    "latitude": 25.86,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第082号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-083",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.02,
+     25.86
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-083",
+    "name": "梅林晚白垩世恐龙骨骼化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "赣县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 115.02,
+    "latitude": 25.86,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第083号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-084",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.93,
+     25.83
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-084",
+    "name": "青峰药厂晚白垩世龟鳖类化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "赣州市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 114.93,
+    "latitude": 25.83,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第084号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-085",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.36,
+     25.4
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-085",
+    "name": "池江晚白垩世恐龙蛋化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "大余县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "待保护",
+    "longitude": 114.36,
+    "latitude": 25.4,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第085号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-086",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.95,
+     25.37
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-086",
+    "name": "柏树芜晚白垩世恐龙化石产地产地",
+    "region": "赣东南",
+    "subregion": "信丰",
+    "city_county": "信丰县",
+    "detail_location": "信丰县同益乡柏树芫塘湖坝一带",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "塘边组、莲荷组（据图册第三章正文）",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 114.95,
+    "latitude": 25.37,
+    "coord_precision": "地名级（PBDB）",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第086号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "1952年发现，塘边组、莲荷组多个层位产恐龙蛋；产地名称“产地”二字重复系原书如此，照录未改。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-087",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.8,
+     25.59
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-087",
+    "name": "寨脚下晚白垩世恐龙化石产地",
+    "region": "赣东南",
+    "subregion": "会昌",
+    "city_county": "会昌县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.8,
+    "latitude": 25.59,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第087号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-088",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.38,
+     26.94
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-088",
+    "name": "龙溪恐龙骨骼化石产地",
+    "region": "赣东南",
+    "subregion": "其它（于都赖村、广昌甘竹、万安狮岩）",
+    "city_county": "广昌县",
+    "detail_location": "广昌县龙溪",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世（据第三章第五节正文）",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "已设置保护纪念碑",
+    "longitude": 116.38,
+    "latitude": 26.94,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第088号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "20世纪80年代由上海自然博物馆、江西省文物工作队等发掘；地质时代据第三章第五节正文为晚白垩世。",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-089",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.92,
+     26.81
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-089",
+    "name": "螺溪晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "吉安",
+    "city_county": "泰和县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.92,
+    "latitude": 26.81,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第089号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-090",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.36,
+     28.45
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-090",
+    "name": "祥符晚白垩世恐龙蛋化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "高安市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "亟待保护",
+    "longitude": 115.36,
+    "latitude": 28.45,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第090号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-091",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.9,
+     28.45
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-091",
+    "name": "董团晚白垩世恐龙骨骼化石产地",
+    "region": "赣东北",
+    "subregion": "弋阳",
+    "city_county": "上饶县（现改为广信区）",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 117.9,
+    "latitude": 28.45,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第091号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无｜11/16 分区：表1 弋阳分布「上饶县、弋阳县」直接覆盖上饶县，置信高。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-092",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.9,
+     28.45
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-092",
+    "name": "风岭头晚白垩世恐龙蛋化石产地",
+    "region": "赣东北",
+    "subregion": "弋阳",
+    "city_county": "上饶县（现改为广信区）",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 117.9,
+    "latitude": 28.45,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第092号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无｜11/16 分区：表1 弋阳分布「上饶县、弋阳县」直接覆盖上饶县，置信高。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-093",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.24,
+     28.3
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-093",
+    "name": "滨江晚白垩世恐龙骨骼化石产地",
+    "region": "赣东北",
+    "subregion": "弋阳",
+    "city_county": "贵溪市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "待保护",
+    "longitude": 117.24,
+    "latitude": 28.3,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第093号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-094",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.54,
+     29.03
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-094",
+    "name": "三都晚白垩世恐龙蛋化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "修水县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 114.54,
+    "latitude": 29.03,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第094号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-095",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.24,
+     28.68
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-095",
+    "name": "金山晚白垩世恐龙蛋化石产地",
+    "region": "赣东北",
+    "subregion": "玉山",
+    "city_county": "玉山县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "晚白垩世",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 118.24,
+    "latitude": 28.68,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第095号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-096",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.54,
+     25.48
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-096",
+    "name": "池江坳古近纪脊椎动物哺乳类化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "大余县",
+    "detail_location": "大余县池江坳（池江盆地）",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "古近纪",
+    "stratum": "池江组（据图册第三章正文）",
+    "protection_level": "国家级",
+    "protection_status": "未保护",
+    "longitude": 114.54,
+    "latitude": 25.48,
+    "coord_precision": "地名级（PBDB）",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第096号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；旧表「大余池江盆地古近纪哺乳动物群」S14 图册第三章第六节（池江组）",
+    "remarks": "童永生等（1979）研究，池江组哺乳类化石极为丰富。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-097",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.48,
+     25.46
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-097",
+    "name": "青龙古近纪脊椎动物哺乳类化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "大余县",
+    "detail_location": "大余县青龙镇狮子口",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "古近纪",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "未保护",
+    "longitude": 114.48,
+    "latitude": 25.46,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第097号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-098",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.54,
+     28.06
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-098",
+    "name": "诸塘古近纪腹足类化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "樟树市",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "古近纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.54,
+    "latitude": 28.06,
+    "coord_precision": "市级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第098号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无｜11/16 分区：樟树属宜春市，旧表「清江盆地」曾标未定；本版按县域归赣西·上高，置信中，待附表4 核实。",
+    "coord_approx": true,
+    "coord_error_km": "60–100 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-099",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.21,
+     27.85
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-099",
+    "name": "宁家山古近纪脊椎动物哺乳类化石产地",
+    "region": "赣西",
+    "subregion": "上高",
+    "city_county": "新余市",
+    "detail_location": "新余市姚圩镇宁家山",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "古近纪",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "破坏较严重",
+    "longitude": 115.21,
+    "latitude": 27.85,
+    "coord_precision": "地名级（PBDB）",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第099号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；旧表「新余姚圩古近纪脊椎动物产地」S14 图册第三章第六节（姚圩镇宁家山）",
+    "remarks": "周明镇（1959）、郑家坚等（1975）研究；化石总体时代属始新世。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-100",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.09,
+     29.25
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-100",
+    "name": "王埠古近纪介形虫与腹足类化石产地",
+    "region": "赣西北",
+    "subregion": "武宁",
+    "city_county": "武宁县",
+    "detail_location": "无",
+    "fossil_group": "古无脊椎动物",
+    "geological_age": "古近纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 115.09,
+    "latitude": 29.25,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第100号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-101",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.19,
+     26.75
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-101",
+    "name": "头陂新近纪植物化石产地",
+    "region": "赣东南",
+    "subregion": "其它（于都赖村、广昌甘竹、万安狮岩）",
+    "city_county": "广昌县",
+    "detail_location": "广昌县头陂（头陂组层型地）",
+    "fossil_group": "古植物",
+    "geological_age": "新近纪",
+    "stratum": "头陂组（层型地）（据图册第三章正文）",
+    "protection_level": "省级",
+    "protection_status": "未保护",
+    "longitude": 116.19,
+    "latitude": 26.75,
+    "coord_precision": "乡级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第101号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；旧表「广昌头陂新近纪古植物产地」S14 图册第三章第六节三（头陂组层型地）",
+    "remarks": "无｜11/16 分区：表1 其它行仅列「广昌甘竹」，头陂为另一镇；按县域归入赣东南·其它行，置信中。",
+    "coord_approx": true,
+    "coord_error_km": "5–10 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-102",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.8,
+     24.9
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-102",
+    "name": "玉石岩第四纪哺乳动物化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "龙南县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "第四纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "省级重点文物保护单位",
+    "longitude": 114.8,
+    "latitude": 24.9,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第102号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册表3-6-1「龙南玉石岩」条目",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-103",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.41,
+     25.95
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-103",
+    "name": "岩前第四纪哺乳动物化石产地",
+    "region": "赣东南",
+    "subregion": "赣州",
+    "city_county": "于都县",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "第四纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 115.41,
+    "latitude": 25.95,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第103号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册表3-6-1「于都罗坳岩前」条目",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-104",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.02,
+     25.89
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-104",
+    "name": "独石子第四纪古动物化石产地",
+    "region": "赣东南",
+    "subregion": "会昌",
+    "city_county": "瑞金市",
+    "detail_location": "无",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "第四纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "待保护",
+    "longitude": 116.02,
+    "latitude": 25.89,
+    "coord_precision": "县级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第104号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册表3-6-1「瑞金独石子」条目",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-105",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.02,
+     26.33
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-105",
+    "name": "狮岩第四纪古脊椎动物化石产地",
+    "region": "赣东南",
+    "subregion": "其它（于都赖村、广昌甘竹、万安狮岩）",
+    "city_county": "万安县",
+    "detail_location": "万安县狮岩",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "第四纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "待保护",
+    "longitude": 115.02,
+    "latitude": 26.33,
+    "coord_precision": "村级占位",
+    "data_status": "图册主名录＋表1 分区归并（低置信待核）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第105号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；图册表3-6-1「万安狮岩」条目",
+    "remarks": "无｜11/16 分区：万安行政属吉安市（赣西），表1 将「万安狮岩」列赣东南其它行；沿用 11/08 裁定，大区随表1，置信低。",
+    "coord_approx": true,
+    "coord_error_km": "2–5 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-106",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.67,
+     27.36
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-106",
+    "name": "石屋洞第四纪灵长类古动物化石产地",
+    "region": "赣西",
+    "subregion": "吉安",
+    "city_county": "安福县",
+    "detail_location": "安福县石屋洞",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "第四纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 114.67,
+    "latitude": 27.36,
+    "coord_precision": "地名级（PBDB）",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第106号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；图册表3-6-1「安福石屋洞」条目",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-107",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.64,
+     27.79
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-107",
+    "name": "洪阳洞第四纪剑齿象骨骼化石产地",
+    "region": "赣西",
+    "subregion": "其它（莲花杨家源、分宜洪阳洞）",
+    "city_county": "分宜县",
+    "detail_location": "分宜县洪阳洞",
+    "fossil_group": "古脊椎动物",
+    "geological_age": "第四纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "已破坏",
+    "longitude": 114.64,
+    "latitude": 27.79,
+    "coord_precision": "地名级（PBDB）",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第107号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；图册表3-6-1「分宜洪阳洞」条目",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-108",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.32,
+     29.16
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-108",
+    "name": "涌山洞第四纪哺乳动物化石与古人类文化遗址",
+    "region": "赣东北",
+    "subregion": "乐平",
+    "city_county": "乐平市",
+    "detail_location": "乐平市涌山洞",
+    "fossil_group": "古脊椎动物与古人类文化遗址",
+    "geological_age": "第四纪",
+    "stratum": "无",
+    "protection_level": "省级",
+    "protection_status": "省级重点文物保护单位，亟待保护",
+    "longitude": 117.32,
+    "latitude": 29.16,
+    "coord_precision": "乡级占位",
+    "data_status": "图册主名录＋表1 分区归并（高置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第108号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；图册表3-6-1「乐平涌山洞」条目",
+    "remarks": "无",
+    "coord_approx": true,
+    "coord_error_km": "5–10 km"
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "JX-00-00-109",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.17,
+     28.74
+    ]
+   },
+   "properties": {
+    "id": "JX-00-00-109",
+    "name": "仙人洞第四纪全新世古动物化石与古人类文化遗址",
+    "region": "赣东北",
+    "subregion": "乐平",
+    "city_county": "万年县",
+    "detail_location": "万年县仙人洞（含吊桶环）",
+    "fossil_group": "古脊椎动物与古人类文化遗址",
+    "geological_age": "第四纪",
+    "stratum": "无",
+    "protection_level": "国家级",
+    "protection_status": "省级地质公园",
+    "longitude": 117.17,
+    "latitude": 28.74,
+    "coord_precision": "地名级（PBDB）",
+    "data_status": "图册主名录＋表1 分区归并（中置信）",
+    "data_source": "《江西省古生物化石图册》表3-0-1 第109号（主名录）；《江西省古生物化石保护规划（2016—2025年）》表1（分区，S11）；C 岗《分区小区归并表》＋A 岗 11/08 裁定（归并准则）；图册第三章相关章节正文（详细位置／赋存地层／备注）；S15 万年县人民政府网《仙人洞与吊桶环遗址》；规划第二十二条赣东北线路",
+    "remarks": "1993、1995年中美联合考古队发掘；野生稻与栽培稻线索对探索稻作农业起源意义重大。",
+    "coord_approx": true,
+    "coord_error_km": "20–30 km"
+   }
+  }
+ ]
+}
