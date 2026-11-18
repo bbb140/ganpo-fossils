@@ -1,0 +1,54 @@
+[
+  {
+    "genus": "Drapanura",
+    "species": "sp.",
+    "author_year": "",
+    "cn_name": "蝙蝠虫",
+    "age": "中寒武世（存疑）",
+    "region": "",
+    "taxa": "三叶虫",
+    "classification": "三叶虫纲—褶颊虫目",
+    "features": "",
+    "reference": "",
+    "tapho_link": ""
+  },
+  {
+    "genus": "Ganzhousaurus",
+    "species": "nankangensis",
+    "author_year": "Wang et al., 2013",
+    "cn_name": "南康赣州龙",
+    "age": "晚白垩世",
+    "region": "赣东南",
+    "taxa": "恐龙",
+    "classification": "恐龙总目—兽脚亚目—窃蛋龙科",
+    "features": "窃蛋龙类，正型标本为一半关联的部分骨架（含不完整下颌、三枚关联后部尾椎、部分腰带等，编号 SDM 20090302），产自赣州南康南雄组。由原始与衍生特征的独特组合界定：齿骨较浅，外侧面无凹窝与气孔；下颌前端弱下翻；外下颌孔前缘围有浅凹窝并被上隅骨前突分割；齿骨后腹突轻微扭转、位于下颌腹外侧面；第二跖骨远端半具腹侧缘突；不具掠食龙脚型跖骨构造。支序分析将其与 Oviraptor、Citipati 等同归窃蛋龙科，是赣州窃蛋龙动物群的成员之一。",
+    "reference": "Wang S, Sun C, Sullivan C, et al. A new oviraptorid dinosaur (Theropoda: Oviraptorosauria) from the Upper Cretaceous of southern China[J]. Zootaxa, 2013, 3640(2): 242-257.",
+    "tapho_link": ""
+  },
+  {
+    "genus": "Banji",
+    "species": "long",
+    "author_year": "Xu & Han, 2010",
+    "cn_name": "斑嵴龙",
+    "age": "晚白垩世（约66 Ma）",
+    "region": "赣东南",
+    "taxa": "恐龙",
+    "classification": "恐龙总目—兽脚亚目—窃蛋龙科",
+    "features": "窃蛋龙类，正型标本为近完整头骨与下颌（IVPP V 16896），由业余采集者捐赠给中国科学院古脊椎动物与古人类研究所，据围岩判断产自赣州南雄组。鉴别特征：头冠由前颌骨与鼻骨构成，后端呈阶梯状，两侧各具两条纵沟及大量斜行细纹——属名“斑嵴”（条纹头冠）即由此而来；外鼻孔极度延长、位置靠后接近眼眶；翼骨腭支背面具深凹窝；齿骨后部背缘多纵沟；上隅骨背缘侧架具多枚小结突。支序分析显示其在窃蛋龙科内位置较基干，腭部与下颌的若干特征为该类群形态演化提供关键信息。",
+    "reference": "Xu X, Han F L. A new oviraptorid dinosaur (Theropoda: Oviraptorosauria) from the Upper Cretaceous of China[J]. Vertebrata PalAsiatica, 2010, 48(1): 11-18.",
+    "tapho_link": ""
+  },
+  {
+    "genus": "Minioolithus",
+    "species": "ganzhouensis",
+    "author_year": "Wu et al., 2024",
+    "cn_name": "赣州迷你蛋",
+    "age": "晚白垩世（约8000万年前）",
+    "region": "赣东南",
+    "taxa": "恐龙蛋",
+    "classification": "恐龙蛋—椭圆形蛋科（副分类）",
+    "features": "已知最小的非鸟翼类恐龙蛋：一窝六枚近乎完整、成窝但无序保存，最大长轴仅 29.93 mm、赤道直径 22.92 mm。其分类归属依据不是外形，而是蛋壳显微结构——扫描电子显微镜与电子背散射衍射揭示的壳单元排列、气孔系统形态与蛋壳厚度，与已知各类蛋化石存在稳定差异，据此建立新蛋属新蛋种并归入椭圆形蛋科，采用与骨骼分类树并行的副分类系统。蛋的大小与母体体型、窝卵数相关，一窝如此小的蛋指向一类体型很小的兽脚类恐龙，但产蛋者具体类群尚未确定。2026 年获吉尼斯世界纪录认证。",
+    "reference": "Wu R, Lou F, Yu J, et al. The smallest known complete dinosaur fossil eggs from the Upper Cretaceous of South China[J]. Historical Biology, 2024: 1-10.",
+    "tapho_link": ""
+  }
+]
