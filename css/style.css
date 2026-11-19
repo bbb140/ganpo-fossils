@@ -780,6 +780,16 @@ th.sortable.sorted::after {
   color: #9a9a90;
   word-break: break-word;
 }
+.species-card .sp-unknown {
+  display: inline-block;
+  margin-top: .3rem;
+  padding: .1rem .45rem;
+  border: 1px dashed #d9b26a;
+  border-radius: 3px;
+  background: #fdf8ee;
+  font-size: .78rem;
+  color: #9a6b1f;
+}
 @media (max-width: 768px) {
   .species-card, #species-list .species-card { flex: 1 1 100%; }
 }

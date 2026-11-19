@@ -1,7 +1,7 @@
 /* ============================================================
    js/species.js —— 物种图鉴渲染层（B 岗数据接入点）
 
-   作用：把 data/species.json（15 条图鉴）渲染到两处：
+   作用：把 data/species.json（当前 14 条图鉴）渲染到两处：
      · 首页四个分区的 .species-cards
      · 地图页筛选结果的 #species-list
 
@@ -98,18 +98,34 @@
     });
   }
 
-  /* 一条图鉴是否与当前这批产地相关：
+  /* 一条图鉴是否与当前这批产地相关（三级匹配，可靠性递减）：
      ① 有 tapho_link → 编号精确匹配（最可靠）
-     ② 无 link → 用门类交集匹配（宽松回退，方便 B 岗先给内容后补编号） */
+     ② 无 link 但有 region → 按大区匹配（如斑嵴龙：产地不详，仅知赣州/赣东南）
+     ③ 都没有 → 用门类交集匹配（宽松回退）
+     注意：②只在整批 sites 属于同一大区时才生效（首页分区 / 大区筛选），
+     在地图全量视图下不启用，否则一条"产地不详"会挂到全省所有区。 */
   function related(item, sites) {
+    if (!sites || !sites.length) return false;
     const link = val(item, F.site);
     if (link) {
       const codes = link.split(/[、，,；;]/).map(function (x) { return x.trim(); }).filter(Boolean);
       return codes.some(function (c) {
-        return sites.some(function (s) {
-          return val(s, ['id', '记录编号']) === c;
-        });
+        return sites.some(function (s) { return val(s, ['id', '记录编号']) === c; });
       });
+    }
+    const rg = val(item, F.region);
+    if (rg) {
+      const areas = {};
+      sites.forEach(function (s) {
+        const a = val(s, ['region', '保护分区', '大区']).replace(/大区|\s/g, '');
+        if (a) areas[a] = 1;
+      });
+      /* 整批产地同属一个大区、且与图鉴 region 一致 → 按大区关联。
+         要求 sites.length > 1：单条产地（点地图/精确筛选）不挂"产地不详"的图鉴，
+         否则任何一条赣东南产地都会错误地显示斑嵴龙。 */
+      const keys = Object.keys(areas);
+      if (sites.length > 1 && keys.length === 1 &&
+          keys[0].indexOf(rg.replace(/大区|\s/g, '')) > -1) return true;
     }
     const tx = val(item, F.taxa);
     if (!tx) return false;
@@ -140,6 +156,11 @@
     if (link) {
       const code = link.split(/[、，,；;]/)[0].trim();
       html += '<a class="sp-link" href="map.html?code=' + encodeURIComponent(code) + '">地图定位 →</a>';
+    } else {
+      /* 无产地编号：明确标注"具体不详"，不编造定位，也不显示地图定位链接。
+         如斑嵴龙正模为匿名捐赠，原文仅记「赣州附近 Hongcheng 盆地」，无工地可对。 */
+      const rg = val(it, F.region);
+      html += '<span class="sp-unknown">产地：' + esc(rg || '未详') + '（具体不详）</span>';
     }
     if (ref && ref !== '无') html += '<div class="sp-ref">' + esc(cut(ref, 52)) + '</div>';
     return html + '</div>';
