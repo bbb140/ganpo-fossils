@@ -16,7 +16,10 @@
   header nav{display:flex;justify-content:space-between;align-items:center;
     padding:1rem 2rem;border-bottom:1px solid var(--c-border);background:var(--c-surface)}
   nav .logo{font-weight:bold;color:var(--c-primary);text-decoration:none}
-  nav ul{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+  /* 清零 ul 默认 padding/margin：主站靠全局 *{margin:0;padding:0} 已清掉，
+     本页没有全局重置，若不单独清零，ul 会保留浏览器默认 padding-left:40px
+     + 上下 1em 外边距，导致导航菜单右移、比其它页"宽"。 */
+  nav ul{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap;margin:0;padding:0}
   nav a{text-decoration:none;color:var(--c-text)}
   nav a.active{color:var(--c-primary);font-weight:600;
     border-bottom:2px solid var(--c-primary);padding-bottom:2px}
