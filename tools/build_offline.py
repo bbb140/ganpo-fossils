@@ -25,7 +25,9 @@ DIST = os.path.join(BASE, "dist")
 ZIP = os.path.join(BASE, "赣鄱石语_离线演示版.zip")
 
 COPY_DIRS = ["css", "js", "assets", "img", "data"]
-COPY_FILES = ["index.html", "map.html", "list.html", "download.html"]
+# 图鉴探索页的三个根目录依赖（atlas.html 用相对路径直接引，不在 js/ 子目录）
+ATLAS_JS = ["atlas-demo-data.js", "atlas-logic.js", "atlas-quiz.js"]
+COPY_FILES = ["index.html", "map.html", "list.html", "download.html", "atlas.html"] + ATLAS_JS
 
 # 演示包里绝不能出现的东西：内部工作稿（含"待确认/未定/待岗签字"列）+ 备份文件
 # 发给老师/评委的包里出现"待确认 6 条"这种表，只会被理解成数据不严谨
@@ -127,14 +129,22 @@ def content_version():
     paths.append(SITES)
     if os.path.isfile(SPECIES) and os.path.getsize(SPECIES) > 0:
         paths.append(SPECIES)   # B 岗图鉴一到位，版本号即变，缓存自动失效
+    # 图鉴探索的根目录 JS 也要计入：加化石后 build_atlas_data.py 会改 atlas-demo-data.js，
+    # 漏掉它就会出现"图鉴数据更新了、浏览器还是旧缓存"
+    for fn in ATLAS_JS:
+        p = os.path.join(BASE, fn)
+        if os.path.isfile(p):
+            paths.append(p)
     for p in sorted(paths):
         with io.open(p, "rb") as f:
             h.update(f.read())
     return h.hexdigest()[:8]
 
 
-# 只匹配本站自有资源（css/、js/），外链与 assets/leaflet 的固定版本库不动
-RE_ASSET = re.compile(r'(href|src)="((?:css|js)/[^"?#]+)(?:\?v=[^"]*)?"')
+# 只匹配本站自有资源（css/、js/ + 图鉴探索的三个根目录 JS），
+# 外链与 assets/leaflet 的固定版本库不动
+RE_ASSET = re.compile(
+    r'(href|src)="((?:css|js)/[^"?#]+|atlas-(?:demo-data|logic|quiz)\.js)(?:\?v=[^"]*)?"')
 
 
 def stamp_assets(ver):

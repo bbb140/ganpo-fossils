@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>赣鄱石语 · 化石图鉴探索</title>
+<style>
+  :root{--ink:#26332e;--muted:#737f78;--line:#e3e7e1;--paper:#f6f7f2;--card:#fff;
+    --green:#3c806d;--green-d:#2b5f51;--green-l:#e9f3ef;
+    --amber:#b5842f;--amber-l:#fbf1dd;--purple:#6a5aa8;--purple-l:#efeefa;
+    --lock:#a3aaa3;--lock-bg:#f0f1ed;--shadow:0 6px 22px rgba(30,50,40,.10)}
+  *{box-sizing:border-box}
+  /* 与主站一致的导航（沿用主站色板变量，保证换肤同步） */
+  :root{--c-primary:#2E5E4E;--c-text:#222;--c-bg:#fff;--c-surface:#f5f5f0;--c-border:#ddd}
+  header{position:relative;z-index:10}
+  header nav{display:flex;justify-content:space-between;align-items:center;
+    padding:1rem 2rem;border-bottom:1px solid var(--c-border);background:var(--c-surface)}
+  nav .logo{font-weight:bold;color:var(--c-primary);text-decoration:none}
+  nav ul{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+  nav a{text-decoration:none;color:var(--c-text)}
+  nav a.active{color:var(--c-primary);font-weight:600;
+    border-bottom:2px solid var(--c-primary);padding-bottom:2px}
+  body{margin:0;background:var(--c-bg);color:var(--c-text);
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:15px;line-height:1.7}
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 18px 70px}
+  header{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
+  header h1{margin:0 0 5px;font-size:25px;font-weight:600;letter-spacing:.5px}
+  header p{margin:0;color:var(--muted);font-size:13px}
+  .tag{display:inline-block;margin-top:9px;padding:3px 10px;border-radius:20px;
+    background:var(--amber-l);color:var(--amber);font-size:12px}
+  .topbtns{display:flex;gap:9px;flex-wrap:wrap}
+  .btn{font:inherit;font-size:13px;padding:9px 15px;border-radius:8px;cursor:pointer;
+    border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .btn:hover{border-color:var(--green)}
+  .btn.primary{background:var(--green);color:#fff;border-color:var(--green)}
+  .btn.primary:hover{background:var(--green-d)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .hud{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 12px}
+  @media(max-width:680px){.hud{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+  .stat .n{font-size:24px;font-weight:600;line-height:1.1}
+  .stat .l{font-size:12px;color:var(--muted);margin-top:3px}
+  .bar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:12px 0 20px;
+    padding:12px 15px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+  .bar label{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer}
+  .bar .spacer{flex:1}
+  .bar .hint{font-size:12px;color:var(--muted)}
+  .badges{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 22px}
+  .badge{display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:9px;
+    background:#f1f2ee;border:1px solid var(--line);font-size:12px;color:var(--lock)}
+  .badge.got{background:var(--amber-l);border-color:#ecd9b4;color:#8a621d}
+  .badge .medal{width:18px;height:18px;border-radius:50%;background:#dfe1dc;
+    display:inline-flex;align-items:center;justify-content:center;font-size:10px;color:#fff}
+  .badge.got .medal{background:var(--amber)}
+  .badge small{display:block;font-size:11px;color:var(--muted)}
+  .badge.got small{color:#a07c3c}
+  h2.sec{font-size:16px;font-weight:600;margin:0 0 12px}
+  .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:680px){.grid4{grid-template-columns:1fr}}
+  .area{position:relative;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:17px 18px;cursor:pointer;transition:.15s}
+  .area:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .area.locked{background:var(--lock-bg);cursor:not-allowed;color:var(--lock);border-color:#e5e7e2}
+  .area.locked:hover{transform:none;box-shadow:none}
+  .area .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .area .name{font-size:17px;font-weight:600}
+  .area .pill{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--green-l);color:var(--green-d)}
+  .area.locked .pill{background:#e2e4df;color:var(--lock)}
+  .area .desc{font-size:12px;color:var(--muted);margin-top:8px}
+  .area.locked .desc{color:var(--lock)}
+  .prog{height:6px;border-radius:6px;background:#eceff0;overflow:hidden;margin-top:12px}
+  .prog i{display:block;height:100%;background:var(--green);border-radius:6px;transition:width .3s}
+  .area.locked .prog{background:#e0e2dd}
+  .area .foot{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px}
+  .mask{position:fixed;inset:0;background:rgba(25,34,29,.55);display:none;
+    align-items:center;justify-content:center;padding:18px;z-index:50}
+  .mask.show{display:flex}
+  .modal{background:#fff;border-radius:14px;width:100%;max-width:640px;
+    padding:24px;max-height:88vh;overflow:auto;box-shadow:var(--shadow)}
+  .modal h3{margin:0 0 4px;font-size:19px}
+  .modal .sub{color:var(--muted);font-size:12px;margin:0 0 16px}
+  .close{float:right;border:0;background:#f1f2ee;border-radius:7px;
+    width:30px;height:30px;cursor:pointer;color:var(--muted);font-size:17px}
+  .sitelist{display:grid;gap:9px;max-height:52vh;overflow:auto;padding-right:4px}
+  .site{display:flex;justify-content:space-between;align-items:center;gap:12px;
+    border:1px solid var(--line);border-radius:9px;padding:11px 13px;background:#fff}
+  .site.done{background:var(--green-l);border-color:#cfe4db}
+  .site .nm{font-size:14px;font-weight:500}
+  .site .mt{font-size:11px;color:var(--muted);margin-top:2px}
+  .site .go{font-size:12px;color:var(--green-d);white-space:nowrap}
+  .site.done .go{color:var(--muted)}
+  .site .gem{font-size:11px;color:var(--amber);margin-left:6px}
+  .atlasgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
+  @media(max-width:560px){.atlasgrid{grid-template-columns:repeat(3,1fr)}}
+  .slot{border:1px solid var(--line);border-radius:10px;padding:11px 9px;min-height:96px;
+    background:#fafbf8;cursor:default;text-align:center}
+  .slot.got{background:var(--purple-l);border-color:#d8d4ef;cursor:pointer}
+  .slot.got:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .slot.lit{background:#fafbf8;border-color:var(--line);cursor:pointer;border-style:dashed}
+  .slot.lit:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .slot.lit .cn{color:var(--muted);font-weight:500}
+  .slot .idx{font-size:10px;color:var(--muted)}
+  .slot .cn{font-size:13px;font-weight:600;margin-top:5px;word-break:break-all}
+  .slot .sci{font-size:10px;color:var(--muted);font-style:italic;margin-top:3px;word-break:break-all}
+  .slot .q{font-size:22px;color:#c7ccc5;margin-top:16px}
+  .detail{font-size:13px;line-height:1.8}
+  .detail .row{margin:6px 0}
+  .detail .row b{color:var(--muted);font-weight:500;font-size:12px}
+  .detail .feat{padding:12px;background:var(--paper);border-radius:8px;margin-top:10px}
+  .drop{text-align:center;padding:14px 0}
+  .drop .ico{font-size:34px}
+  .drop h4{margin:8px 0 4px;font-size:17px}
+  .drop p{color:var(--muted);font-size:13px}
+  .found{background:var(--purple-l);border:1px solid #d8d4ef;border-radius:11px;
+    padding:13px;margin:12px 0;text-align:left}
+  .found .cn{font-size:16px;font-weight:600;color:var(--purple)}
+  .found .sci{font-style:italic;color:var(--muted);font-size:12px}
+  .unlockmsg{margin-top:12px;padding:11px 13px;border-radius:9px;
+    background:var(--amber-l);color:#8a621d;font-size:13px}
+  .acts{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    background:#25382f;color:#fff;padding:11px 20px;border-radius:22px;font-size:13px;
+    opacity:0;pointer-events:none;transition:opacity .25s;z-index:80}
+  .toast.show{opacity:1}
+  /* 门槛：知识小考 */
+  .lvbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 16px;
+    padding:12px 15px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+  .lvbar .ttl{font-size:13px;font-weight:600}
+  .lvbtn{font:inherit;font-size:12px;padding:6px 12px;border-radius:7px;cursor:pointer;
+    border:1px solid var(--line);background:#fff;color:var(--muted)}
+  .lvbtn.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .lvbar .lvdesc{font-size:12px;color:var(--muted);margin-left:4px}
+  .infocard{background:var(--paper);border:1px solid var(--line);border-radius:10px;
+    padding:13px 15px;margin:0 0 16px}
+  .infocard .hd{font-size:12px;color:var(--green-d);font-weight:600;margin-bottom:8px}
+  .infocard .kv{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px;font-size:13px}
+  @media(max-width:560px){.infocard .kv{grid-template-columns:1fr}}
+  .infocard .kv b{color:var(--muted);font-weight:500;font-size:12px;margin-right:6px}
+  .quizq{border-top:1px solid var(--line);padding:14px 0 4px}
+  .quizq .qt{font-size:14px;font-weight:500;margin-bottom:9px}
+  .quizq .qt em{font-style:normal;color:var(--green-d);font-size:11px;margin-left:6px}
+  .opts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+  @media(max-width:560px){.opts{grid-template-columns:1fr}}
+  .opt{font:inherit;text-align:left;font-size:13px;padding:9px 12px;border-radius:8px;
+    border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+  .opt:hover{border-color:var(--green)}
+  .opt.sel{background:var(--green-l);border-color:var(--green);color:var(--green-d);font-weight:600}
+  .opt.right{background:#e6f4ea;border-color:#5aa76f;color:#276c3a}
+  .opt.wrong{background:#fdeaea;border-color:#d98a8a;color:#a33}
+  .quizmsg{padding:11px 13px;border-radius:9px;font-size:13px;margin-top:14px}
+  .quizmsg.ok{background:#e6f4ea;color:#276c3a}
+  .quizmsg.no{background:#fdeaea;color:#a33}
+  .quizmsg b{font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <a class="logo" href="index.html">赣鄱石语</a>
+    <ul>
+      <li><a href="index.html">首页</a></li>
+      <li><a href="map.html">产地地图</a></li>
+      <li><a href="list.html">产地名录</a></li>
+      <li><a href="download.html">数据下载</a></li>
+      <li><a href="atlas.html" class="active">图鉴探索</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>赣鄱石语 · 化石图鉴探索</h1>
+      <p>从赣西北出发，探索产地 → 发现化石 → 集入图鉴 → 解锁新分区 → 赢得徽章</p>
+      <span class="tag">科普互动 · 边读边探索</span>
+    </div>
+    <div class="topbtns">
+      <button class="btn primary" id="atlasBtn">我的图鉴本</button>
+      <button class="btn" id="badgeBtn">徽章墙</button>
+    </div>
+  </header>
+
+  <div class="hud">
+    <div class="stat"><div class="n" id="sFound">0</div><div class="l">已探索产地</div></div>
+    <div class="stat"><div class="n" id="sFossil">0/0</div><div class="l">已收集化石（可探索）</div></div>
+    <div class="stat"><div class="n" id="sArea">1/4</div><div class="l">已解锁分区</div></div>
+    <div class="stat"><div class="n" id="sBadge">0/5</div><div class="l">已获得徽章</div></div>
+  </div>
+
+  <div class="lvbar">
+    <span class="ttl">门槛强度</span>
+    <button class="lvbtn" data-lv="easy">轻松</button>
+    <button class="lvbtn" data-lv="normal">标准</button>
+    <button class="lvbtn" data-lv="hard">挑战</button>
+    <span class="lvdesc" id="lvdesc"></span>
+    <span class="spacer" style="flex:1"></span>
+    <label style="font-size:13px;cursor:pointer"><input type="checkbox" id="demoMode"> 演示模式（答辩用，跳过答题）</label>
+  </div>
+
+  <div class="bar">
+    <span class="hint" id="hint">点开产地 → 先读信息卡 → 答对题目才算勘探成功</span>
+    <span class="spacer"></span>
+    <button class="btn" id="resetBtn">重置进度</button>
+  </div>
+
+  <div class="badges" id="badges"></div>
+
+  <h2 class="sec">四个化石分区</h2>
+  <div class="grid4" id="areaGrid"></div>
+  <p style="font-size:11px;color:var(--muted);margin-top:14px">
+    说明：赣西北 14 处产地暂无线索化石（B 岗图鉴未覆盖该区），但探索本身计入解锁进度；
+    化石按图鉴文件中的 <code>tapho_link</code> 真实对应到产地，不推测、不编造。
+  </p>
+</div>
+
+<div class="mask" id="mask"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="atlas-demo-data.js"></script>
+<script src="atlas-logic.js"></script>
+<script src="atlas-quiz.js"></script>
+<script>
+(function(){
+  'use strict';
+  var L=window.ATLAS_LOGIC, Q=window.ATLAS_QUIZ, SITES=window.ATLAS_SITES||[], SPECIES=window.ATLAS_SPECIES||[];
+  var store=window.localStorage, state=L.load(store);
+  /* 答辩优先：全新访客（从未设置过演示模式开关）默认开启演示模式，
+     老师从导航点进来直接全解锁、不被第一关卡住。用户手动关过一次后，
+     demo 键就有了值，此后尊重其选择，不再强行打开。 */
+  try {
+    if (store.getItem(L.K.demo) === null && !state.demo) {
+      state = L.setDemo(store, state, true);
+    }
+  } catch (e) {}
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2200);}
+  function open(html){$('modal').innerHTML=html;$('mask').classList.add('show');}
+  function close(){$('mask').classList.remove('show');}
+  function byArea(a){return SITES.filter(function(r){return r.region===a;});}
+  function fossilsHere(site){return SPECIES.filter(function(f){return f.tapho_link===site.id;});}
+
+  function newBadges(before,after){
+    var a={};before.forEach(function(x){if(x.got)a[x.id]=1;});
+    return after.filter(function(x){return x.got&&!a[x.id];});
+  }
+
+  function render(){
+    var st=L.stats(state,SPECIES);
+    $('sFound').textContent=st.found;
+    $('sFossil').textContent=st.fossils+'/'+st.collectable;
+    $('sArea').textContent=st.unlocked+'/4';
+    $('sBadge').textContent=st.badges+'/5';
+    $('demoMode').checked=state.demo;
+    var lv=L.LEVELS[state.level]||L.LEVELS.normal;
+    $('lvdesc').textContent=lv.desc+' · 答对才算数';
+    Array.prototype.forEach.call(document.querySelectorAll('.lvbtn'),function(b){
+      b.classList.toggle('on',b.getAttribute('data-lv')===state.level);
+    });
+    $('hint').textContent=state.demo
+      ?'演示模式：跳过答题，全部解锁 + 全图鉴预览'
+      :'点开产地 → 先读信息卡 → 答对 '+lv.quiz+' 题才算勘探成功；每区 '+lv.need+' 处解锁下一区';
+
+    $('badges').innerHTML=L.badges(state,SPECIES).map(function(b){
+      return '<div class="badge '+(b.got?'got':'')+'"><span class="medal">'+(b.got?'✓':'·')+'</span>'+
+        '<span>'+esc(b.name)+'<small>'+esc(b.desc)+'</small></span></div>';
+    }).join('');
+
+    var g=$('areaGrid');g.innerHTML='';
+    L.AREAS.forEach(function(a,i){
+      var ok=L.canEnter(state,i), rows=byArea(a), n=L.foundIn(state,a,SITES);
+      var d=document.createElement('div');
+      d.className='area'+(ok?'':' locked');
+      var gems=rows.filter(function(r){return fossilsHere(r).length;}).length;
+      var pill=ok?(state.demo?'预览':(i===state.unlocked-1?'探索中':'已解锁')):'未解锁';
+      var foot=ok?('已探索 '+n+' / '+rows.length+' 处 · 藏有化石的产地 '+gems+' 处'):('通关「'+L.AREAS[i-1]+'」后开放');
+      d.innerHTML='<div class="top"><span class="name">'+esc(a)+'</span><span class="pill">'+pill+'</span></div>'+
+        '<div class="desc">'+rows.length+' 处产地记录'+(gems?'，其中 '+gems+' 处藏有化石':'，暂无化石线索')+'</div>'+
+        '<div class="prog"><i style="width:'+Math.min(100,Math.round(n/rows.length*100))+'%"></i></div>'+
+        '<div class="foot"><span>'+esc(foot)+'</span><span>'+(ok?'进入 →':'锁定')+'</span></div>';
+      if(ok)d.onclick=function(){openArea(a);};
+      g.appendChild(d);
+    });
+  }
+
+  function openArea(area){
+    var rows=byArea(area), ids={};state.found.forEach(function(id){ids[id]=1;});
+    var html='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+      '<h3>'+esc(area)+' · 产地探索</h3>'+
+      '<p class="sub">点击一处产地进行勘探；藏有化石的产地会掉落图鉴卡片</p><div class="sitelist">';
+    rows.forEach(function(r){
+      var fs=fossilsHere(r), done=!!ids[r.id];
+      html+='<div class="site '+(done?'done':'')+'" data-id="'+esc(r.id)+'">'+
+        '<div><div class="nm">'+esc(r.name)+(fs.length?'<span class="gem">◆ 藏有化石</span>':'')+'</div>'+
+        '<div class="mt">'+esc(r.id)+' · '+esc(r.city_county||'')+' · '+esc(r.geological_age||'')+' · '+esc(r.fossil_group||'')+'</div></div>'+
+        '<div class="go">'+(done?'已勘探':'勘探 →')+'</div></div>';
+    });
+    html+='</div><div class="acts"><button class="btn" id="closeArea">返回</button></div>';
+    open(html);
+    $('closeArea').onclick=close;
+    Array.prototype.forEach.call($('modal').querySelectorAll('.site'),function(el){
+      el.onclick=function(){
+        var id=el.getAttribute('data-id');
+        var site=SITES.filter(function(r){return r.id===id;})[0];
+        if(site)doExplore(site);
+      };
+    });
+  }
+
+  /* 点产地：演示模式直接勘探；否则先过知识小考 */
+  function doExplore(site){
+    if(state.demo){ invokeExplore(site, true); return; }
+    openQuiz(site);
+  }
+
+  /* 门槛关卡：先给真实信息卡，再从卡上字段出题，全对才放行 */
+  function openQuiz(site){
+    var qs=Q.make(site,SITES,L.quizOf(state));
+    if(!qs.length){ invokeExplore(site, true); return; }  // 极少数字段全空：不设门槛
+    var html='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+      '<h3>勘探前的知识小考</h3>'+
+      '<p class="sub">先读下方信息卡，再答题。全部答对才算勘探成功（答案都在卡上，不用背）。</p>'+
+      '<div class="infocard"><div class="hd">产地信息卡 · '+esc(site.id)+'</div><div class="kv">'+
+      '<div><b>名称</b>'+esc(site.name)+'</div>'+
+      '<div><b>位置</b>'+esc(site.city_county||'—')+'</div>'+
+      '<div><b>年代</b>'+esc(site.geological_age||'—')+'</div>'+
+      '<div><b>门类</b>'+esc(site.fossil_group||'—')+'</div>'+
+      '<div><b>级别</b>'+esc(site.protection_level||'—')+'</div>'+
+      '<div><b>分区</b>'+esc(site.region||'—')+'</div>'+
+      '</div></div><div id="qlist">';
+    qs.forEach(function(q,i){
+      html+='<div class="quizq" data-i="'+i+'"><div class="qt">'+(i+1)+'. '+esc(q.q)+
+        '<em>单选</em></div><div class="opts">';
+      q.options.forEach(function(op){
+        html+='<button class="opt" data-i="'+i+'" data-v="'+esc(op)+'">'+esc(op)+'</button>';
+      });
+      html+='</div></div>';
+    });
+    html+='</div><div id="qmsg"></div>'+
+      '<div class="acts"><button class="btn" id="quizBack">返回分区</button>'+
+      '<button class="btn primary" id="quizSubmit">提交答卷</button></div>';
+    open(html);
+    var chosen={};
+    Array.prototype.forEach.call($('modal').querySelectorAll('.opt'),function(el){
+      el.onclick=function(){
+        var i=el.getAttribute('data-i');
+        Array.prototype.forEach.call($('modal').querySelectorAll('.opt[data-i="'+i+'"]'),function(o){o.classList.remove('sel');});
+        el.classList.add('sel');
+        chosen[i]=el.getAttribute('data-v');
+      };
+    });
+    $('quizBack').onclick=function(){close();render();};
+    $('quizSubmit').onclick=function(){
+      var right=0;
+      qs.forEach(function(q,i){
+        if(Q.check(q,chosen[i]))right++;
+      });
+      if(right===qs.length){
+        invokeExplore(site,true);
+        return;
+      }
+      /* 未全对：标出对错，给出线索，允许重试；不计入探索 */
+      Array.prototype.forEach.call($('modal').querySelectorAll('.opt'),function(el){
+        var i=el.getAttribute('data-i'), q=qs[i];
+        el.classList.remove('sel');
+        if(el.getAttribute('data-v')===q.answer)el.classList.add('right');
+        else if(el.getAttribute('data-v')===chosen[i])el.classList.add('wrong');
+      });
+      var firstWrong=-1;
+      qs.forEach(function(q,i){if(firstWrong<0&&!Q.check(q,chosen[i]))firstWrong=i;});
+      $('qmsg').innerHTML='<div class="quizmsg no">答对 '+right+' / '+qs.length+' 题，还没通过。'+
+        esc(qs[firstWrong].tip)+'。可以重看信息卡再答一次。</div>';
+      $('quizSubmit').textContent='重新作答';
+    };
+  }
+
+  /* 勘探成功后的掉落、解锁与徽章展示 */
+  function invokeExplore(site,passed){
+    var before=L.badges(state,SPECIES);
+    var r=L.explore(store,state,site,SITES,SPECIES,passed);
+    if(r.already){toast('这处产地已经勘探过了');return;}
+    if(r.failed){toast('题目还没答对，再试一次');return;}
+    var html='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+      '<div class="drop"><div class="ico">⛏</div><h4>'+(state.demo?'演示勘探':'勘探通过')+'</h4>'+
+      '<p>'+esc(site.name)+'</p></div>'+
+      '<div class="detail">'+
+      '<div class="row"><b>编号</b> '+esc(site.id)+'</div>'+
+      '<div class="row"><b>位置</b> '+esc(site.city_county||'—')+'</div>'+
+      '<div class="row"><b>年代</b> '+esc(site.geological_age||'—')+'</div>'+
+      '<div class="row"><b>门类</b> '+esc(site.fossil_group||'—')+'</div>'+
+      '<div class="row"><b>级别</b> '+esc(site.protection_level||'—')+'</div></div>';
+    if(r.fossils.length){
+      html+='<div class="found"><div style="font-size:12px;color:var(--muted)">发现化石 '+r.fossils.length+' 条</div>';
+      r.fossils.forEach(function(f){
+        html+='<div style="margin-top:8px"><span class="cn">'+esc(f.cn_name)+'</span> '+
+          '<span class="sci">'+esc(f.genus+' '+f.species)+'</span></div>';
+      });
+      html+='</div>';
+    }else{
+      html+='<p style="font-size:12px;color:var(--muted)">该产地暂无物种图鉴线索，探索进度已计入解锁。</p>';
+    }
+    if(r.unlockedAreas.length){
+      html+='<div class="unlockmsg">新分区解锁：'+esc(r.unlockedAreas.join('、'))+'</div>';
+    }
+    var nb=newBadges(before,L.badges(state,SPECIES));
+    if(nb.length)html+='<div class="unlockmsg">获得徽章：'+esc(nb.map(function(b){return b.name;}).join('、'))+'</div>';
+    html+='<div class="acts">';
+    if(r.fossils.length)html+='<button class="btn primary" id="collectBtn">收入我的图鉴</button>';
+    html+='<button class="btn" id="backArea">返回分区</button></div>';
+    open(html);
+    if(r.fossils.length)$('collectBtn').onclick=function(){
+      var added=0;r.fossils.forEach(function(f){if(L.collect(store,state,f))added++;});
+      close();render();
+      toast(added?('已收入图鉴 '+added+' 条'):'这几条已经在图鉴里了');
+    };
+    $('backArea').onclick=function(){close();render();};
+    render();
+  }
+
+  function openAtlas(){
+    var got={};state.fossils.forEach(function(n){got[n]=1;});
+    var preview=state.demo;
+    var html='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+      '<h3>化石图鉴本</h3><p class="sub">'+(preview?'演示模式预览：全部条目可见':'已收集 '+state.fossils.length+' / '+L.collectableCount(SPECIES)+' 条可探索图鉴；点击已收集条目看鉴定要点')+'</p>'+
+      '<div class="atlasgrid">';
+    SPECIES.forEach(function(f,i){
+      var has=preview||got[f.cn_name];
+      var noSite=!f.tapho_link;                       // 无产地编号：不可通过探索获得
+      var cls=has?'got':(noSite?'lit':'');
+      html+='<div class="slot '+cls+'" '+((has||noSite)?'data-i="'+i+'"':'')+'>'+
+        '<div class="idx">No.'+(i+1)+(noSite?' · 文献':'')+'</div>'+
+        (has?('<div class="cn">'+esc(f.cn_name)+'</div><div class="sci">'+esc(f.genus+' '+f.species)+'</div>')
+            :noSite?('<div class="cn">'+esc(f.cn_name)+'</div><div class="sci">产地不详</div>')
+            :'<div class="q">？</div>')+'</div>';
+    });
+    html+='</div><div class="acts"><button class="btn" id="closeAtlas">关闭</button></div>';
+    open(html);
+    $('closeAtlas').onclick=close;
+    Array.prototype.forEach.call($('modal').querySelectorAll('.slot.got, .slot.lit'),function(el){
+      el.onclick=function(){
+        var f=SPECIES[parseInt(el.getAttribute('data-i'),10)];
+        if(!f)return;
+        var h='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+          '<h3>'+esc(f.cn_name)+'</h3><p class="sub"><i>'+esc(f.genus+' '+f.species)+'</i> · '+esc(f.author_year||'')+'</p>'+
+          '<div class="detail">'+
+          '<div class="row"><b>年代</b> '+esc(f.age||'—')+'</div>'+
+          '<div class="row"><b>分类</b> '+esc(f.classification||'—')+'</div>'+
+          '<div class="row"><b>产地</b> '+esc(f.tapho_link||'具体不详')+'</div>'+
+          '<div class="row"><b>门类</b> '+esc(f.taxa||'—')+'</div>'+
+          '<div class="feat">'+esc(f.features||'—')+'</div>'+
+          '<div class="row" style="margin-top:10px"><b>文献</b> '+esc(f.reference||'—')+'</div></div>'+
+          '<div class="acts"><button class="btn" id="backAtlas">返回图鉴本</button></div>';
+        open(h);$('backAtlas').onclick=openAtlas;
+      };
+    });
+  }
+
+  function openBadges(){
+    var html='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+      '<h3>徽章墙</h3><p class="sub">按探索与收集进度自动授予</p><div class="sitelist">';
+    L.badges(state,SPECIES).forEach(function(b){
+      html+='<div class="site '+(b.got?'done':'')+'"><div><div class="nm">'+(b.got?'✓ ':'· ')+esc(b.name)+'</div>'+
+        '<div class="mt">'+esc(b.desc)+'</div></div><div class="go">'+(b.got?'已获得':'未获得')+'</div></div>';
+    });
+    html+='</div><div class="acts"><button class="btn" id="closeBadge">关闭</button></div>';
+    open(html);$('closeBadge').onclick=close;
+  }
+
+  $('atlasBtn').onclick=openAtlas;
+  $('badgeBtn').onclick=openBadges;
+  Array.prototype.forEach.call(document.querySelectorAll('.lvbtn'),function(b){
+    b.onclick=function(){
+      state=L.setLevel(store,state,b.getAttribute('data-lv'));
+      render();
+      toast('门槛已切换为「'+(L.LEVELS[state.level].label)+'」，进度保留');
+    };
+  });
+  $('demoMode').onchange=function(e){state=L.setDemo(store,state,e.target.checked);render();};
+  $('resetBtn').onclick=function(){
+    if(!confirm('重置全部探索、图鉴与徽章进度？'))return;
+    state=L.reset(store);close();render();toast('进度已重置');
+  };
+  $('mask').onclick=function(e){if(e.target===this)close();};
+  render();
+})();
+</script>
+</body>
+</html>
