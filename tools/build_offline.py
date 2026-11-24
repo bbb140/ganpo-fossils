@@ -25,8 +25,8 @@ DIST = os.path.join(BASE, "dist")
 ZIP = os.path.join(BASE, "赣鄱石语_离线演示版.zip")
 
 COPY_DIRS = ["css", "js", "assets", "img", "data"]
-# 图鉴探索页的三个根目录依赖（atlas.html 用相对路径直接引，不在 js/ 子目录）
-ATLAS_JS = ["atlas-demo-data.js", "atlas-logic.js", "atlas-quiz.js"]
+# 图鉴探索页的四个根目录依赖（atlas.html 用相对路径直接引，不在 js/ 子目录）
+ATLAS_JS = ["atlas-demo-data.js", "atlas-logic.js", "atlas-quiz.js", "atlas-mystery.js"]
 COPY_FILES = ["index.html", "map.html", "list.html", "download.html", "atlas.html"] + ATLAS_JS
 
 # 演示包里绝不能出现的东西：内部工作稿（含"待确认/未定/待岗签字"列）+ 备份文件
@@ -141,10 +141,10 @@ def content_version():
     return h.hexdigest()[:8]
 
 
-# 只匹配本站自有资源（css/、js/ + 图鉴探索的三个根目录 JS），
+# 只匹配本站自有资源（css/、js/ + 图鉴探索的四个根目录 JS），
 # 外链与 assets/leaflet 的固定版本库不动
 RE_ASSET = re.compile(
-    r'(href|src)="((?:css|js)/[^"?#]+|atlas-(?:demo-data|logic|quiz)\.js)(?:\?v=[^"]*)?"')
+    r'(href|src)="((?:css|js)/[^"?#]+|atlas-(?:demo-data|logic|quiz|mystery)\.js)(?:\?v=[^"]*)?"')
 
 
 def stamp_assets(ver):

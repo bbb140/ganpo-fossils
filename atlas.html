@@ -159,6 +159,32 @@
   .quizmsg.ok{background:#e6f4ea;color:#276c3a}
   .quizmsg.no{background:#fdeaea;color:#a33}
   .quizmsg b{font-weight:600}
+  /* 盲盒猜物种：紫色系，和门槛小考的绿色系区分开 */
+  .mystery{text-align:center}
+  .mystery .box{position:relative;background:linear-gradient(135deg,var(--purple-l),#f7f5fd);
+    border:1px solid #d8d4ef;border-radius:12px;padding:22px 20px;margin:6px 0 16px}
+  .mystery .box .qmark{font-size:26px;color:var(--purple);font-weight:600}
+  .mystery .box .lbl{font-size:11px;color:var(--purple);letter-spacing:2px;margin-bottom:10px}
+  .mystery .box .clue{font-size:15px;line-height:1.9;color:var(--ink)}
+  .mystery .tags{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:13px}
+  .mystery .tags span{font-size:11px;padding:3px 10px;border-radius:20px;
+    background:#fff;border:1px solid #ddd8f0;color:var(--purple)}
+  .mystery .moreline{margin-top:12px}
+  .mystery .moreline button{font:inherit;font-size:11px;padding:4px 10px;border-radius:6px;
+    border:1px dashed var(--purple);background:transparent;color:var(--purple);cursor:pointer}
+  .mystery .morehint{font-size:12px;color:var(--purple);margin-top:9px;line-height:1.8}
+  .mystery .opts{margin-top:4px}
+  .mystery .opt{text-align:center;font-size:14px;padding:12px 10px}
+  .mystery .score{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .mystery .score b{color:var(--purple);font-size:15px}
+  .mystery .result{font-size:15px;margin:8px 0 14px;color:var(--green-d)}
+  .mystery .result.no{color:#a33}
+  .mystery .srcfont{font-size:11px;color:var(--muted);line-height:1.7;
+    text-align:left;background:var(--paper);border-radius:8px;padding:10px 12px;margin-top:10px}
+  .mystery .roundbar{display:flex;justify-content:center;gap:6px;margin-bottom:14px}
+  .mystery .roundbar i{width:22px;height:5px;border-radius:5px;background:#e0dced}
+  .mystery .roundbar i.on{background:var(--purple)}
+  .mystery .roundbar i.done{background:var(--green)}
 </style>
 </head>
 <body>
@@ -184,6 +210,7 @@
     <div class="topbtns">
       <a class="btn" href="map.html">🗺 产地地图</a>
       <a class="btn" href="list.html">📋 产地名录</a>
+      <button class="btn" id="mysteryBtn">🎲 盲盒猜物种</button>
       <button class="btn primary" id="atlasBtn">我的图鉴本</button>
       <button class="btn" id="badgeBtn">徽章墙</button>
     </div>
@@ -228,10 +255,15 @@
 <script src="atlas-demo-data.js"></script>
 <script src="atlas-logic.js"></script>
 <script src="atlas-quiz.js"></script>
+<script src="atlas-mystery.js"></script>
 <script>
 (function(){
   'use strict';
-  var L=window.ATLAS_LOGIC, Q=window.ATLAS_QUIZ, SITES=window.ATLAS_SITES||[], SPECIES=window.ATLAS_SPECIES||[];
+  var L=window.ATLAS_LOGIC, Q=window.ATLAS_QUIZ, M=window.ATLAS_MYSTERY,
+      SITES=window.ATLAS_SITES||[], SPECIES=window.ATLAS_SPECIES||[];
+  /* 盲盒玩法的本地状态：与探索进度完全隔离，不参与解锁/徽章 */
+  var MY_BEST='gbsy_mystery_best';
+  var myQs=[], myIdx=0, myRight=0, myAnswered=false, myMore=0;
   var store=window.localStorage, state=L.load(store);
   /* 答辩优先：全新访客（从未设置过演示模式开关）默认开启演示模式，
      老师从导航点进来直接全解锁、不被第一关卡住。用户手动关过一次后，
@@ -483,6 +515,103 @@
     open(html);$('closeBadge').onclick=close;
   }
 
+  /* ===== 盲盒猜物种：读真实鉴定特征，猜化石名。线索逐字出自图鉴 features ===== */
+  function bestScore(){
+    try{var v=parseInt(store.getItem(MY_BEST),10);return isNaN(v)?0:v;}catch(e){return 0;}
+  }
+  function saveBest(n){
+    if(n>bestScore()){try{store.setItem(MY_BEST,String(n));}catch(e){}}
+  }
+  function openMystery(seed){
+    if(!M||!SPECIES.length){toast('图鉴数据未加载');return;}
+    var total=Math.min(5,SPECIES.length);
+    myQs=M.make(SPECIES,total,seed==null?('round-'+Date.now()):seed);
+    myIdx=0;myRight=0;myAnswered=false;myMore=0;
+    renderMystery();
+  }
+  function renderMystery(){
+    var q=myQs[myIdx];
+    if(!q){return;}
+    var bars='';
+    myQs.forEach(function(_,i){
+      bars+='<i class="'+(i<myIdx?'done':(i===myIdx?'on':''))+'"></i>';
+    });
+    var html='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+      '<h3>🎲 盲盒猜物种</h3>'+
+      '<p class="sub">读一段真实的鉴定特征，猜它是哪种化石。线索逐字摘自图鉴原文，干扰项也都是真实物种。</p>'+
+      '<div class="score">第 <b>'+(myIdx+1)+' / '+myQs.length+'</b> 题 · 已答对 <b>'+myRight+'</b> 题 · 最佳 '+bestScore()+' 题</div>'+
+      '<div class="roundbar">'+bars+'</div>'+
+      '<div class="mystery"><div class="box">'+
+      '<div class="qmark">?</div><div class="lbl">鉴 定 特 征</div>'+
+      '<div class="clue" id="clueText">'+esc(q.clue)+'</div>'+
+      '<div class="tags"><span>'+esc(q.taxa||'化石')+'</span>'+
+      (q.age?'<span>'+esc(q.age)+'</span>':'')+
+      (q.region?'<span>'+esc(q.region)+'</span>':'')+'</div>'+
+      ((q.moreClues&&q.moreClues.length)?'<div class="moreline"><button id="moreBtn">再给一条线索</button></div><div class="morehint" id="moreHint"></div>':'')+
+      '</div><div class="opts" id="myOpts">';
+    q.options.forEach(function(op){
+      html+='<button class="opt" data-v="'+esc(op)+'">'+esc(op)+'</button>';
+    });
+    html+='</div><div id="myFeedback"></div>'+
+      '<div class="acts" id="myActs"><button class="btn" id="myQuit">退出盲盒</button></div></div>';
+    open(html);
+    $('myQuit').onclick=function(){saveBest(myRight);close();render();};
+    if($('moreBtn'))$('moreBtn').onclick=function(){
+      if(myMore<(q.moreClues||[]).length){
+        $('moreHint').innerHTML+='<div>补充线索：'+esc(q.moreClues[myMore])+'</div>';
+        myMore++;
+        if(myMore>=(q.moreClues||[]).length)this.disabled=true;
+      }
+    };
+    Array.prototype.forEach.call($('myOpts').querySelectorAll('.opt'),function(el){
+      el.onclick=function(){myAnswer(q,el);};
+    });
+  }
+  function myAnswer(q,el){
+    if(myAnswered)return;
+    myAnswered=true;
+    var picked=el.getAttribute('data-v'), right=M.check(q,picked);
+    if(right)myRight++;
+    Array.prototype.forEach.call($('myOpts').querySelectorAll('.opt'),function(o){
+      var v=o.getAttribute('data-v');
+      if(v===q.answer)o.classList.add('right');
+      else if(v===picked)o.classList.add('wrong');
+      o.disabled=true;
+    });
+    /* 答完立刻展示原文出处：即使猜错也是一次科普，不白点 */
+    var fb='<div class="result '+(right?'':'no')+'">'+
+      (right?'✓ 答对了！':'✗ 答案是「'+esc(q.answer)+'」')+'</div>'+
+      '<div class="srcfont"><b>原文出处（'+(q.genus||'')+' '+esc(q.species||'')+'）</b><br>'+esc(q.detail)+
+      (q.reference?'<br><b>文献：</b>'+esc(q.reference):'')+'</div>';
+    $('myFeedback').innerHTML=fb;
+    $('myActs').innerHTML='<button class="btn" id="myQuit">退出盲盒</button>'+
+      (myIdx+1<myQs.length?'<button class="btn primary" id="myNext">下一题 →</button>'
+                          :'<button class="btn primary" id="myNext">查看成绩</button>');
+    $('myQuit').onclick=function(){saveBest(myRight);close();render();};
+    $('myNext').onclick=function(){
+      myIdx++;myAnswered=false;myMore=0;
+      if(myIdx>=myQs.length){myResult();return;}
+      renderMystery();
+    };
+  }
+  function myResult(){
+    saveBest(myRight);
+    var n=myQs.length, best=bestScore();
+    var word=myRight===n?'全对！化石侦探本探 🔍':(myRight>=n/2?'不错，已经认得不少了':'再多读几页图鉴就能认出来');
+    var html='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+      '<div class="mystery"><h3>🎲 盲盒挑战完成</h3>'+
+      '<div style="font-size:40px;margin:14px 0 6px">'+myRight+' <span style="font-size:16px;color:var(--muted)">/ '+n+'</span></div>'+
+      '<div class="result">'+esc(word)+'</div>'+
+      '<p class="sub" style="text-align:center">最佳成绩 '+best+' / '+n+' · 线索全部出自真实图鉴原文</p>'+
+      '<div class="acts" style="justify-content:center"><button class="btn" id="myBack">返回探索</button>'+
+      '<button class="btn primary" id="myAgain">换一批再猜</button></div></div>';
+    open(html);
+    $('myBack').onclick=function(){close();render();};
+    $('myAgain').onclick=function(){openMystery();};
+    render();
+  }
+
+  $('mysteryBtn').onclick=function(){openMystery();};
   $('atlasBtn').onclick=openAtlas;
   $('badgeBtn').onclick=openBadges;
   Array.prototype.forEach.call(document.querySelectorAll('.lvbtn'),function(b){
