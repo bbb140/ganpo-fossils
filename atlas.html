@@ -117,6 +117,13 @@
   .found .sci{font-style:italic;color:var(--muted);font-size:12px}
   .unlockmsg{margin-top:12px;padding:11px 13px;border-radius:9px;
     background:var(--amber-l);color:#8a621d;font-size:13px}
+  /* 从勘探/图鉴跳到主站真实档案的出口链接 */
+  .golinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:12px;
+    border-top:1px dashed var(--line)}
+  .golinks a{font-size:12px;color:var(--green-d);text-decoration:none;
+    padding:5px 11px;border:1px solid var(--green);border-radius:7px;background:#fff}
+  .golinks a:hover{background:var(--green-l)}
+  .golinks .note{font-size:11px;color:var(--muted);align-self:center}
   .acts{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
   .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
     background:#25382f;color:#fff;padding:11px 20px;border-radius:22px;font-size:13px;
@@ -326,7 +333,10 @@
       '<div><b>门类</b>'+esc(site.fossil_group||'—')+'</div>'+
       '<div><b>级别</b>'+esc(site.protection_level||'—')+'</div>'+
       '<div><b>分区</b>'+esc(site.region||'—')+'</div>'+
-      '</div></div><div id="qlist">';
+      '</div>'+
+      '<div class="golinks"><a href="map.html?code='+encodeURIComponent(site.id)+'">🗺 地图定位</a>'+
+      '<a href="list.html?q='+encodeURIComponent(site.id)+'">📋 名录档案</a>'+
+      '<span class="note">答案就在卡上；想看完整数据可点这里</span></div></div><div id="qlist">';
     qs.forEach(function(q,i){
       html+='<div class="quizq" data-i="'+i+'"><div class="qt">'+(i+1)+'. '+esc(q.q)+
         '<em>单选</em></div><div class="opts">';
@@ -386,8 +396,10 @@
       '<div class="row"><b>编号</b> '+esc(site.id)+'</div>'+
       '<div class="row"><b>位置</b> '+esc(site.city_county||'—')+'</div>'+
       '<div class="row"><b>年代</b> '+esc(site.geological_age||'—')+'</div>'+
-      '<div class="row"><b>门类</b> '+esc(site.fossil_group||'—')+'</div>'+
-      '<div class="row"><b>级别</b> '+esc(site.protection_level||'—')+'</div></div>';
+      '<div class="row"><b>级别</b> '+esc(site.protection_level||'—')+'</div>'+
+      '<div class="golinks"><a href="map.html?code='+encodeURIComponent(site.id)+'">🗺 在地图定位</a>'+
+      '<a href="list.html?q='+encodeURIComponent(site.id)+'">📋 查名录档案</a>'+
+      '<span class="note">看这处产地的完整数据</span></div></div>';
     if(r.fossils.length){
       html+='<div class="found"><div style="font-size:12px;color:var(--muted)">发现化石 '+r.fossils.length+' 条</div>';
       r.fossils.forEach(function(f){
@@ -447,7 +459,10 @@
           '<div class="row"><b>产地</b> '+esc(f.tapho_link||'具体不详')+'</div>'+
           '<div class="row"><b>门类</b> '+esc(f.taxa||'—')+'</div>'+
           '<div class="feat">'+esc(f.features||'—')+'</div>'+
-          '<div class="row" style="margin-top:10px"><b>文献</b> '+esc(f.reference||'—')+'</div></div>'+
+          '<div class="row" style="margin-top:10px"><b>文献</b> '+esc(f.reference||'—')+'</div>'+
+          (f.tapho_link?('<div class="golinks"><a href="map.html?code='+encodeURIComponent(f.tapho_link)+'">🗺 看产地在地图上的位置</a>'+
+            '<a href="list.html?q='+encodeURIComponent(f.tapho_link)+'">📋 查产地档案</a></div>'):'')+
+          '</div>'+
           '<div class="acts"><button class="btn" id="backAtlas">返回图鉴本</button></div>';
         open(h);$('backAtlas').onclick=openAtlas;
       };
