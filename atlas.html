@@ -23,7 +23,10 @@
   body{margin:0;background:var(--c-bg);color:var(--c-text);
     font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:15px;line-height:1.7}
   .wrap{max-width:1080px;margin:0 auto;padding:26px 18px 70px}
-  header{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
+  /* 只让 .wrap 内的「标题区」header 用 flex 并排（标题 + 按钮）。
+     不能写成全局 header{display:flex}——那会把外层装导航的 header 也变成 flex 容器，
+     nav 收缩成内容宽度，浅灰背景只铺左边一截，与主站其它页不一致。 */
+  .wrap > header{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
   header h1{margin:0 0 5px;font-size:25px;font-weight:600;letter-spacing:.5px}
   header p{margin:0;color:var(--muted);font-size:13px}
   .tag{display:inline-block;margin-top:9px;padding:3px 10px;border-radius:20px;
