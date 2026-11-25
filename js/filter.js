@@ -8,6 +8,10 @@
    2) 关键词覆盖 名称/编号/县市/门类/地层/年代/备注，一个输入框够用；
    3) 状态写进 URL（?q=笔石&zone=玉山），可分享、可回退；
    4) 结果条数实时显示，0 条时给明确提示而不是空白地图。
+   5) 页面下方「代表物种」区跟随当前范围：检索/筛选 → 命中产地的物种；
+      点开某条产地（点标记、「名录 → 地图 ?code=」跳转）→ 只显示这条产地的物种，
+      关闭侧栏即退回筛选结果。侧栏通过 gbsy:sitefocus / gbsy:siteblur 事件通知，
+      本文件只监听、不反向依赖 detail.js。
    ============================================================ */
 (function () {
   'use strict';
@@ -86,33 +90,97 @@
     return c;
   }
 
-  /* ---- 当前结果的物种概览：图鉴数据到位显示图鉴卡片，否则按门类聚合 ---- */
+  /* ---- 当前结果的物种概览 ----
+     范围口径（按优先级）：
+       ① 点开某条产地（含「名录 → 地图 ?code=」跳转）→ 只显示这条产地的物种；
+          该产地没有关联图鉴条目时，给出「看同小区其他化石」的手动入口
+          （不自动扩展：同小区是地理相邻，不等于物种属该产地，必须读者自己点）；
+       ② 有检索/筛选条件 → 显示命中产地的物种；
+       ③ 都没有 → 显示全部产地的物种。
+     图鉴数据到位就用图鉴卡片，否则按门类聚合兜底，不编物种名。 */
+  let focused = null;        // 当前点开/聚焦的产地记录
+  let zoneExpand = false;    // 是否已扩展到"同保护小区"
+  let lastMatched = [];      // 最近一次筛选命中（调试与测试用）
+
   function parts(v) {
     return String(v || '').split(/[、，,；;]/).map(function (x) { return x.trim(); })
       .filter(Boolean);
   }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  /* 同一保护小区内的产地（含自己）。小区为空时只返回自己，不跨区兜底 */
+  function sameZone(rec) {
+    const z = val(rec, 'zone');
+    if (!z) return [rec];
+    const list = sites.filter(function (s) { return val(s, 'zone') === z; });
+    return list.length ? list : [rec];
+  }
+
+  /* 标题与范围说明：让读者一眼看出这批卡片来自"全部/筛选结果/单个产地" */
+  function renderScope(list, rendered) {
+    const title = $('species-title'), scope = $('species-scope');
+    if (title) {
+      title.textContent = focused
+        ? (zoneExpand ? '同小区的代表物种' : '该产地的代表物种')
+        : '当前结果的代表物种';
+    }
+    if (!scope) return;
+    if (focused) {
+      const nm = esc(val(focused, 'name') || '该产地');
+      const code = val(focused, 'code');
+      const back = '<a class="sp-scope-link" data-act="only-site">只看本产地 →</a>';
+      const all = '<a class="sp-scope-link" data-act="all-species">看全部筛选结果 →</a>';
+      if (zoneExpand) {
+        scope.innerHTML = '聚焦 ' + nm + (code ? '（' + esc(code) + '）' : '') +
+          '　已扩展到同小区「' + esc(val(focused, 'zone') || '—') + '」的 ' +
+          list.length + ' 处产地' + back + all;
+      } else {
+        let extra = '';
+        if (!rendered && sameZone(focused).length > 1) {
+          extra = '<a class="sp-scope-link" data-act="zone">看同小区其他化石 →</a>';
+        }
+        scope.innerHTML = '聚焦 ' + nm + (code ? '（' + esc(code) + '）' : '') + all + extra;
+      }
+    } else {
+      const active = state.q || state.area || state.zone || state.acc || state.status;
+      scope.textContent = active
+        ? '已按条件筛选：' + list.length + ' 处产地'
+        : '全部 ' + list.length + ' 处产地（检索关键词或点开某条产地，可缩小到这里）';
+    }
+  }
+
   function renderSummary(matched) {
     const box = $('species-list');
     if (!box) return;
-    if (!matched.length) {
+    lastMatched = matched;
+    /* 聚焦单条产地时，无论筛选命中多少，只显示这一条（或它所在小区） */
+    const list = focused ? (zoneExpand ? sameZone(focused) : [focused]) : matched;
+    if (!list.length) {
+      renderScope(list, false);
       box.innerHTML = '<p class="note">没有匹配的记录。</p>';
       return;
     }
-    /* 图鉴优先：有数据且本次筛选命中图鉴条目时，直接渲染图鉴卡片 */
+    /* 图鉴优先：有数据且本次范围内命中图鉴条目时，直接渲染图鉴卡片 */
     const sp = window.GBSYSpecies;
-    if (sp && sp.has() && sp.renderCards(box, matched)) return;
+    const rendered = !!(sp && sp.has() && sp.renderCards(box, list));
+    renderScope(list, rendered);
+    if (rendered) return;
 
     /* 兜底：按「主要化石门类」聚合，不编物种名 */
     const c = {};
-    matched.forEach(function (r) {
+    list.forEach(function (r) {
       parts(val(r, 'taxa')).forEach(function (t) { c[t] = (c[t] || 0) + 1; });
     });
     const top = Object.keys(c).sort(function (a, b) { return c[b] - c[a]; }).slice(0, 8);
     box.innerHTML = top.map(function (t) {
       return '<div class="taxa-chip"><strong>' + t + '</strong><span>' + c[t] + '</span></div>';
     }).join('') +
-      '<p class="note">按「主要化石门类」聚合，共 ' + matched.length +
-      ' 条记录。</p>';
+      '<p class="note">' + (focused
+        ? '该产地暂未关联到图鉴条目，以上为它的主要化石门类。'
+        : '按「主要化石门类」聚合，共 ' + list.length + ' 条记录。') + '</p>';
   }
 
   /* ---- 主流程 ---- */
@@ -153,6 +221,8 @@
       el.addEventListener(ev, function () {
         state[pair[1]] = el.value.trim();
         if (pair[1] === 'q') state.q = state.q.toLowerCase();
+        focused = null;          // 用户重新检索 → 退回"筛选结果"口径
+        zoneExpand = false;
         apply();
       });
     });
@@ -161,7 +231,30 @@
       reset.addEventListener('click', function () {
         Object.keys(state).forEach(function (k) { state[k] = ''; });
         ids.forEach(function (p) { if ($(p[0])) $(p[0]).value = ''; });
+        focused = null;
+        zoneExpand = false;
         apply();
+      });
+    }
+    /* 作用范围行里的三个入口：看全部筛选结果 / 只看本产地 / 看同小区其他化石 */
+    const scope = $('species-scope');
+    if (scope) {
+      scope.addEventListener('click', function (e) {
+        const t = e.target && e.target.closest ? e.target.closest('[data-act]') : null;
+        if (!t) return;
+        e.preventDefault();
+        const act = t.getAttribute ? t.getAttribute('data-act') : '';
+        if (act === 'zone') {
+          zoneExpand = true;
+        } else if (act === 'only-site') {
+          zoneExpand = false;
+        } else if (act === 'all-species') {
+          focused = null;
+          zoneExpand = false;
+        } else {
+          return;
+        }
+        renderSummary(sites.filter(match));
       });
     }
   }
@@ -202,6 +295,28 @@
                 Object.keys(areaC).length + '｜小区 ' + Object.keys(zoneC).length);
   }
 
+  /* 侧栏开/关 → 代表物种跟着"聚焦某条产地"或"退回筛选结果"。
+     由 js/detail.js 在 show()/hide() 时派发，filter.js 只监听，不反向依赖它，
+     这样 list.html（没有地图）加载 detail.js 也不会报错。 */
+  if (typeof document !== 'undefined' && document.addEventListener) {
+    document.addEventListener('gbsy:sitefocus', function (e) {
+      focused = (e && e.detail && e.detail.rec) || null;
+      zoneExpand = false;
+      renderSummary(sites.filter(match));
+    });
+    document.addEventListener('gbsy:siteblur', function () {
+      if (!focused) return;
+      focused = null;
+      zoneExpand = false;
+      renderSummary(sites.filter(match));
+    });
+    /* 图鉴数据走 fetch，常晚于首次渲染到达：补渲染一次，
+       否则会一直停在"门类聚合"的兜底视图 */
+    document.addEventListener('gbsy:species', function () {
+      renderSummary(sites.filter(match));
+    });
+  }
+
   document.addEventListener('gbsy:ready', function (e) { init(e.detail); });
 
   /* 兜底：若本脚本加载时 gbsy:ready 已经错过（数据比脚本先就绪），直接初始化。
@@ -211,7 +326,12 @@
   /* 单测入口：不依赖 DOM 也能验证匹配逻辑 */
   window.GBSYFilter = {
     match: match, state: state, shortZone: shortZone,
-    init: init, apply: apply,
-    _setSites: function (s) { sites = s; }
+    init: init, apply: apply, renderSummary: renderSummary,
+    _setSites: function (s) { sites = s; },
+    _focus: function (rec) { focused = rec || null; zoneExpand = false; renderSummary(sites.filter(match)); },
+    _focused: function () { return focused; },
+    _expand: function (v) { zoneExpand = !!v; renderSummary(sites.filter(match)); },
+    _zoneExpand: function () { return zoneExpand; },
+    _scopeList: function (matched) { return focused ? [focused] : matched; }
   };
 })();

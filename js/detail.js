@@ -153,6 +153,20 @@
     );
   }
 
+  /* ---------- 对外广播：侧栏开/关 ----------
+     map.html 的「代表物种」区据此切换口径——点开哪条产地就显示哪条的物种。
+     用事件而不是直接调 filter.js：list.html 也加载本文件但没地图，
+     事件没人听也不会报错。 */
+  function emit(name, rec) {
+    if (typeof document === 'undefined' || !document.dispatchEvent) return;
+    try {
+      const ev = typeof CustomEvent === 'function'
+        ? new CustomEvent(name, { detail: { rec: rec || null } })
+        : null;
+      if (ev) document.dispatchEvent(ev);
+    } catch (e) { /* 老环境无 CustomEvent，忽略：代表物种区保持筛选口径 */ }
+  }
+
   /* ---------- 对外 API ---------- */
   function show(rec) {
     if (!rec) return false;
@@ -165,13 +179,16 @@
     /* 移动端抽屉展开后，键盘焦点给关闭键，Esc 可直接关 */
     const btn = p.querySelector('.d-close');
     if (btn && btn.focus) btn.focus();
+    emit('gbsy:sitefocus', rec);
     return true;
   }
 
   function hide() {
     if (!panel) return;
+    const wasOpen = !panel.hidden;
     panel.hidden = true;
     current = null;
+    if (wasOpen) emit('gbsy:siteblur', null);
   }
 
   function isOpen() { return !!(panel && !panel.hidden); }
