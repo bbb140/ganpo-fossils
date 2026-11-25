@@ -22,7 +22,7 @@
   var BADGES = [
     { id: 'scout',    name: '初探者',        desc: '探索满 3 处产地',       test: function (s) { return s.found.length >= 3; } },
     { id: 'first',    name: '化石发现者',    desc: '收入第 1 条化石图鉴',   test: function (s) { return s.fossils.length >= 1; } },
-    { id: 'hunter',   name: '寻龙者',        desc: '收入 5 条化石图鉴',     test: function (s) { return s.fossils.length >= 5; } },
+    { id: 'hunter',   name: '寻珍者',        desc: '收入 5 条化石图鉴',     test: function (s) { return s.fossils.length >= 5; } },
     { id: 'traveler', name: '走遍赣鄱',      desc: '解锁全部 4 个分区',     test: function (s) { return s.unlocked >= 4; } },
     /* 大师徽章按「可探索获得的图鉴数」判定，不加固定数字——以后加化石自动跟随 */
     { id: 'master',   name: '赣鄱化石大师',  desc: '集齐全部可探索图鉴',   test: function (s, collectable) { return s.fossils.length >= (collectable || 14) && (collectable || 14) > 0; } }
