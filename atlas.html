@@ -12,7 +12,8 @@
   *{box-sizing:border-box}
   /* 与主站一致的导航（沿用主站色板变量，保证换肤同步） */
   :root{--c-primary:#2E5E4E;--c-text:#222;--c-bg:#fff;--c-surface:#f5f5f0;--c-border:#ddd}
-  header{position:relative;z-index:10}
+  /* 导航吸顶：只作用于顶层的导航 header；.wrap>header 是页内标题区，不能跟着 sticky */
+  body > header{position:sticky;top:0;z-index:10;background:var(--c-surface)}
   header nav{display:flex;justify-content:space-between;align-items:center;
     padding:1rem 2rem;border-bottom:1px solid var(--c-border);background:var(--c-surface)}
   nav .logo{font-weight:bold;color:var(--c-primary);text-decoration:none}

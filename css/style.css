@@ -21,10 +21,23 @@ body {
 img { max-width: 100%; display: block; }
 
 /* ===== 3. 顶部导航 ===== */
-/* 新增：让导航压住 Leaflet 内部图层（Leaflet 控件 z-index 高达 1000） */
+/* 导航吸顶：sticky 而不是 fixed —— 仍占着文档流的位置，下面的内容不需要额外 padding */
+/* z-index 用来压住 Leaflet 内部图层（Leaflet 控件 z-index 高达 1000，#map 已自建层叠上下文） */
 header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 10;
+  background: var(--c-surface);   /* 兜底：滚过内容时不透字 */
+}
+
+/* 导航挡住的高度：页内锚点（如首页 #region-nw）跳转时留出空档，标题不被压住 */
+:root { --nav-h: 57px; }
+
+section[id],
+div[id],
+h2[id],
+article[id] {
+  scroll-margin-top: calc(var(--nav-h) + 10px);
 }
 
 header nav {
@@ -401,8 +414,11 @@ footer {
 @media (max-width: 768px) {
   main { padding: 1rem; }
 
-  header nav { padding: .75rem 1rem; }
-  nav ul { gap: 1rem; }
+  header nav { padding: .55rem 1rem; column-gap: .75rem; }
+  nav ul { gap: .2rem 1rem; font-size: .92rem; line-height: 1.5;
+           justify-content: flex-end; flex-wrap: wrap; }
+  nav a { white-space: nowrap; }          /* 吸顶后高度宝贵：宁可整项换行，也不让"首页"拆成竖排 */
+  :root { --nav-h: 88px; }                /* 手机上菜单两行，锚点留白跟着调高 */
 
   .hero { padding: 2rem 1rem; }
   .hero h1 { font-size: 1.4rem; }
