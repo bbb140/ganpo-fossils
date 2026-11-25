@@ -113,3 +113,7 @@ assets/leaflet/          Leaflet 1.9.4 本地化，不依赖 CDN
 tools/                   构建、校验、测试、部署脚本
 dist/                    构建产物（已 gitignore，由 Actions 生成）
 ```
+
+**数据口径**：物种文字一律以本仓库 `data/species.json` 原数据为准。B 岗后续补交的
+`species_with_images.json` 只用于取图片，其中附带的文字修订（如「赣州江西龙」分类、
+「丁氏阶齿兽」年代）不采用，`tools/merge_species_images.py` 也只写图片字段。
