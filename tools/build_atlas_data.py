@@ -4,8 +4,8 @@
 
 以后 A/B 岗补了化石，只需两步：
     python tools/build_atlas_data.py      # 重新生成 atlas-demo-data.js
-然后刷新 atlas-demo.html 即可。题库、门槛、图鉴本、徽章全部自动跟随新数据，
-无需改任何 JS。
+然后刷新图鉴页 atlas.html 即可。题库、门槛、图鉴本、徽章全部自动跟随新数据，
+无需改任何 JS；本地那份不上线的演示版（atlas-demo.html）如需同步，再跑一次 python tools/make_demo_page.py。
 """
 import io
 import json

@@ -27,3 +27,6 @@ __pycache__/
 *.pyc
 tools/_*.png
 tools/_*.html
+
+# ===== 本地演示版（由 tools/make_demo_page.py 生成，不上线）=====
+atlas-demo.html

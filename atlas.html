@@ -286,8 +286,6 @@
     <button class="lvbtn" data-lv="normal">标准</button>
     <button class="lvbtn" data-lv="hard">挑战</button>
     <span class="lvdesc" id="lvdesc"></span>
-    <span class="spacer" style="flex:1"></span>
-    <label style="font-size:13px;cursor:pointer"><input type="checkbox" id="demoMode"> 演示模式（答辩用，跳过答题）</label>
   </div>
 
   <div class="bar">
@@ -335,14 +333,14 @@
     };
   }
   var state=L.load(store);
-  /* 答辩优先：全新访客（从未设置过演示模式开关）默认开启演示模式，
-     老师从导航点进来直接全解锁、不被第一关卡住。用户手动关过一次后，
-     demo 键就有了值，此后尊重其选择，不再强行打开。 */
+  /* 线上版不提供演示模式：旧版本会把 demo=true 写进 localStorage，老访客刷新后仍停在
+     "全解锁"的演示态，这里统一退回正式进度（setDemo(false) 会还原演示前的解锁数）。
+     答辩用的演示版由 tools/make_demo_page.py 从本页派生，标志位在下面这块里替换。 */
+  /* DEMO-SWITCH-START */
   try {
-    if (store.getItem(L.K.demo) === null && !state.demo) {
-      state = L.setDemo(store, state, true);
-    }
+    if (state.demo) { state = L.setDemo(store, state, false); }
   } catch (e) {}
+  /* DEMO-SWITCH-END */
   var $=function(id){return document.getElementById(id);};
   function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
   function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2200);}
@@ -376,7 +374,6 @@
     $('sFossil').textContent=st.fossils+'/'+st.collectable;
     $('sArea').textContent=st.unlocked+'/4';
     $('sBadge').textContent=st.badges+'/'+(L.BADGES?L.BADGES.length:5);
-    $('demoMode').checked=state.demo;
     var lv=L.LEVELS[state.level]||L.LEVELS.normal;
     $('lvdesc').textContent=lv.desc+' · 答对才算数';
     Array.prototype.forEach.call(document.querySelectorAll('.lvbtn'),function(b){
@@ -758,7 +755,6 @@
       toast('门槛已切换为「'+(L.LEVELS[state.level].label)+'」，进度保留');
     };
   });
-  $('demoMode').onchange=function(e){state=L.setDemo(store,state,e.target.checked);render();};
   $('resetBtn').onclick=function(){
     if(!confirm('重置全部探索、图鉴与徽章进度？'))return;
     state=L.reset(store);close();render();toast('进度已重置');
