@@ -101,15 +101,18 @@ t('首页无占位字符残留', !/class="medal">[✓·]</.test(barHtml));
 $('badgeBtn').onclick();
 var wallHtml = $('modal')._html;
 icons.forEach(function (ic) { t('徽章墙输出 ' + ic, wallHtml.indexOf(ic) >= 0); });
-t('徽章墙用圆形奖牌卡片', wallHtml.indexOf('class="bwall"') >= 0 &&
-  wallHtml.indexOf('class="bmedal"') >= 0 && wallHtml.indexOf('class="bcard ') >= 0);
+t('徽章墙用六边形奖牌卡片', wallHtml.indexOf('class="bwall"') >= 0 &&
+  wallHtml.indexOf('class="bmedal"') >= 0 && wallHtml.indexOf('class="bface"') >= 0 &&
+  wallHtml.indexOf('class="bcard ') >= 0);
 t('徽章墙输出全部 10 枚', (wallHtml.match(/class="bcard /g) || []).length === 10);
-t('徽章墙 10 枚圆章全带图案', (wallHtml.match(/class="bico"/g) || []).length === 10);
+t('徽章墙 10 枚六边形章全带图案', (wallHtml.match(/class="bico"/g) || []).length === 10);
 
-/* 样式：圆形奖牌 + 未获得灰度 */
-t('圆形奖牌是正圆', html.indexOf('.bmedal{') >= 0 && html.indexOf('border-radius:50%') >= 0);
+/* 样式：六边形奖牌 + 未获得灰度 */
+t('勋章是六边形 clip-path', html.indexOf('.bface{') >= 0 &&
+  html.indexOf('clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)') >= 0);
+t('有 -webkit- 兼容前缀', html.indexOf('-webkit-clip-path:polygon') >= 0);
 t('未获得图案有灰度样式', html.indexOf('.badge:not(.got) .medal .ico{filter:grayscale(1)') >= 0 &&
-  html.indexOf('.bcard:not(.got) .bmedal .bico{filter:grayscale(1)') >= 0);
+  html.indexOf('.bcard:not(.got) .bico{filter:grayscale(1)') >= 0);
 
 console.log('徽章图案验证：' + pass + ' 通过 / ' + fail + ' 失败');
 process.exit(fail ? 1 : 0);

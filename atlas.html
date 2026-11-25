@@ -64,25 +64,29 @@
   /* 首页徽章条的小圆点：带 icon 显示图案，未获得时灰度 */
   .badge .medal .ico{font-size:12px;line-height:1}
   .badge:not(.got) .medal .ico{filter:grayscale(1);opacity:.5}
-  /* 徽章墙：圆形奖牌卡片（试点） */
-  .bwall{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-height:56vh;overflow:auto;padding-right:4px}
+  /* 徽章墙：六边形勋章（大气版） */
+  .bwall{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;max-height:58vh;overflow:auto;padding-right:4px}
   @media(max-width:680px){.bwall{grid-template-columns:1fr}}
-  .bcard{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;
-    padding:18px 12px 15px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+  .bcard{display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px;
+    padding:20px 12px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px}
   .bcard.got{background:linear-gradient(180deg,#fffdf7,var(--amber-l));border-color:#ecd9b4}
-  .bmedal{position:relative;width:76px;height:76px;border-radius:50%;
+  /* 外层只负责投影，让阴影贴合六边形轮廓 */
+  .bmedal{width:84px;height:92px;filter:drop-shadow(0 5px 7px rgba(30,50,40,.18));
+    display:flex;align-items:center;justify-content:center}
+  /* 内层六边形：clip-path 造型 + 金属渐变 + 内嵌高光 */
+  .bface{position:relative;width:100%;height:100%;
+    -webkit-clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+    clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
     display:flex;align-items:center;justify-content:center;font-size:34px;line-height:1;
-    background:radial-gradient(circle at 35% 30%,#f7f8f4,#dfe3db 72%);
-    border:3px solid #d3d8cf;color:var(--lock);
-    box-shadow:0 4px 10px rgba(30,50,40,.10),inset 0 2px 4px rgba(255,255,255,.7)}
-  .bmedal:before{content:'';position:absolute;inset:5px;border-radius:50%;
-    border:1px dashed rgba(255,255,255,.75);pointer-events:none}
-  .bcard.got .bmedal{background:radial-gradient(circle at 35% 30%,#fdf0cd,#e6bd68 72%);
-    border-color:#d6a544;color:#7a5516;
-    box-shadow:0 5px 14px rgba(181,132,47,.28),inset 0 2px 6px rgba(255,255,255,.8)}
-  .bcard.got .bmedal:before{border-color:rgba(255,255,255,.85)}
-  .bcard:not(.got) .bmedal .bico{filter:grayscale(1);opacity:.55}
-  .bmedal .bico{line-height:1}
+    background:linear-gradient(160deg,#f2f4f1 0%,#ccd2cd 50%,#aeb5af 100%);color:var(--lock)}
+  .bface:before{content:'';position:absolute;inset:5px;
+    -webkit-clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+    clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+    background:linear-gradient(160deg,#fff 0%,#e6eae6 100%);opacity:.75;pointer-events:none}
+  .bface .bico{position:relative;z-index:1;line-height:1}
+  .bcard.got .bface{background:linear-gradient(160deg,#fbe6ad 0%,#dcae45 52%,#b5842f 100%);color:#6b470d}
+  .bcard.got .bface:before{background:linear-gradient(160deg,#fff6db 0%,#f1d489 100%);opacity:.8}
+  .bcard:not(.got) .bico{filter:grayscale(1);opacity:.55}
   .bcard .bn{font-size:14px;font-weight:600;color:var(--ink)}
   .bcard:not(.got) .bn{color:var(--lock)}
   .bcard .bd{font-size:11px;color:var(--muted);line-height:1.45}
@@ -543,7 +547,7 @@
     L.badges(state,SPECIES).forEach(function(b){
       var face=b.icon?('<span class="bico">'+b.icon+'</span>'):(b.got?'✓':'·');
       html+='<div class="bcard '+(b.got?'got':'')+'">'+
-        '<div class="bmedal">'+face+'</div>'+
+        '<div class="bmedal"><div class="bface">'+face+'</div></div>'+
         '<div class="bn">'+esc(b.name)+'</div>'+
         '<div class="bd">'+esc(b.desc)+'</div>'+
         '<div class="bg">'+(b.got?'已获得':'未获得')+'</div></div>';
