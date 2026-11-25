@@ -40,12 +40,12 @@ python -m http.server 8000
 ```bash
 python tools/build_data.py --src 新表.xlsx          # 先看差异，不覆盖
 python tools/build_data.py --src 新表.xlsx --apply  # 确认后替换（自动备份到 data/backup/）
-python tools/validate_data.py                       # 6 组校验，0 错误才算过
+python tools/validate_data.py                       # 同时校验 109 产地 + 162 图鉴，0 错误才算过
 python tools/build_geojson.py                       # 从 sites.json 重生成 sites.geojson
 python tools/build_offline.py --dist                # 重建 dist 与离线包
 ```
 
-`validate_data.py` 同时是**字段契约**：A 岗改列名会直接报错，不会静默变空。
+`validate_data.py` 同时是**字段契约**：A 岗改列名会直接报错，不会静默变空。图鉴侧校验编号能对上产地、中文名不重复、图号可溯源；文献图号缺失这类资料缺口只报警告（需 B 岗补，不自行编造），不阻塞发布。CI 每次推送都会跑这道门禁。
 
 ### 物种图鉴接入（现 162 条）
 

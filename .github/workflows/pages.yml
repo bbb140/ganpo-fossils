@@ -31,7 +31,7 @@ jobs:
           python-version: '3.11'
 
       # 门禁：数据有错误就停在这里，不发布坏数据
-      - name: 校验数据（0 错误才继续）
+      - name: 校验产地与图鉴数据（0 错误才继续）
         run: python tools/validate_data.py
 
       # 生成 dist/：内联数据（file:// 也能看）+ 资源版本号 + .nojekyll

@@ -3,9 +3,12 @@
 """赣鄱石语 · 数据校验器
 
 用法：
-    python tools/validate_data.py                 # 校验 data/sites.json
-    python tools/validate_data.py --file X.json   # 校验指定文件
+    python tools/validate_data.py                 # 默认同时校验 sites.json + species.json
+    python tools/validate_data.py --file X.json   # 只校验指定文件
     python tools/validate_data.py --quiet         # 只输出结论
+
+图鉴（species.json）校验：编号必须能对上产地、中文名不重复、鉴定要点不缺；
+文献图号不全等资料缺口只报警告、不阻塞发布（这些要找 B 岗补，不自行编造）。
 
 为什么要有它：
 1) 字段契约——A 岗换版时若改了列名/删了列，这里第一时间报错，不让前端静默变空；
@@ -297,26 +300,92 @@ def validate(records, rep):
         rep.warn("来源仅规划点名 %d/%d 条（缺文献支撑）" % (src_weak, len(records)))
 
 
+def validate_species(records, rep, site_ids):
+    """图鉴数据校验：错误阻塞发布，资料缺口只警告（不自行补造文献信息）。"""
+    if not isinstance(records, list):
+        rep.err("图鉴顶层不是数组：species.json 应是 [{...}, ...]")
+        return
+    if not records:
+        rep.err("图鉴为空：species.json 无条目")
+        return
+
+    seen = {}
+    linked = 0
+    for i, f in enumerate(records):
+        if not isinstance(f, dict):
+            rep.err("图鉴第 %d 条不是对象" % (i + 1))
+            continue
+        name = s(f.get("cn_name") or f.get("中文名"))
+        if not name:
+            rep.err("图鉴第 %d 条缺中文名（cn_name）" % (i + 1))
+            continue
+        if name in seen:
+            rep.err("图鉴中文名重复：「%s」（第 %d、%d 条）" % (name, seen[name], i + 1))
+        seen[name] = i + 1
+
+        feat = s(f.get("features"))
+        ref = s(f.get("reference"))
+        if not feat:
+            rep.err("图鉴「%s」缺鉴定要点（features）" % name)
+        if re.search(r"待补|待定|TODO|待确认", feat + ref):
+            rep.err("图鉴「%s」仍含待补字样" % name)
+
+        link = s(f.get("tapho_link"))
+        if link in ("无", "—", "-"):
+            link = ""
+        if link:
+            linked += 1
+            for code in re.split(r"[、，,；;]", link):
+                code = code.strip()
+                if code and code not in site_ids:
+                    rep.err("图鉴「%s」的关联编号 %s 不在产地表中" % (name, code))
+
+        # 图号溯源：无关联编号的文献条目同样要查（它们恰恰最依赖文献定位）
+        figs = set(re.findall(r"图\s*\d+-\d+-\d+", feat))
+        refs = set(re.findall(r"图\s*\d+-\d+-\d+", ref))
+        if "图册" in ref and not refs:
+            rep.warn("图鉴「%s」来自图册但文献字段无图号页码（需 B 岗核）" % name)
+        elif figs and not refs:
+            rep.warn("图鉴「%s」正文有图号但文献字段无图号页码（需 B 岗核）" % name)
+        elif refs and (figs - refs):
+            rep.warn("图鉴「%s」正文图号 %s 未在文献字段列出（需 B 岗核）" %
+                     (name, "、".join(sorted(figs - refs))))
+
+    rep.info("图鉴共 %d 条：%d 条有产地关联，%d 条为文献条目（不从地图掉落）"
+             % (len(records), linked, len(records) - linked))
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--file", default=os.path.join(BASE, "data", "sites.json"))
+    ap.add_argument("--file", default=None, help="只校验指定文件（默认校验产地+图鉴）")
     ap.add_argument("--quiet", action="store_true")
     a = ap.parse_args()
 
-    if not os.path.isfile(a.file):
-        print("找不到数据文件：%s" % a.file)
-        return 1
-    with io.open(a.file, encoding="utf-8") as f:
-        data = json.load(f)
-    records = data if isinstance(data, list) else (
-        data.get("sites") or data.get("data") or [])
-
+    files = [a.file] if a.file else [
+        os.path.join(BASE, "data", "sites.json"),
+        os.path.join(BASE, "data", "species.json"),
+    ]
     rep = Report()
-    validate(records, rep)
+    site_ids = set()
+    for path in files:
+        if not os.path.isfile(path):
+            if a.file:
+                print("找不到数据文件：%s" % path)
+                return 1
+            continue
+        with io.open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        records = data if isinstance(data, list) else (
+            data.get("sites") or data.get("species") or data.get("data") or [])
+        if os.path.basename(path) == "species.json":
+            validate_species(records, rep, site_ids)
+        else:
+            validate(records, rep)
+            site_ids = set(s(g(r, "code")) for r in records if isinstance(r, dict))
 
     print("=" * 66)
     print("赣鄱石语 · 数据校验报告")
-    print("文件：%s" % os.path.relpath(a.file, BASE))
+    print("文件：%s" % "、".join(os.path.relpath(p, BASE) for p in files))
     print("时间：%s" % datetime.now().strftime("%Y-%m-%d %H:%M"))
     print("=" * 66)
 

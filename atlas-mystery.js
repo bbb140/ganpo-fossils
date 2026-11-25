@@ -119,6 +119,7 @@
         answer: ans,
         options: options,
         taxa: f.taxa || '', age: f.age || '', region: f.region || '',
+        genus: f.genus || '', species: f.species || '',              // 答完展示的原文出处学名
         detail: String(f.features || ''),                            // 答对后展示的科普原文
         reference: f.reference || ''
       });

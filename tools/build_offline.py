@@ -33,10 +33,30 @@ COPY_FILES = ["index.html", "map.html", "list.html", "download.html", "atlas.htm
 # 发给老师/评委的包里出现"待确认 6 条"这种表，只会被理解成数据不严谨
 EXCLUDE_NAMES = {"分区小区归并表.csv", "回填表.csv", "species.json"}
 EXCLUDE_PAT = (".bak", ".backup", "~", ".next.")
+# 目录名不带点，只靠 EXCLUDE_PAT 会漏网：data/backup 曾把「待补编号/待B岗」工作稿
+# 一路带进演示包。这里按目录名单独拦一道。
+EXCLUDE_DIRS = {"backup", "__pycache__", ".git"}
 
 
 def _skip(name):
     return name in EXCLUDE_NAMES or any(p in name for p in EXCLUDE_PAT)
+
+
+def _skip_dir(name):
+    return name in EXCLUDE_DIRS or any(p in name for p in EXCLUDE_PAT)
+
+
+def _ignore(dirpath, names):
+    """copytree 的忽略回调：目录按 _skip_dir，文件按 _skip + 空文件。"""
+    out = []
+    for n in names:
+        p = os.path.join(dirpath, n)
+        if os.path.isdir(p):
+            if _skip_dir(n):
+                out.append(n)
+        elif _skip(n) or os.path.getsize(p) == 0:
+            out.append(n)
+    return out
 
 
 # v1.2 英文字段 → 对外 CSV 中文表头（公众下载，中文更友好；顺序即导出顺序）
@@ -135,6 +155,11 @@ def content_version():
         p = os.path.join(BASE, fn)
         if os.path.isfile(p):
             paths.append(p)
+    # HTML 本身也必须计入：只改导航/文案/说明时，若哈希不变浏览器会一直拿旧缓存页
+    for fn in COPY_FILES:
+        p = os.path.join(BASE, fn)
+        if fn.endswith(".html") and os.path.isfile(p):
+            paths.append(p)
     for p in sorted(paths):
         with io.open(p, "rb") as f:
             h.update(f.read())
@@ -170,6 +195,10 @@ def build():
         os.makedirs(DIST)
     for junk in glob.glob(os.path.join(DIST, "**", "*"), recursive=True):
         base = os.path.basename(junk)
+        if os.path.isdir(junk) and _skip_dir(base):
+            shutil.rmtree(junk)
+            print("已从 dist 移除内部目录：" + os.path.relpath(junk, DIST))
+            continue
         empty = os.path.isfile(junk) and os.path.getsize(junk) == 0
         if os.path.isfile(junk) and (_skip(base) or empty):
             os.remove(junk)
@@ -179,9 +208,7 @@ def build():
         src = os.path.join(BASE, d)
         if os.path.isdir(src):
             shutil.copytree(src, os.path.join(DIST, d), dirs_exist_ok=True,
-                            ignore=lambda d, names: [n for n in names if _skip(n)
-                                                     or (os.path.isfile(os.path.join(d, n))
-                                                         and os.path.getsize(os.path.join(d, n)) == 0)])
+                            ignore=_ignore)
     for f in COPY_FILES:
         shutil.copy2(os.path.join(BASE, f), os.path.join(DIST, f))
 
@@ -206,7 +233,7 @@ def build():
 
     # 资源版本号：部署后无需教用户硬刷新，内容一变缓存自动失效
     ver = content_version()
-    print("版本号 v=%s（由 css/js + sites.json 内容哈希得出）" % ver)
+    print("版本号 v=%s（由 css/js + HTML + sites.json 内容哈希得出）" % ver)
     stamp_assets(ver)
 
     # GitHub Pages：跳过 Jekyll 处理，静态文件原样发布（顺带省掉构建时间）

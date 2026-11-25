@@ -280,9 +280,9 @@
 
   <h2 class="sec">四个化石分区</h2>
   <div class="grid4" id="areaGrid"></div>
-  <p style="font-size:11px;color:var(--muted);margin-top:14px">
-    说明：赣西北 14 处产地暂无线索化石（B 岗图鉴未覆盖该区），但探索本身计入解锁进度；
-    化石按图鉴文件中的 <code>tapho_link</code> 真实对应到产地，不推测、不编造。
+  <p style="font-size:11px;color:var(--muted);margin-top:14px" id="areaNote">
+    说明：化石按图鉴文件中的 <code>tapho_link</code> 真实对应到产地，不推测、不编造；
+    各区线索化石数量以当前图鉴数据为准，探索本身计入解锁进度。
   </p>
 </div>
 
@@ -301,7 +301,20 @@
   /* 盲盒玩法的本地状态：与探索进度完全隔离，不参与解锁/徽章 */
   var MY_BEST='gbsy_mystery_best';
   var myQs=[], myIdx=0, myRight=0, myAnswered=false, myMore=0;
-  var store=window.localStorage, state=L.load(store);
+  /* Safari 无痕、禁用站点数据、部分 file:// 环境下，读取 window.localStorage
+     本身就会抛 SecurityError——不接住会让整段脚本中断、分区与按钮全失效。
+     降级到内存版：本次会话照常体验，刷新不留存，总比白屏好。 */
+  var store;
+  try { store=window.localStorage; }
+  catch(e){
+    var memStore={};
+    store={
+      getItem:function(k){return Object.prototype.hasOwnProperty.call(memStore,k)?memStore[k]:null},
+      setItem:function(k,v){memStore[k]=String(v)},
+      removeItem:function(k){delete memStore[k]}
+    };
+  }
+  var state=L.load(store);
   /* 答辩优先：全新访客（从未设置过演示模式开关）默认开启演示模式，
      老师从导航点进来直接全解锁、不被第一关卡住。用户手动关过一次后，
      demo 键就有了值，此后尊重其选择，不再强行打开。 */
@@ -622,7 +635,7 @@
     /* 答完立刻展示原文出处：即使猜错也是一次科普，不白点 */
     var fb='<div class="result '+(right?'':'no')+'">'+
       (right?'✓ 答对了！':'✗ 答案是「'+esc(q.answer)+'」')+'</div>'+
-      '<div class="srcfont"><b>原文出处（'+(q.genus||'')+' '+esc(q.species||'')+'）</b><br>'+esc(q.detail)+
+      '<div class="srcfont"><b>原文出处（'+esc([q.genus,q.species].filter(Boolean).join(' ')||'图鉴条目')+'）</b><br>'+esc(q.detail)+
       (q.reference?'<br><b>文献：</b>'+esc(q.reference):'')+'</div>';
     $('myFeedback').innerHTML=fb;
     $('myActs').innerHTML='<button class="btn" id="myQuit">退出盲盒</button>'+

@@ -1,7 +1,7 @@
 /* ============================================================
    js/species.js —— 物种图鉴渲染层（B 岗数据接入点）
 
-   作用：把 data/species.json（当前 14 条图鉴）渲染到两处：
+   作用：把 data/species.json（当前 162 条图鉴，55 条有产地编号）渲染到两处：
      · 首页四个分区的 .species-cards
      · 地图页筛选结果的 #species-list
 
@@ -98,16 +98,14 @@
     });
   }
 
-  /* 一条图鉴是否与当前这批产地相关（三级匹配，可靠性递减）：
-     ① 有 tapho_link → 编号精确匹配（最可靠）
-     ② 无 link 但有 region → 按大区匹配（如斑嵴龙：产地不详，仅知赣州/赣东南）
-     ③ 都没有 → 用门类交集匹配（宽松回退）
-     注意：②只在整批 sites 属于同一大区时才生效（首页分区 / 大区筛选），
-     在地图全量视图下不启用，否则一条"产地不详"会挂到全省所有区。
-     另：②是给早期「仅 1 条产地不详化石（斑嵴龙）」设计的特例。图鉴扩容到大量
-     无编号条目后，若仍按大区挂，首页每个分区会凭空多出几十条"具体不详"卡片，
-     误导性强。因此仅当全表无编号条目很少（<=2，特例规模）时才启用 ②；
-     数据量大时交给 ③ 门类交集（有真实化石门类依据）处理。 */
+  /* 一条图鉴是否与当前这批产地相关：
+     ① 有 tapho_link → 编号精确匹配（唯一可靠的关联方式）
+     ② 无 link 但有 region → 仅在全表无编号条目极少（<=2，早期斑嵴龙那种特例）
+        且整批 sites 同属一个大区时按大区匹配；图鉴扩容到 107 条无编号文献条目后
+        此分支自动失效。
+     ③ 早期还有"按门类交集"的宽松回退，现已移除：107 条无编号化石会让每个分区
+        都挂上上百张"具体不详"卡片（实测 110–131 张），与"代表物种"语义严重不符，
+        也违背"不推测关联"的约定。无编号化石只在图鉴探索页作文献条目展示。 */
   function related(item, sites) {
     if (!sites || !sites.length) return false;
     const link = val(item, F.site);
@@ -117,7 +115,8 @@
         return sites.some(function (s) { return val(s, ['id', '记录编号']) === c; });
       });
     }
-    const fewNoLink = items.filter(function (it) { return !val(it, F.site); }).length <= 2;
+    const fewNoLink = items.length > 0 &&
+                      items.filter(function (it) { return !val(it, F.site); }).length <= 2;
     const rg = val(item, F.region);
     if (rg && fewNoLink) {
       const areas = {};
@@ -132,13 +131,9 @@
       if (sites.length > 1 && keys.length === 1 &&
           keys[0].indexOf(rg.replace(/大区|\s/g, '')) > -1) return true;
     }
-    const tx = val(item, F.taxa);
-    if (!tx) return false;
-    const parts = tx.split(/[、，,；;]/).map(function (x) { return x.trim(); }).filter(Boolean);
-    return sites.some(function (s) {
-      const st = val(s, ['fossil_group', 'taxa', '主要化石门类']);
-      return parts.some(function (t) { return st.indexOf(t) > -1; });
-    });
+    /* 不再按门类猜测关联：无编号条目已达 107 条，按门类会把每个分区都塞满
+       "具体不详"卡片。只有编号精确匹配才挂到产地，其余留给图鉴探索页。 */
+    return false;
   }
 
   function cardHTML(it) {

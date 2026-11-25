@@ -67,7 +67,7 @@
   }
 
   /* ---- 下拉选项：全部从数据里取，避免和图例脱钩 ---- */
-  const ACC_ORDER = ['实测', '乡级占位', '县级占位', '市级占位', '地名级'];
+  const ACC_ORDER = ['实测', '村级占位', '乡级占位', '县级占位', '市级占位', '地名级'];
   function fillSelect(sel, items, placeholder) {
     if (!sel) return;
     let html = '<option value="">' + placeholder + '</option>';

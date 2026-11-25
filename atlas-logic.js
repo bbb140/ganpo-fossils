@@ -16,7 +16,10 @@
     fossils: 'gbsy_atlas_fossils',
     demo: 'gbsy_atlas_demo',
     level: 'gbsy_atlas_level',
-    preDemo: 'gbsy_atlas_preDemo'   // 进入演示前的解锁进度，关闭演示时还原
+    // 进入演示前的进度快照：关闭演示时完整还原，避免"已收8条却只解锁1区"
+    preDemo: 'gbsy_atlas_preDemo',
+    preFound: 'gbsy_atlas_preFound',
+    preFossils: 'gbsy_atlas_preFossils'
   };
 
   /* 地质年代归类：字段写法很杂（"晚白垩世"/"古新世（池江组）"/"始新世…"），
@@ -84,7 +87,17 @@
   }
 
   function fresh() {
-    return { unlocked: 1, found: [], fossils: [], demo: false, level: 'normal', preDemo: 1 };
+    return { unlocked: 1, found: [], fossils: [], demo: false, level: 'normal',
+             preDemo: 1, preFound: [], preFossils: [] };
+  }
+  /* localStorage 里可能被塞进非数组/非数字（旧版残留、手工改过、脚本写错）。
+     读取时一律归一化，避免 foundIn()/collect() 在 forEach/indexOf 处抛错白屏。 */
+  function arr(v) {
+    return Array.isArray(v) ? v.filter(function (x) { return typeof x === 'string' && x; }) : [];
+  }
+  function boundedInt(v, def, lo, hi) {
+    var n = Number(v);
+    return (isFinite(n) && n >= lo && n <= hi) ? Math.floor(n) : def;
   }
   function needOf(s) {
     return (LEVELS[s && s.level] || LEVELS.normal).need;
@@ -99,11 +112,13 @@
       catch (e) { return def; }
     }
     var s = fresh();
-    s.unlocked = Math.min(4, Math.max(1, get(K.unlocked, 1) || 1));
-    s.found = get(K.found, []) || [];
-    s.fossils = get(K.fossils, []) || [];
+    s.unlocked = boundedInt(get(K.unlocked, 1), 1, 1, 4);
+    s.found = arr(get(K.found, []));
+    s.fossils = arr(get(K.fossils, []));
     s.demo = !!get(K.demo, false);
-    s.preDemo = Math.min(4, Math.max(1, get(K.preDemo, 1) || 1));
+    s.preDemo = boundedInt(get(K.preDemo, 1), 1, 1, 4);
+    s.preFound = arr(get(K.preFound, []));
+    s.preFossils = arr(get(K.preFossils, []));
     var lv = get(K.level, 'normal');
     s.level = LEVELS[lv] ? lv : 'normal';
     return s;
@@ -117,6 +132,8 @@
       store.setItem(K.demo, JSON.stringify(s.demo));
       store.setItem(K.level, JSON.stringify(s.level));
       store.setItem(K.preDemo, JSON.stringify(s.preDemo));
+      store.setItem(K.preFound, JSON.stringify(s.preFound || []));
+      store.setItem(K.preFossils, JSON.stringify(s.preFossils || []));
     } catch (e) {}
   }
   function setLevel(store, s, level) {
@@ -134,10 +151,14 @@
   function setDemo(store, s, on) {
     on = !!on;
     if (on && !s.demo) {
-      s.preDemo = s.unlocked;   // 记住进入演示前的进度
-      s.unlocked = 4;           // 演示态：全部解锁
+      s.preDemo = s.unlocked;              // 记住进入演示前的进度
+      s.preFound = (s.found || []).slice();
+      s.preFossils = (s.fossils || []).slice();
+      s.unlocked = 4;                      // 演示态：全部解锁
     } else if (!on && s.demo) {
-      s.unlocked = Math.min(4, Math.max(1, s.preDemo || 1));  // 关闭：还原
+      s.unlocked = Math.min(4, Math.max(1, s.preDemo || 1));
+      s.found = arr(s.preFound);           // 演示期勘探/收集不带入正式进度
+      s.fossils = arr(s.preFossils);
     }
     s.demo = on;
     save(store, s);
