@@ -152,7 +152,14 @@
     const feat = val(it, F.features), ref = val(it, F.ref), link = val(it, F.site);
     let html = '<div class="species-card">' + name;
     if (meta.length) html += '<div class="sp-meta">' + esc(meta.join(' · ')) + '</div>';
-    if (feat && feat !== '无') html += '<p class="sp-feat">' + esc(cut(feat, 64)) + '</p>';
+    if (feat && feat !== '无') {
+      /* 卡片只放摘要（64 字），全文在图鉴探索页。直达链接按中文名定位，
+         中文名缺失时退回拉丁双名，与 atlas.html 的读取规则一致。 */
+      html += '<p class="sp-feat">' + esc(cut(feat, 64)) + '</p>';
+      const key = cn || sci;
+      if (key) html += '<a class="sp-link sp-full" href="atlas.html?species=' +
+                       encodeURIComponent(key) + '">看完整鉴定要点 →</a>';
+    }
     if (link) {
       const code = link.split(/[、，,；;]/)[0].trim();
       html += '<a class="sp-link" href="map.html?code=' + encodeURIComponent(code) + '">地图定位 →</a>';

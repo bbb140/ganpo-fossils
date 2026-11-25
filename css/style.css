@@ -774,6 +774,11 @@ th.sortable.sorted::after {
   border-bottom: 1px dotted var(--c-primary);
 }
 .species-card .sp-link:hover { opacity: .75; }
+/* 看全文链接独占一行，与「地图定位」区分；不打断卡片节奏 */
+.species-card .sp-full {
+  display: block;
+  margin: -.15rem 0 .4rem;
+}
 .species-card .sp-ref {
   margin-top: .35rem;
   font-size: .73rem;

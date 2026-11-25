@@ -513,6 +513,25 @@
     render();
   }
 
+  /* 单条物种详情：图鉴本点击与「?species=」直达共用同一段渲染 */
+  function openSpeciesDetail(f){
+    if(!f)return;
+    var h='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+      '<h3>'+esc(f.cn_name)+'</h3><p class="sub"><i>'+esc(f.genus+' '+f.species)+'</i> · '+esc(f.author_year||'')+'</p>'+
+      '<div class="detail">'+
+      '<div class="row"><b>年代</b> '+esc(f.age||'—')+'</div>'+
+      '<div class="row"><b>分类</b> '+esc(f.classification||'—')+'</div>'+
+      '<div class="row"><b>产地</b> '+esc(f.tapho_link||'具体不详')+'</div>'+
+      '<div class="row"><b>门类</b> '+esc(f.taxa||'—')+'</div>'+
+      '<div class="feat">'+esc(f.features||'—')+'</div>'+
+      '<div class="row" style="margin-top:10px"><b>文献</b> '+esc(f.reference||'—')+'</div>'+
+      (f.tapho_link?('<div class="golinks"><a href="map.html?code='+encodeURIComponent(f.tapho_link)+'">🗺 看产地在地图上的位置</a>'+
+        '<a href="list.html?q='+encodeURIComponent(f.tapho_link)+'">📋 查产地档案</a></div>'):'')+
+      '</div>'+
+      '<div class="acts"><button class="btn" id="backAtlas">返回图鉴本</button></div>';
+    open(h);$('backAtlas').onclick=openAtlas;
+  }
+
   function openAtlas(){
     var got={};state.fossils.forEach(function(n){got[n]=1;});
     var preview=state.demo;
@@ -534,22 +553,7 @@
     $('closeAtlas').onclick=close;
     Array.prototype.forEach.call($('modal').querySelectorAll('.slot.got, .slot.lit'),function(el){
       el.onclick=function(){
-        var f=SPECIES[parseInt(el.getAttribute('data-i'),10)];
-        if(!f)return;
-        var h='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
-          '<h3>'+esc(f.cn_name)+'</h3><p class="sub"><i>'+esc(f.genus+' '+f.species)+'</i> · '+esc(f.author_year||'')+'</p>'+
-          '<div class="detail">'+
-          '<div class="row"><b>年代</b> '+esc(f.age||'—')+'</div>'+
-          '<div class="row"><b>分类</b> '+esc(f.classification||'—')+'</div>'+
-          '<div class="row"><b>产地</b> '+esc(f.tapho_link||'具体不详')+'</div>'+
-          '<div class="row"><b>门类</b> '+esc(f.taxa||'—')+'</div>'+
-          '<div class="feat">'+esc(f.features||'—')+'</div>'+
-          '<div class="row" style="margin-top:10px"><b>文献</b> '+esc(f.reference||'—')+'</div>'+
-          (f.tapho_link?('<div class="golinks"><a href="map.html?code='+encodeURIComponent(f.tapho_link)+'">🗺 看产地在地图上的位置</a>'+
-            '<a href="list.html?q='+encodeURIComponent(f.tapho_link)+'">📋 查产地档案</a></div>'):'')+
-          '</div>'+
-          '<div class="acts"><button class="btn" id="backAtlas">返回图鉴本</button></div>';
-        open(h);$('backAtlas').onclick=openAtlas;
+        openSpeciesDetail(SPECIES[parseInt(el.getAttribute('data-i'),10)]);
       };
     });
   }
@@ -682,6 +686,20 @@
   };
   $('mask').onclick=function(e){if(e.target===this)close();};
   render();
+
+  /* 从首页/地图页「看完整鉴定要点」跳进来：atlas.html?species=<中文名或拉丁名>
+     直达该条详情，不必自己在图鉴本里翻找。按中文名优先、拉丁双名兜底匹配，
+     与 js/species.js 的链接生成规则一致；找不到时静默留在首页，不弹错提示。 */
+  try {
+    var want=new URLSearchParams(location.search).get('species');
+    if(want){
+      var hit=SPECIES.filter(function(f){
+        return (f.cn_name&&f.cn_name===want)||
+               (!f.cn_name&&[f.genus,f.species].filter(Boolean).join(' ')===want);
+      })[0];
+      if(hit)openSpeciesDetail(hit);
+    }
+  } catch(e) {}
 })();
 </script>
 </body>
