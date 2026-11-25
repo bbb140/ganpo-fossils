@@ -8,6 +8,8 @@ const path = require('path');
 const BASE = path.dirname(__dirname);
 
 let created = null;                     // 捕获挂进 #map 的面板节点
+/* 记录 Leaflet 事件隔离是否被施加到侧栏（防滚卡片时地图跟着动） */
+const isolated = { scroll: 0, click: 0 };
 function mkEl() {
   return {
     style: {}, innerHTML: '', textContent: '', className: '', id: '',
@@ -18,7 +20,14 @@ function mkEl() {
   };
 }
 
-global.window = {};
+global.window = {
+  L: {
+    DomEvent: {
+      disableScrollPropagation(el) { if (el === created) isolated.scroll++; },
+      disableClickPropagation(el) { if (el === created) isolated.click++; }
+    }
+  }
+};
 global.document = {
   getElementById(id) {
     if (id === 'map') return mkEl();    // detail 面板的宿主
@@ -81,6 +90,10 @@ chk('级别附图册出处说明', html.indexOf('图册') > -1);
 /* 名录联动链接 */
 chk('带"在名录中查看"链接',
   html.indexOf('list.html?q=' + encodeURIComponent(val(normal, 'code'))) > -1);
+
+/* Leaflet 事件隔离：滚侧栏时不带动地图（用户反馈「地图被滑动而卡片不动」） */
+chk('侧栏已隔离滚动传播给 Leaflet 地图', isolated.scroll > 0);
+chk('侧栏已隔离点击传播给 Leaflet 地图', isolated.click > 0);
 
 /* 关闭 */
 D().hide();

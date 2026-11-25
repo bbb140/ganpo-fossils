@@ -50,6 +50,18 @@
     panel.setAttribute('role', 'dialog');
     panel.hidden = true;
     host.appendChild(panel);
+    /* 侧栏挂在 #map 内，Leaflet 在容器上监听 wheel/touch/mousedown 做缩放拖动。
+       不隔离的话，滚侧栏会被地图吃掉（地图动、卡片不动）。用 Leaflet 官方方法
+       同时挡滚动与点击传播；老环境无 L 时退化为原生 stopPropagation。 */
+    if (typeof window.L !== 'undefined' && window.L.DomEvent) {
+      window.L.DomEvent.disableScrollPropagation(panel);
+      window.L.DomEvent.disableClickPropagation(panel);
+    } else {
+      ['wheel', 'DOMMouseScroll', 'touchmove', 'mousedown', 'touchstart', 'dblclick', 'contextmenu']
+        .forEach(function (t) {
+          panel.addEventListener(t, function (e) { e.stopPropagation(); }, { passive: false });
+        });
+    }
     return panel;
   }
 
