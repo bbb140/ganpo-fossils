@@ -150,7 +150,16 @@
 
     const meta = [val(it, F.cls), val(it, F.age)].filter(Boolean);
     const feat = val(it, F.features), ref = val(it, F.ref), link = val(it, F.site);
-    let html = '<div class="species-card">' + name;
+    /* 标本照：优先 images 数组首图，其次单张 image；无图不占位，版面与旧版一致 */
+    const imgs = (Array.isArray(it.images) && it.images.length)
+      ? it.images
+      : (val(it, ['image', '图片', '照片']) ? [val(it, ['image', '图片', '照片'])] : []);
+    let html = '<div class="species-card">';
+    if (imgs.length) {
+      html += '<img class="sp-thumb" src="' + esc(imgs[0]) + '" alt="' +
+              esc(cn || sci || '化石标本') + '" loading="lazy">';
+    }
+    html += name;
     if (meta.length) html += '<div class="sp-meta">' + esc(meta.join(' · ')) + '</div>';
     if (feat && feat !== '无') {
       /* 卡片只放摘要（64 字），全文在图鉴探索页。直达链接按中文名定位，

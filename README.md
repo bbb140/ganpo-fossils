@@ -99,6 +99,8 @@ css/ js/ *.html          源码（fields.js 是字段层，map/main/list/filter/
 data/sites.json          产地数据（v1.2 图册重建版：109 条 × 17 列英文键）
 data/sites.geojson       同一批 109 处的点要素版（WGS84，含占位/误差标记，供 GIS 用）
 data/species.json        物种图鉴（162 条 = 152 图册物种 + 10 明星化石；55 条有编号）
+data/fossil_images.json  43 条物种的 93 张标本照清单（由 tools/import_fossil_images.py 生成）
+assets/fossils/          标本照 WebP（编号_序号，最长边 1100px，共约 3.3 MB）
 data/species.backup-14.json  合并前的 14 条备份（不进 dist）
 data/产地对应报告.json   B 岗 44 条产地对应依据（species_index 为旧排序，以物种名为准）
 data/表1_分区基本特征.csv  规划表 1 的 15 行，109 口径的来源

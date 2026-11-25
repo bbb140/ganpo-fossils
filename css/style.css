@@ -746,6 +746,16 @@ th.sortable.sorted::after {
 }
 #species-list { display: flex; flex-wrap: wrap; gap: .75rem; align-items: stretch; }
 #species-list .species-card { flex: 1 1 280px; }
+/* 代表物种卡片缩略图：统一 4:3，避免不同照片比例把卡片撑得参差 */
+.species-card .sp-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 5px;
+  background: #f2f2ec;
+  margin-bottom: .55rem;
+}
 .species-card .sp-cn {
   display: inline-block;
   font-size: 1.02rem;

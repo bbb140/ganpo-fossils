@@ -145,6 +145,21 @@
   .slot .cn{font-size:13px;font-weight:600;margin-top:5px;word-break:break-all}
   .slot .sci{font-size:10px;color:var(--muted);font-style:italic;margin-top:3px;word-break:break-all}
   .slot .q{font-size:22px;color:#c7ccc5;margin-top:16px}
+  /* 图鉴本缩略图：统一 4:3 裁切，未收集仍显示问号 */
+  .slot .thumb{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;
+    border-radius:6px;background:#eeefe9;margin-bottom:6px}
+  /* 详情大图 + 多角度切换 */
+  .fossil-hero{margin:0 0 12px;padding:8px;background:var(--paper);border-radius:10px;text-align:center}
+  .fossil-hero img{max-width:100%;max-height:42vh;object-fit:contain;border-radius:6px;
+    cursor:zoom-in;background:#fff}
+  .fossil-hero .credit{font-size:11px;color:var(--muted);margin-top:6px}
+  .fp-thumbs{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px}
+  .fp-thumbs img{width:58px;height:44px;object-fit:cover;border-radius:5px;flex:0 0 auto;
+    border:2px solid transparent;cursor:pointer;background:#eeefe9}
+  .fp-thumbs img.on{border-color:var(--green)}
+  .mystery-photo{margin-top:10px;text-align:center}
+  .mystery-photo img{max-width:100%;max-height:30vh;object-fit:contain;border-radius:8px;background:#fff}
+  .mystery-photo .credit{font-size:11px;color:var(--muted);margin-top:4px}
   .detail{font-size:13px;line-height:1.8}
   .detail .row{margin:6px 0}
   .detail .row b{color:var(--muted);font-weight:500;font-size:12px}
@@ -531,11 +546,42 @@
     render();
   }
 
+  /* 标本照片：主图 + 多角度缩略图 + 来源标注。无图返回空串，版面与旧版一致 */
+  function photoHTML(f){
+    var imgs=(f.images&&f.images.length)?f.images:(f.image?[f.image]:[]);
+    if(!imgs.length)return '';
+    var h='<div class="fossil-hero"><a href="'+esc(imgs[0])+'" target="_blank" rel="noopener">'+
+      '<img id="fpMain" src="'+esc(imgs[0])+'" alt="'+esc((f.cn_name||'化石')+'标本照片')+'" loading="lazy"></a>'+
+      '<div class="credit">图片来源：'+esc(f.image_credit||'《江西省古生物化石图册》')+'</div></div>';
+    if(imgs.length>1){
+      h+='<div class="fp-thumbs" id="fpThumbs">';
+      imgs.forEach(function(u,i){
+        h+='<img src="'+esc(u)+'" data-u="'+esc(u)+'" class="'+(i===0?'on':'')+'" alt="角度'+(i+1)+'" loading="lazy">';
+      });
+      h+='</div>';
+    }
+    return h;
+  }
+  function bindPhotoSwitch(){
+    var box=$('fpThumbs'),main=$('fpMain');
+    if(!box||!main)return;
+    Array.prototype.forEach.call(box.querySelectorAll('img'),function(t){
+      t.onclick=function(){
+        main.src=t.getAttribute('data-u');
+        var a=main.parentNode;
+        if(a&&a.tagName==='A')a.href=t.getAttribute('data-u');
+        Array.prototype.forEach.call(box.querySelectorAll('img'),function(x){x.classList.remove('on');});
+        t.classList.add('on');
+      };
+    });
+  }
+
   /* 单条物种详情：图鉴本点击与「?species=」直达共用同一段渲染 */
   function openSpeciesDetail(f){
     if(!f)return;
     var h='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
       '<h3>'+esc(f.cn_name)+'</h3><p class="sub"><i>'+esc(f.genus+' '+f.species)+'</i> · '+esc(f.author_year||'')+'</p>'+
+      photoHTML(f)+
       '<div class="detail">'+
       '<div class="row"><b>年代</b> '+esc(f.age||'—')+'</div>'+
       '<div class="row"><b>分类</b> '+esc(f.classification||'—')+'</div>'+
@@ -548,6 +594,7 @@
       '</div>'+
       '<div class="acts"><button class="btn" id="backAtlas">返回图鉴本</button></div>';
     open(h);$('backAtlas').onclick=openAtlas;
+    bindPhotoSwitch();
   }
 
   function openAtlas(){
@@ -560,8 +607,12 @@
       var has=preview||got[f.cn_name];
       var noSite=!f.tapho_link;                       // 无产地编号：不可通过探索获得
       var cls=has?'got':(noSite?'lit':'');
+      var img0=(f.images&&f.images[0])||f.image||'';
+      /* 可查看的条目才露图；未解锁的保持问号，不提前剧透 */
+      var thumb=((has||noSite)&&img0)
+        ? '<img class="thumb" src="'+esc(img0)+'" alt="'+esc(f.cn_name)+'" loading="lazy">' : '';
       html+='<div class="slot '+cls+'" '+((has||noSite)?'data-i="'+i+'"':'')+'>'+
-        '<div class="idx">No.'+(i+1)+(noSite?' · 文献':'')+'</div>'+
+        '<div class="idx">No.'+(i+1)+(noSite?' · 文献':'')+'</div>'+thumb+
         (has?('<div class="cn">'+esc(f.cn_name)+'</div><div class="sci">'+esc(f.genus+' '+f.species)+'</div>')
             :noSite?('<div class="cn">'+esc(f.cn_name)+'</div><div class="sci">产地不详</div>')
             :'<div class="q">？</div>')+'</div>';
@@ -654,9 +705,18 @@
       else if(v===picked)o.classList.add('wrong');
       o.disabled=true;
     });
-    /* 答完立刻展示原文出处：即使猜错也是一次科普，不白点 */
+    /* 答完立刻展示原文出处：即使猜错也是一次科普，不白点。
+       若该物种有标本照，一并亮出来，盲盒才算真的「开箱」。 */
+    var hit=null;
+    for(var i=0;i<SPECIES.length;i++){if(SPECIES[i].cn_name===q.answer){hit=SPECIES[i];break;}}
+    var ph='';
+    if(hit){
+      var u=(hit.images&&hit.images[0])||hit.image||'';
+      if(u)ph='<div class="mystery-photo"><img src="'+esc(u)+'" alt="'+esc(q.answer)+'标本照片" loading="lazy">'+
+        '<div class="credit">图片来源：'+esc(hit.image_credit||'《江西省古生物化石图册》')+'</div></div>';
+    }
     var fb='<div class="result '+(right?'':'no')+'">'+
-      (right?'✓ 答对了！':'✗ 答案是「'+esc(q.answer)+'」')+'</div>'+
+      (right?'✓ 答对了！':'✗ 答案是「'+esc(q.answer)+'」')+'</div>'+ph+
       '<div class="srcfont"><b>原文出处（'+esc([q.genus,q.species].filter(Boolean).join(' ')||'图鉴条目')+'）</b><br>'+esc(q.detail)+
       (q.reference?'<br><b>文献：</b>'+esc(q.reference):'')+'</div>';
     $('myFeedback').innerHTML=fb;

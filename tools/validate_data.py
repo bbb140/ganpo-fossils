@@ -311,6 +311,8 @@ def validate_species(records, rep, site_ids):
 
     seen = {}
     linked = 0
+    with_pic = 0
+    pic_total = 0
     for i, f in enumerate(records):
         if not isinstance(f, dict):
             rep.err("图鉴第 %d 条不是对象" % (i + 1))
@@ -351,8 +353,23 @@ def validate_species(records, rep, site_ids):
             rep.warn("图鉴「%s」正文图号 %s 未在文献字段列出（需 B 岗核）" %
                      (name, "、".join(sorted(figs - refs))))
 
+        # 标本照片：字段写了就必须有文件，否则上线即破图（阻塞发布）
+        imgs = f.get("images")
+        if not isinstance(imgs, list) or not imgs:
+            one = s(f.get("image"))
+            imgs = [one] if one else []
+        picked = [x for x in imgs if x]
+        for rel in picked:
+            path = os.path.join(BASE, str(rel).replace("/", os.sep))
+            if not os.path.isfile(path):
+                rep.err("图鉴「%s」图片不存在：%s" % (name, rel))
+        if picked:
+            with_pic += 1
+            pic_total += len(picked)
+
     rep.info("图鉴共 %d 条：%d 条有产地关联，%d 条为文献条目（不从地图掉落）"
              % (len(records), linked, len(records) - linked))
+    rep.info("标本照片：%d 条有图，共 %d 张" % (with_pic, pic_total))
 
 
 def main():

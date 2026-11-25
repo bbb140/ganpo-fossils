@@ -1,0 +1,439 @@
+{
+  "长刺刺壁珊瑚": {
+    "code": "010",
+    "images": [
+      "assets/fossils/010_1.webp",
+      "assets/fossils/010_2.webp"
+    ],
+    "cover": "assets/fossils/010_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_2026-11-25_141726_161.png"
+  },
+  "江西连板珊瑚": {
+    "code": "011",
+    "images": [
+      "assets/fossils/011_1.webp",
+      "assets/fossils/011_2.webp",
+      "assets/fossils/011_3.webp",
+      "assets/fossils/011_4.webp"
+    ],
+    "cover": "assets/fossils/011_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125142710_304_70.jpg"
+  },
+  "永新速壁珊瑚": {
+    "code": "015",
+    "images": [
+      "assets/fossils/015_1.webp"
+    ],
+    "cover": "assets/fossils/015_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_2026-11-25_141803_054.png"
+  },
+  "付山直房贝": {
+    "code": "022",
+    "images": [
+      "assets/fossils/022_1.webp",
+      "assets/fossils/022_2.webp",
+      "assets/fossils/022_3.webp"
+    ],
+    "cover": "assets/fossils/022_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125142957_306_70.jpg"
+  },
+  "江西米克贝": {
+    "code": "026",
+    "images": [
+      "assets/fossils/026_1.webp",
+      "assets/fossils/026_2.webp",
+      "assets/fossils/026_3.webp",
+      "assets/fossils/026_4.webp"
+    ],
+    "cover": "assets/fossils/026_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125143228_313_70.jpg"
+  },
+  "吉安海登贝": {
+    "code": "027",
+    "images": [
+      "assets/fossils/027_1.webp",
+      "assets/fossils/027_2.webp"
+    ],
+    "cover": "assets/fossils/027_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125143458_317_70.jpg"
+  },
+  "凉州轮刺贝": {
+    "code": "028",
+    "images": [
+      "assets/fossils/028_1.webp",
+      "assets/fossils/028_2.webp",
+      "assets/fossils/028_3.webp",
+      "assets/fossils/028_4.webp"
+    ],
+    "cover": "assets/fossils/028_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125143729_320_70.jpg"
+  },
+  "优美横格贝": {
+    "code": "030",
+    "images": [
+      "assets/fossils/030_1.webp",
+      "assets/fossils/030_2.webp"
+    ],
+    "cover": "assets/fossils/030_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125143901_324_70.jpg"
+  },
+  "巨大鱼鳞贝": {
+    "code": "036",
+    "images": [
+      "assets/fossils/036_1.webp",
+      "assets/fossils/036_2.webp",
+      "assets/fossils/036_3.webp"
+    ],
+    "cover": "assets/fossils/036_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125144142_326_70.jpg"
+  },
+  "大型携螺贝": {
+    "code": "037",
+    "images": [
+      "assets/fossils/037_1.webp",
+      "assets/fossils/037_2.webp",
+      "assets/fossils/037_3.webp"
+    ],
+    "cover": "assets/fossils/037_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125144309_329_70.jpg"
+  },
+  "面店拟瓢蛤（?）": {
+    "code": "039",
+    "images": [
+      "assets/fossils/039_1.webp"
+    ],
+    "cover": "assets/fossils/039_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125144423_332_70.jpg"
+  },
+  "椭圆江西蛤": {
+    "code": "043",
+    "images": [
+      "assets/fossils/043_1.webp"
+    ],
+    "cover": "assets/fossils/043_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125144544_333_70.jpg"
+  },
+  "长方始丽蚌": {
+    "code": "046",
+    "images": [
+      "assets/fossils/046_1.webp",
+      "assets/fossils/046_2.webp"
+    ],
+    "cover": "assets/fossils/046_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125144659_334_70.jpg"
+  },
+  "丰城变带蛤": {
+    "code": "052",
+    "images": [
+      "assets/fossils/052_1.webp",
+      "assets/fossils/052_2.webp",
+      "assets/fossils/052_3.webp"
+    ],
+    "cover": "assets/fossils/052_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125144926_336_70.jpg"
+  },
+  "曲口豆螺": {
+    "code": "053",
+    "images": [
+      "assets/fossils/053_1.webp",
+      "assets/fossils/053_2.webp"
+    ],
+    "cover": "assets/fossils/053_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125145106_339_70.jpg"
+  },
+  "降落蛇菊石": {
+    "code": "057",
+    "images": [
+      "assets/fossils/057_1.webp",
+      "assets/fossils/057_2.webp"
+    ],
+    "cover": "assets/fossils/057_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125145312_341_70.jpg"
+  },
+  "简单安德生菊石": {
+    "code": "059",
+    "images": [
+      "assets/fossils/059_1.webp",
+      "assets/fossils/059_2.webp"
+    ],
+    "cover": "assets/fossils/059_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125145438_343_70.jpg"
+  },
+  "湖北副小菲氏虫": {
+    "code": "067",
+    "images": [
+      "assets/fossils/067_1.webp",
+      "assets/fossils/067_2.webp"
+    ],
+    "cover": "assets/fossils/067_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125145718_345_70.jpg"
+  },
+  "南京南京三瘤虫": {
+    "code": "069",
+    "images": [
+      "assets/fossils/069_1.webp"
+    ],
+    "cover": "assets/fossils/069_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125145833_347_70.jpg"
+  },
+  "铲形托摩特虫": {
+    "code": "070",
+    "images": [
+      "assets/fossils/070_1.webp",
+      "assets/fossils/070_2.webp"
+    ],
+    "cover": "assets/fossils/070_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125150009_348_70.jpg"
+  },
+  "高层栅笔石": {
+    "code": "088",
+    "images": [
+      "assets/fossils/088_1.webp"
+    ],
+    "cover": "assets/fossils/088_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125150752_350_70.jpg"
+  },
+  "四刺直笔石（相似种）": {
+    "code": "089",
+    "images": [
+      "assets/fossils/089_1.webp"
+    ],
+    "cover": "assets/fossils/089_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125150753_351_70.jpg"
+  },
+  "中华赣南龙": {
+    "code": "094",
+    "images": [
+      "assets/fossils/094_1.webp",
+      "assets/fossils/094_2.webp",
+      "assets/fossils/094_3.webp"
+    ],
+    "cover": "assets/fossils/094_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125151135_352_70.jpg"
+  },
+  "赣州江西龙": {
+    "code": "096",
+    "images": [
+      "assets/fossils/096_1.webp"
+    ],
+    "cover": "assets/fossils/096_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125151337_355_70.jpg"
+  },
+  "丁氏阶齿兽": {
+    "code": "100",
+    "images": [
+      "assets/fossils/100_1.webp"
+    ],
+    "cover": "assets/fossils/100_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125151458_356_70.jpg"
+  },
+  "狮子口阶齿兽": {
+    "code": "101",
+    "images": [
+      "assets/fossils/101_1.webp",
+      "assets/fossils/101_2.webp"
+    ],
+    "cover": "assets/fossils/101_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125151605_357_70.jpg"
+  },
+  "新余原深颌兽": {
+    "code": "102",
+    "images": [
+      "assets/fossils/102_1.webp",
+      "assets/fossils/102_2.webp"
+    ],
+    "cover": "assets/fossils/102_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125151753_359_70.jpg"
+  },
+  "细巧新髓兽": {
+    "code": "103",
+    "images": [
+      "assets/fossils/103_1.webp"
+    ],
+    "cover": "assets/fossils/103_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125151902_361_70.jpg"
+  },
+  "小宣南兽": {
+    "code": "104",
+    "images": [
+      "assets/fossils/104_1.webp",
+      "assets/fossils/104_2.webp",
+      "assets/fossils/104_3.webp"
+    ],
+    "cover": "assets/fossils/104_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125152223_362_70.jpg"
+  },
+  "细巧假古蝟": {
+    "code": "105",
+    "images": [
+      "assets/fossils/105_1.webp",
+      "assets/fossils/105_2.webp",
+      "assets/fossils/105_3.webp",
+      "assets/fossils/105_4.webp"
+    ],
+    "cover": "assets/fossils/105_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125152438_365_70.jpg"
+  },
+  "长兴克拉克刺长兴亚种": {
+    "code": "108",
+    "images": [
+      "assets/fossils/108_1.webp",
+      "assets/fossils/108_2.webp",
+      "assets/fossils/108_3.webp",
+      "assets/fossils/108_4.webp",
+      "assets/fossils/108_5.webp",
+      "assets/fossils/108_6.webp"
+    ],
+    "cover": "assets/fossils/108_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125152738_369_70.jpg"
+  },
+  "长兴克拉克刺殷氏亚种": {
+    "code": "109",
+    "images": [
+      "assets/fossils/109_1.webp",
+      "assets/fossils/109_2.webp"
+    ],
+    "cover": "assets/fossils/109_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125152907_375_70.jpg"
+  },
+  "拟亚龙脊克拉克刺": {
+    "code": "110",
+    "images": [
+      "assets/fossils/110_1.webp",
+      "assets/fossils/110_2.webp",
+      "assets/fossils/110_3.webp"
+    ],
+    "cover": "assets/fossils/110_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125153037_377_70.jpg"
+  },
+  "萍乡似叶状体": {
+    "code": "111",
+    "images": [
+      "assets/fossils/111_1.webp"
+    ],
+    "cover": "assets/fossils/111_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125153341_380_70.jpg"
+  },
+  "山阳鳞木": {
+    "code": "113",
+    "images": [
+      "assets/fossils/113_1.webp",
+      "assets/fossils/113_2.webp"
+    ],
+    "cover": "assets/fossils/113_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125153541_381_70.jpg"
+  },
+  "方鳞木": {
+    "code": "114",
+    "images": [
+      "assets/fossils/114_1.webp",
+      "assets/fossils/114_2.webp",
+      "assets/fossils/114_3.webp"
+    ],
+    "cover": "assets/fossils/114_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125153741_383_70.jpg"
+  },
+  "圆窝木": {
+    "code": "117",
+    "images": [
+      "assets/fossils/117_1.webp",
+      "assets/fossils/117_2.webp"
+    ],
+    "cover": "assets/fossils/117_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125153916_386_70.jpg"
+  },
+  "轮状钩叶蕨": {
+    "code": "118",
+    "images": [
+      "assets/fossils/118_1.webp",
+      "assets/fossils/118_2.webp"
+    ],
+    "cover": "assets/fossils/118_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125154449_388_70.jpg"
+  },
+  "弱楔叶": {
+    "code": "119",
+    "images": [
+      "assets/fossils/119_1.webp"
+    ],
+    "cover": "assets/fossils/119_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125154549_390_70.jpg"
+  },
+  "中华叉羽叶": {
+    "code": "130",
+    "images": [
+      "assets/fossils/130_1.webp",
+      "assets/fossils/130_2.webp"
+    ],
+    "cover": "assets/fossils/130_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125155313_395_70.jpg"
+  },
+  "欣克苏铁杉": {
+    "code": "143",
+    "images": [
+      "assets/fossils/143_1.webp"
+    ],
+    "cover": "assets/fossils/143_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125154835_391_70.jpg"
+  },
+  "绒金缕梅": {
+    "code": "145",
+    "images": [
+      "assets/fossils/145_1.webp",
+      "assets/fossils/145_2.webp"
+    ],
+    "cover": "assets/fossils/145_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125154956_392_70.jpg"
+  },
+  "华七叶树": {
+    "code": "146",
+    "images": [
+      "assets/fossils/146_1.webp"
+    ],
+    "cover": "assets/fossils/146_1.webp",
+    "credit": "《江西省古生物化石图册》",
+    "source_name": "微信图片_20261125155053_394_70.jpg"
+  }
+}
