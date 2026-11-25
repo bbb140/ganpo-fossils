@@ -103,7 +103,11 @@
      ② 无 link 但有 region → 按大区匹配（如斑嵴龙：产地不详，仅知赣州/赣东南）
      ③ 都没有 → 用门类交集匹配（宽松回退）
      注意：②只在整批 sites 属于同一大区时才生效（首页分区 / 大区筛选），
-     在地图全量视图下不启用，否则一条"产地不详"会挂到全省所有区。 */
+     在地图全量视图下不启用，否则一条"产地不详"会挂到全省所有区。
+     另：②是给早期「仅 1 条产地不详化石（斑嵴龙）」设计的特例。图鉴扩容到大量
+     无编号条目后，若仍按大区挂，首页每个分区会凭空多出几十条"具体不详"卡片，
+     误导性强。因此仅当全表无编号条目很少（<=2，特例规模）时才启用 ②；
+     数据量大时交给 ③ 门类交集（有真实化石门类依据）处理。 */
   function related(item, sites) {
     if (!sites || !sites.length) return false;
     const link = val(item, F.site);
@@ -113,8 +117,9 @@
         return sites.some(function (s) { return val(s, ['id', '记录编号']) === c; });
       });
     }
+    const fewNoLink = items.filter(function (it) { return !val(it, F.site); }).length <= 2;
     const rg = val(item, F.region);
-    if (rg) {
+    if (rg && fewNoLink) {
       const areas = {};
       sites.forEach(function (s) {
         const a = val(s, ['region', '保护分区', '大区']).replace(/大区|\s/g, '');

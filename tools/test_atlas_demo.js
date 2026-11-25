@@ -68,13 +68,16 @@ t('演示模式任意区可进入', L.canEnter(s, 3));
 s = L.reset(store);
 t('重置回到初始状态', s.unlocked === 1 && s.found.length === 0 && s.fossils.length === 0 && !s.demo);
 
-// 数据一致性：图鉴的 tapho_link 必须在 sites 里（除斑嵴龙空值）
-let valid = 0, empty = 0;
+// 数据一致性：所有 tapho_link 必须是有效编号或空值（无编号=文献条目，不可探索）。
+// 不写死条数：B 岗以后再补化石，测试自动适配。
+let valid = 0, empty = 0, bad = 0;
 species.forEach(f => {
   if (!f.tapho_link) { empty++; return; }
   if (sites.some(r => r.id === f.tapho_link)) valid++;
+  else { bad++; console.log('  ✗ 非法编号：' + f.cn_name + ' -> ' + f.tapho_link); }
 });
-t('图鉴编号全部有效（13 有效 / 1 空）', valid === 13 && empty === 1);
+t('图鉴编号全部有效（无非法编号）', bad === 0);
+t('图鉴含可探索条目与文献条目', valid > 0 && empty > 0);
 
 console.log('\n结论：', ok ? '通过' : '不通过');
 process.exit(ok ? 0 : 1);

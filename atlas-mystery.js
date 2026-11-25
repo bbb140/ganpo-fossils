@@ -50,6 +50,8 @@
   var BAD = /正型标本|正模标本|编号|藏于|采自|馆藏|副型/;       // 标本保管信息不是线索
   var NAMEWORD = /属名|种名|命名|即由此而来|取自|源自/;          // 词源解释常把答案说出来，直接排除
   var COMPARE = /与.{1,10}(类似|相似|相同)/;                      // 提及其它物种，劣后
+  var FIGREF = /[（(]图\s*\d/;                                     // 图册原文里的「（图4-1-1）」排版图号，读起来突兀，劣后
+  var CITATION = /研究所|地质部|博物馆|\d{4}[a-z]?）/;            // 文献出处残句（切句后的尾巴），非鉴定特征，排除
 
   /* 从 features 原文挑出候选线索句（按辨识度排序），返回的是原文逐字片段。
      不报中文名/拉丁名，不取词源解释句——否则「斑嵴」这类答案字面就漏出来了。 */
@@ -63,14 +65,16 @@
       if (species && low.indexOf(species.toLowerCase()) >= 0) return; // 不报种加词
       if (name && s.indexOf(name) >= 0) return;                      // 不报中文全名
       if (NAMEWORD.test(s)) return;                                  // 不报词源解释（会泄露答案字面）
+      if (CITATION.test(s)) return;                                  // 不报文献出处残句（无鉴定信息）
       var n = s.length;
       if (n < 15 || n > 160) return;                                 // 太短没信息，太长不好读
       var score = 0;
       if (GOOD.test(s)) score += 4;
       if (VIVID.test(s)) score += 5;                                 // 形象描述优先，谜面更好猜
-      if (/\d/.test(s)) score += 2;                                  // 带具体数据的更有辨识度
+      if (/\d/.test(s) && !FIGREF.test(s)) score += 2;              // 具体数据加分；图号里的数字不算（否则带图号残句会胜出）
       if (BAD.test(s)) score -= 5;
       if (COMPARE.test(s)) score -= 3;
+      if (FIGREF.test(s)) score -= 8;                              // 带排版图号的句子大幅劣后，谜面更干净
       if (n >= 25 && n <= 110) score += 1;
       scored.push({ s: s, score: score });
     });
