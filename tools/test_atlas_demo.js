@@ -79,5 +79,38 @@ species.forEach(f => {
 t('图鉴编号全部有效（无非法编号）', bad === 0);
 t('图鉴含可探索条目与文献条目', valid > 0 && empty > 0);
 
+// ===== 新增 5 枚徽章：用模拟的「已收集名单」验证判定 =====
+const g = id => badges.find(b => b.id === id);
+const allBadges = L.badges(s, species);
+t('徽章总数 10 枚', allBadges.length === 10);
+t('初始未获得任何新徽章',
+  !allBadges.find(b => ['invert','dino','time','quad','half'].includes(b.id)).got);
+
+// 收集所有可探索化石 → 新徽章应全部点亮
+const sFull = L.fresh();
+sFull.fossils = species.filter(f => f.tapho_link).map(f => f.cn_name);
+const full = L.badges(sFull, species);
+t('集齐后「无脊椎收藏家」点亮', full.find(b => b.id === 'invert').got);
+t('集齐后「龙裔传人」点亮', full.find(b => b.id === 'dino').got);
+t('集齐后「穿越时空」点亮', full.find(b => b.id === 'time').got);
+t('集齐后「四方藏家」点亮', full.find(b => b.id === 'quad').got);
+t('集齐后「半壁江山」点亮', full.find(b => b.id === 'half').got);
+t('集齐后「赣鄱化石大师」点亮', full.find(b => b.id === 'master').got);
+
+// 只收 1 条：数量/覆盖类都不该点亮
+const sOne = L.fresh();
+sOne.fossils = [species.find(f => f.tapho_link).cn_name];
+const one = L.badges(sOne, species);
+t('仅 1 条时新徽章均不点亮',
+  !one.find(b => b.id === 'invert').got && !one.find(b => b.id === 'dino').got &&
+  !one.find(b => b.id === 'time').got && !one.find(b => b.id === 'quad').got &&
+  !one.find(b => b.id === 'half').got);
+
+// 描述里的数字应随数据动态变化（不写死）
+const halfDesc = full.find(b => b.id === 'half').desc;
+const totalAvail = species.filter(f => f.tapho_link).length;
+t('「半壁江山」描述含动态门槛 ' + Math.ceil(totalAvail / 2),
+  halfDesc.indexOf(String(Math.ceil(totalAvail / 2))) > -1);
+
 console.log('\n结论：', ok ? '通过' : '不通过');
 process.exit(ok ? 0 : 1);

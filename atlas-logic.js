@@ -19,14 +19,69 @@
     preDemo: 'gbsy_atlas_preDemo'   // 进入演示前的解锁进度，关闭演示时还原
   };
 
+  /* 地质年代归类：字段写法很杂（"晚白垩世"/"古新世（池江组）"/"始新世…"），
+     按关键词归到三代，用于「穿越时空」徽章。返回 null 表示无法归类。 */
+  function eraOf(age) {
+    var a = String(age || '');
+    if (/寒武|奥陶|志留|泥盆|石炭|二叠/.test(a)) return '古生代';
+    if (/三叠|侏罗|白垩/.test(a)) return '中生代';
+    if (/古近|新近|第四|古新|始新|渐新|中新|更新|全新/.test(a)) return '新生代';
+    return null;
+  }
+  /* 门类归类：恐龙/恐龙蛋归"恐龙类"，笔石并入古无脊椎，其余按原 taxa */
+  function kindOf(taxa) {
+    var t = String(taxa || '');
+    if (t === '恐龙' || t === '恐龙蛋') return '恐龙类';
+    if (t === '笔石' || t === '古无脊椎动物') return '古无脊椎';
+    if (t === '古脊椎动物' || t === '哺乳动物') return '古脊椎';
+    return t;
+  }
+
   var BADGES = [
     { id: 'scout',    name: '初探者',        desc: '探索满 3 处产地',       test: function (s) { return s.found.length >= 3; } },
     { id: 'first',    name: '化石发现者',    desc: '收入第 1 条化石图鉴',   test: function (s) { return s.fossils.length >= 1; } },
     { id: 'hunter',   name: '寻珍者',        desc: '收入 5 条化石图鉴',     test: function (s) { return s.fossils.length >= 5; } },
     { id: 'traveler', name: '走遍赣鄱',      desc: '解锁全部 4 个分区',     test: function (s) { return s.unlocked >= 4; } },
+    /* 以下 5 枚为图鉴扩容（162 条）后新增，条件全部数据驱动，不写死条数。
+       test 第三参 species：按已收集名字回查门类/年代/大区，判断覆盖面。 */
+    { id: 'invert',   name: '无脊椎收藏家',  desc: '收入 10 条古无脊椎化石',
+      test: function (s, total, sp) { return countKind(s, sp, '古无脊椎') >= 10; } },
+    { id: 'dino',     name: '龙裔传人',      desc: '集齐全部可探索的恐龙类化石',
+      test: function (s, total, sp) {
+        var allDino = (sp || []).filter(function (f) { return f.tapho_link && kindOf(f.taxa) === '恐龙类'; });
+        return allDino.length > 0 && s.fossils.length >= allDino.length &&
+               allDino.every(function (f) { return s.fossils.indexOf(f.cn_name) > -1; });
+      } },
+    { id: 'time',     name: '穿越时空',      desc: '古生代、中生代、新生代各收 1 条',
+      test: function (s, total, sp) {
+        var eras = {};
+        (sp || []).forEach(function (f) {
+          if (s.fossils.indexOf(f.cn_name) > -1) { var e = eraOf(f.age); if (e) eras[e] = 1; }
+        });
+        return eras['古生代'] && eras['中生代'] && eras['新生代'];
+      } },
+    { id: 'quad',     name: '四方藏家',      desc: '赣西北、赣东北、赣西、赣东南各收 1 条',
+      test: function (s, total, sp) {
+        var areas = {};
+        (sp || []).forEach(function (f) {
+          if (s.fossils.indexOf(f.cn_name) > -1 && f.region) areas[f.region] = 1;
+        });
+        return AREAS.every(function (a) { return areas[a]; });
+      } },
+    { id: 'half',     name: '半壁江山',      desc: '收入全部可探索图鉴的一半',
+      test: function (s, total) { return total > 0 && s.fossils.length >= Math.ceil(total / 2); } },
     /* 大师徽章按「可探索获得的图鉴数」判定，不加固定数字——以后加化石自动跟随 */
     { id: 'master',   name: '赣鄱化石大师',  desc: '集齐全部可探索图鉴',   test: function (s, collectable) { return s.fossils.length >= (collectable || 14) && (collectable || 14) > 0; } }
   ];
+
+  /* 已收集化石里属于某门类的条数 */
+  function countKind(s, sp, kind) {
+    var n = 0;
+    (sp || []).forEach(function (f) {
+      if (s.fossils.indexOf(f.cn_name) > -1 && kindOf(f.taxa) === kind) n++;
+    });
+    return n;
+  }
 
   function fresh() {
     return { unlocked: 1, found: [], fossils: [], demo: false, level: 'normal', preDemo: 1 };
@@ -137,12 +192,15 @@
 
   function badges(s, species) {
     var total = collectableCount(species || []);
+    var dinoTotal = (species || []).filter(function (f) {
+      return f.tapho_link && kindOf(f.taxa) === '恐龙类';
+    }).length;
     return BADGES.map(function (b) {
-      return {
-        id: b.id, name: b.name,
-        desc: b.id === 'master' ? ('集齐 ' + total + ' 条可探索图鉴') : b.desc,
-        got: b.test(s, total)
-      };
+      var desc = b.desc;
+      if (b.id === 'master') desc = '集齐 ' + total + ' 条可探索图鉴';
+      if (b.id === 'dino' && dinoTotal) desc = '集齐 ' + dinoTotal + ' 条可探索恐龙类化石';
+      if (b.id === 'half' && total) desc = '收入 ' + Math.ceil(total / 2) + ' 条（可探索的一半）';
+      return { id: b.id, name: b.name, desc: desc, got: b.test(s, total, species || []) };
     });
   }
 

@@ -226,7 +226,7 @@
     <div class="stat"><div class="n" id="sFound">0</div><div class="l">已探索产地</div></div>
     <div class="stat"><div class="n" id="sFossil">0/0</div><div class="l">已收集化石（可探索）</div></div>
     <div class="stat"><div class="n" id="sArea">1/4</div><div class="l">已解锁分区</div></div>
-    <div class="stat"><div class="n" id="sBadge">0/5</div><div class="l">已获得徽章</div></div>
+    <div class="stat"><div class="n" id="sBadge">0/10</div><div class="l">已获得徽章</div></div>
   </div>
 
   <div class="lvbar">
@@ -297,7 +297,7 @@
     $('sFound').textContent=st.found;
     $('sFossil').textContent=st.fossils+'/'+st.collectable;
     $('sArea').textContent=st.unlocked+'/4';
-    $('sBadge').textContent=st.badges+'/5';
+    $('sBadge').textContent=st.badges+'/'+(L.BADGES?L.BADGES.length:5);
     $('demoMode').checked=state.demo;
     var lv=L.LEVELS[state.level]||L.LEVELS.normal;
     $('lvdesc').textContent=lv.desc+' · 答对才算数';
