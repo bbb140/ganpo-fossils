@@ -61,6 +61,33 @@
   .badge.got .medal{background:var(--amber)}
   .badge small{display:block;font-size:11px;color:var(--muted)}
   .badge.got small{color:#a07c3c}
+  /* 首页徽章条的小圆点：带 icon 显示图案，未获得时灰度 */
+  .badge .medal .ico{font-size:12px;line-height:1}
+  .badge:not(.got) .medal .ico{filter:grayscale(1);opacity:.5}
+  /* 徽章墙：圆形奖牌卡片（试点） */
+  .bwall{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-height:56vh;overflow:auto;padding-right:4px}
+  @media(max-width:680px){.bwall{grid-template-columns:1fr}}
+  .bcard{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;
+    padding:18px 12px 15px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+  .bcard.got{background:linear-gradient(180deg,#fffdf7,var(--amber-l));border-color:#ecd9b4}
+  .bmedal{position:relative;width:76px;height:76px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:34px;line-height:1;
+    background:radial-gradient(circle at 35% 30%,#f7f8f4,#dfe3db 72%);
+    border:3px solid #d3d8cf;color:var(--lock);
+    box-shadow:0 4px 10px rgba(30,50,40,.10),inset 0 2px 4px rgba(255,255,255,.7)}
+  .bmedal:before{content:'';position:absolute;inset:5px;border-radius:50%;
+    border:1px dashed rgba(255,255,255,.75);pointer-events:none}
+  .bcard.got .bmedal{background:radial-gradient(circle at 35% 30%,#fdf0cd,#e6bd68 72%);
+    border-color:#d6a544;color:#7a5516;
+    box-shadow:0 5px 14px rgba(181,132,47,.28),inset 0 2px 6px rgba(255,255,255,.8)}
+  .bcard.got .bmedal:before{border-color:rgba(255,255,255,.85)}
+  .bcard:not(.got) .bmedal .bico{filter:grayscale(1);opacity:.55}
+  .bmedal .bico{line-height:1}
+  .bcard .bn{font-size:14px;font-weight:600;color:var(--ink)}
+  .bcard:not(.got) .bn{color:var(--lock)}
+  .bcard .bd{font-size:11px;color:var(--muted);line-height:1.45}
+  .bcard .bg{font-size:11px;color:var(--amber);font-weight:600}
+  .bcard:not(.got) .bg{color:var(--lock)}
   h2.sec{font-size:16px;font-weight:600;margin:0 0 12px}
   .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
   @media(max-width:680px){.grid4{grid-template-columns:1fr}}
@@ -309,7 +336,7 @@
       :'点开产地 → 先读信息卡 → 答对 '+lv.quiz+' 题才算勘探成功；每区 '+lv.need+' 处解锁下一区';
 
     $('badges').innerHTML=L.badges(state,SPECIES).map(function(b){
-      return '<div class="badge '+(b.got?'got':'')+'"><span class="medal">'+(b.got?'✓':'·')+'</span>'+
+      return '<div class="badge '+(b.got?'got':'')+'"><span class="medal">'+(b.icon?'<span class="ico">'+b.icon+'</span>':(b.got?'✓':'·'))+'</span>'+
         '<span>'+esc(b.name)+'<small>'+esc(b.desc)+'</small></span></div>';
     }).join('');
 
@@ -512,10 +539,14 @@
 
   function openBadges(){
     var html='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
-      '<h3>徽章墙</h3><p class="sub">按探索与收集进度自动授予</p><div class="sitelist">';
+      '<h3>徽章墙</h3><p class="sub">按探索与收集进度自动授予</p><div class="bwall">';
     L.badges(state,SPECIES).forEach(function(b){
-      html+='<div class="site '+(b.got?'done':'')+'"><div><div class="nm">'+(b.got?'✓ ':'· ')+esc(b.name)+'</div>'+
-        '<div class="mt">'+esc(b.desc)+'</div></div><div class="go">'+(b.got?'已获得':'未获得')+'</div></div>';
+      var face=b.icon?('<span class="bico">'+b.icon+'</span>'):(b.got?'✓':'·');
+      html+='<div class="bcard '+(b.got?'got':'')+'">'+
+        '<div class="bmedal">'+face+'</div>'+
+        '<div class="bn">'+esc(b.name)+'</div>'+
+        '<div class="bd">'+esc(b.desc)+'</div>'+
+        '<div class="bg">'+(b.got?'已获得':'未获得')+'</div></div>';
     });
     html+='</div><div class="acts"><button class="btn" id="closeBadge">关闭</button></div>';
     open(html);$('closeBadge').onclick=close;
