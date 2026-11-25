@@ -96,8 +96,8 @@
     /* 级别（v2.9 有逐条真值）：带色显示，与地图点位同色 */
     const lv = val(rec, 'level');
     const lvOK = lv && lv.indexOf('待') < 0 && lv !== '无';
-    /* 状态全称太长（"图册主名录＋表1 分区归并（高置信）"），取括号内短词 */
-    const dstatShort = (val(rec, 'dstat').match(/（([^）]+)）/) || [])[1] || val(rec, 'dstat') || '—';
+    /* 状态值已是短词（已核验 / 按县域推定 / 存疑），直接显示 */
+    const dstatShort = val(rec, 'dstat') || '—';
     return '<tr class="row" data-code="' + esc(code) + '" tabindex="0">' +
       '<td class="c-code">' + esc(code) + '</td>' +
       '<td class="c-name">' + esc(val(rec, 'name')) + '</td>' +
@@ -108,7 +108,7 @@
       '<td>' + esc(cut(val(rec, 'taxa'), 22)) + '</td>' +
       '<td>' + (lvOK
         ? '<span style="color:' + colorByLevel(lv) + ';font-weight:600">' + esc(lv) + '</span>'
-        : '<span class="zone-sub">待核定</span>') + '</td>' +
+        : '<span class="zone-sub">未定级</span>') + '</td>' +
       '<td class="col-hide-sm">' + esc(cut(hasVal(val(rec, 'strata')) ? val(rec, 'strata') : '—', 26)) + '</td>' +
       '<td><span class="badge ' + (measured ? 'badge-ok' : 'badge-soft') + '">' +
         esc(baseAcc(acc)) + '</span>' +

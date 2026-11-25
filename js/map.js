@@ -86,10 +86,10 @@ function popupHTML(s) {
   const accText = acc || '未标注';
   /* 级别：v1.2 有真值（世界级/国家级/省级）；旧版数据的"待确认"降级显示原因 */
   const lvRaw = field(s, F.level);
-  const lvOK = lvRaw && lvRaw.indexOf('待确认') < 0 && lvRaw.indexOf('待核定') < 0 && lvRaw !== '无';
+  const lvOK = lvRaw && lvRaw.indexOf('待确认') < 0 && lvRaw.indexOf('未定级') < 0 && lvRaw !== '无';
   const lv = lvOK
     ? '<span style="color:' + colorByLevel(lvRaw) + ';font-weight:600">' + lvRaw + '</span>'
-    : '<span style="color:#9E9E9E">待核定</span>' +
+    : '<span style="color:#9E9E9E">未定级</span>' +
       '<span style="font-size:11px;color:#999">（来源未逐条给出）</span>';
   const detailLoc = field(s, F.detail);
   const strata = field(s, F.strata);
@@ -241,7 +241,7 @@ dataSource
 
       // 级别统计：真值进 levelCount（图例显示），待确认进 levelPending（自检日志）
       const lvRaw = field(s, F.level);
-      if (!lvRaw || lvRaw.indexOf('待确认') > -1 || lvRaw.indexOf('待核定') > -1 || lvRaw === '无') {
+      if (!lvRaw || lvRaw.indexOf('待确认') > -1 || lvRaw.indexOf('未定级') > -1 || lvRaw === '无') {
         levelPending++;
       } else {
         levelCount[lvRaw] = (levelCount[lvRaw] || 0) + 1;
@@ -401,8 +401,8 @@ function renderLegend(counts) {
       const n = counts && counts[k] != null ? counts[k] : null;
       body += legendRow(LEVEL_COLOR[k], k + (n == null ? '' : '　' + n));
     }
-    if (counts && counts['待核定']) {
-      body += legendRow('#9E9E9E', '待核定　' + counts['待核定']);
+    if (counts && counts['未定级']) {
+      body += legendRow('#9E9E9E', '未定级　' + counts['未定级']);
     }
   } else {
     body = '<div style="font-weight:bold;margin-bottom:2px">保护分区（大区）</div>';

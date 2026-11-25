@@ -112,7 +112,7 @@
       return '<div class="taxa-chip"><strong>' + t + '</strong><span>' + c[t] + '</span></div>';
     }).join('') +
       '<p class="note">按「主要化石门类」聚合，共 ' + matched.length +
-      ' 条记录；物种级名录待 B 岗数据到位后替换。</p>';
+      ' 条记录。</p>';
   }
 
   /* ---- 主流程 ---- */

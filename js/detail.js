@@ -89,11 +89,11 @@
     /* 级别口径（v2.9）：v1.2 有逐条真值（据图册名录判定），带色显示；
        待确认是旧版数据的兜底情况 */
     const lvRaw = val(rec, 'level');
-    const lvOK = hasVal(lvRaw) && lvRaw.indexOf('待确认') < 0 && lvRaw.indexOf('待核定') < 0;
+    const lvOK = hasVal(lvRaw) && lvRaw.indexOf('待确认') < 0 && lvRaw.indexOf('未定级') < 0;
     const lvHTML = lvOK
       ? '<span style="color:' + colorByLevel(lvRaw) + ';font-weight:600">' + esc(lvRaw) + '</span>' +
         '<span class="d-note">据《江西省古生物化石图册》名录逐条判定</span>'
-      : '<span class="d-pending">待核定</span>' +
+      : '<span class="d-pending">未定级</span>' +
         '<span class="d-note">来源未逐条给出，级别汇总见数据下载页</span>';
 
     /* 坐标：把"这是个占位值"说满——档位、误差、依据，三样缺一不可。
@@ -125,7 +125,7 @@
       '<div class="d-badges">' +
         '<span class="d-badge d-badge-area" style="--dot:' +
           (lvOK ? colorByLevel(lvRaw) : '#9E9E9E') + '">' +
-          esc(lvOK ? lvRaw : '待核定') + '</span>' +
+          esc(lvOK ? lvRaw : '未定级') + '</span>' +
         '<span class="d-badge">' + esc(undecided ? '未定分区' : region || '—') + '</span>' +
         '<span class="d-badge">' + esc(zone || '小区未填') + '</span>' +
         '<span class="d-badge d-badge-status">' + esc(val(rec, 'dstat') || '状态未填') + '</span>' +

@@ -12,6 +12,7 @@ data/sites.csv
 data/分区小区归并表.csv
 data/回填表.csv
 给A岗_回填清单.html
+_internal/
 
 # ===== 备份与临时文件 =====
 *.bak
