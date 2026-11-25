@@ -75,6 +75,8 @@ var sandbox = {
     ATLAS_MYSTERY: require(path.join(BASE, 'atlas-mystery.js'))
   },
   document: {
+    documentElement: { style: {} },
+    body: { style: {} },
     getElementById: $,
     querySelectorAll: function () { return []; },
     createElement: function () { return new El(); }

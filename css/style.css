@@ -608,6 +608,7 @@ th.sortable.sorted::after {
   font-size: .92rem;
   line-height: 1.65;
   overflow: hidden;
+  overscroll-behavior: contain;   /* 侧栏滚到底不带走背后页面 */
 }
 .gbsy-detail[hidden] { display: none !important; }  /* display:flex 会盖掉默认 hidden，必须显式压回 */
 
@@ -672,6 +673,7 @@ th.sortable.sorted::after {
 .gbsy-detail .d-list {
   flex: 1 1 auto;
   overflow-y: auto;                     /* 字段多，列表区自己滚 */
+  overscroll-behavior: contain;         /* 滚到头不把滚动传给背景页 */
   padding: .6rem 1rem .4rem;
   margin: 0;
 }

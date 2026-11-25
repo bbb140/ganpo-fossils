@@ -113,6 +113,10 @@
   .mask{position:fixed;inset:0;background:rgba(25,34,29,.55);display:none;
     align-items:center;justify-content:center;padding:18px;z-index:50}
   .mask.show{display:flex}
+  /* 弹窗打开时锁背景滚动，防止滚动穿透到主页面 */
+  html.modal-open,body.modal-open{overflow:hidden}
+  /* 滚动到内容边界时不再把滚动链传给父级/背景页 */
+  .modal,.sitelist,.bwall{overscroll-behavior:contain}
   .modal{background:#fff;border-radius:14px;width:100%;max-width:640px;
     padding:24px;max-height:88vh;overflow:auto;box-shadow:var(--shadow)}
   .modal h3{margin:0 0 4px;font-size:19px}
@@ -326,8 +330,22 @@
   var $=function(id){return document.getElementById(id);};
   function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
   function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2200);}
-  function open(html){$('modal').innerHTML=html;$('mask').classList.add('show');}
-  function close(){$('mask').classList.remove('show');}
+  /* 弹窗开关统一锁/放背景滚动：直接改 body.style.overflow，
+     这样所有入口（含 8 处内联 × 按钮的 classList.remove）都会经 MutationObserver 同步。 */
+  function setBodyLock(on){
+    /* html 与 body 都锁，兼容「只锁 body 仍可滚」的浏览器 */
+    var v=on?'hidden':'';
+    document.documentElement.style.overflow=v;
+    document.body.style.overflow=v;
+  }
+  /* 内联关闭按钮绕过 close()，用观察器兜底同步锁状态 */
+  try {
+    new MutationObserver(function(){
+      setBodyLock($('mask').classList.contains('show'));
+    }).observe($('mask'),{attributes:true,attributeFilter:['class']});
+  } catch(e) {}
+  function open(html){$('modal').innerHTML=html;$('mask').classList.add('show');setBodyLock(true);}
+  function close(){$('mask').classList.remove('show');setBodyLock(false);}
   function byArea(a){return SITES.filter(function(r){return r.region===a;});}
   function fossilsHere(site){return SPECIES.filter(function(f){return f.tapho_link===site.id;});}
 

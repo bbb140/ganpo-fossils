@@ -83,6 +83,8 @@ var sandbox = {
     ATLAS_MYSTERY: require(path.join(BASE, 'atlas-mystery.js'))
   },
   document: {
+    documentElement: { style: {} },
+    body: { style: {} },
     getElementById: $,
     querySelectorAll: function (sel) { return query({ childNodes: Object.keys(registry).map(function (k) { return registry[k]; }) }, sel); },
     createElement: function () { return new El(); }
