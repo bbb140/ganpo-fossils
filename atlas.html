@@ -45,9 +45,17 @@
   .btn:disabled{opacity:.5;cursor:not-allowed}
   .hud{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 12px}
   @media(max-width:680px){.hud{grid-template-columns:repeat(2,1fr)}}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+  /* 统计项做成入口：数字仍醒目，但整块可点、有 hover 与键盘焦点反馈 */
+  .stat{position:relative;background:var(--card);border:1px solid var(--line);
+    border-radius:11px;padding:14px 16px;text-align:left;font:inherit;color:inherit;
+    cursor:pointer;transition:.15s}
+  .stat:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--green)}
+  .stat:focus-visible{outline:2px solid var(--green);outline-offset:2px}
   .stat .n{font-size:24px;font-weight:600;line-height:1.1}
   .stat .l{font-size:12px;color:var(--muted);margin-top:3px}
+  .stat .go{position:absolute;right:14px;top:13px;font-size:13px;color:var(--green);opacity:.45}
+  .stat:hover .go{opacity:1}
+  h2.sec,#areaGrid{scroll-margin-top:80px}
   .bar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:12px 0 20px;
     padding:12px 15px;background:var(--card);border:1px solid var(--line);border-radius:10px}
   .bar label{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer}
@@ -125,6 +133,7 @@
   .close{float:right;border:0;background:#f1f2ee;border-radius:7px;
     width:30px;height:30px;cursor:pointer;color:var(--muted);font-size:17px}
   .sitelist{display:grid;gap:9px;max-height:52vh;overflow:auto;padding-right:4px}
+  .sitelist a.site{text-decoration:none;color:inherit}
   .site{display:flex;justify-content:space-between;align-items:center;gap:12px;
     border:1px solid var(--line);border-radius:9px;padding:11px 13px;background:#fff}
   .site.done{background:var(--green-l);border-color:#cfe4db}
@@ -274,10 +283,10 @@
   </header>
 
   <div class="hud">
-    <div class="stat"><div class="n" id="sFound">0</div><div class="l">已探索产地</div></div>
-    <div class="stat"><div class="n" id="sFossil">0/0</div><div class="l">已收集化石（可探索）</div></div>
-    <div class="stat"><div class="n" id="sArea">1/4</div><div class="l">已解锁分区</div></div>
-    <div class="stat"><div class="n" id="sBadge">0/10</div><div class="l">已获得徽章</div></div>
+    <button type="button" class="stat" data-go="found" title="查看已探索产地清单"><div class="n" id="sFound">0</div><div class="l">已探索产地<span class="go">→</span></div></button>
+    <button type="button" class="stat" data-go="fossil" title="打开我的图鉴本"><div class="n" id="sFossil">0/0</div><div class="l">已收集化石（可探索）<span class="go">→</span></div></button>
+    <button type="button" class="stat" data-go="area" title="查看四个分区并进入"><div class="n" id="sArea">1/4</div><div class="l">已解锁分区<span class="go">→</span></div></button>
+    <button type="button" class="stat" data-go="badge" title="打开徽章墙"><div class="n" id="sBadge">0/10</div><div class="l">已获得徽章<span class="go">→</span></div></button>
   </div>
 
   <div class="lvbar">
@@ -640,6 +649,55 @@
     open(html);$('closeBadge').onclick=close;
   }
 
+  /* 统计栏入口①：已探索产地清单。点条目直接去地图看该产地，不在弹窗里复述字段。 */
+  function openFound(){
+    var ids={};state.found.forEach(function(id){ids[id]=1;});
+    var rows=SITES.filter(function(r){return ids[r.id];});
+    var html='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+      '<h3>已探索产地</h3><p class="sub">共 '+rows.length+' 处 · 点条目可看它在地图上的位置</p>';
+    if(!rows.length){
+      html+='<p style="font-size:13px;color:var(--muted)">还没有探索记录。到下面的四个化石分区开始勘探吧。</p>'+
+        '<div class="acts"><button class="btn primary" id="goAreas">去看分区 →</button></div>';
+    }else{
+      html+='<div class="sitelist">';
+      rows.forEach(function(r){
+        html+='<a class="site" href="map.html?code='+encodeURIComponent(r.id)+'">'+
+          '<div><div class="nm">'+esc(r.name)+
+          (fossilsHere(r).length?'<span class="gem">◆ 藏有化石</span>':'')+'</div>'+
+          '<div class="mt">'+esc(r.id)+' · '+esc(r.city_county||'')+' · '+esc(r.geological_age||'')+'</div></div>'+
+          '<div class="go">地图 →</div></a>';
+      });
+      html+='</div><div class="acts"><button class="btn" id="closeFound">关闭</button></div>';
+    }
+    open(html);
+    if($('closeFound'))$('closeFound').onclick=close;
+    if($('goAreas'))$('goAreas').onclick=function(){
+      close();document.getElementById('areaGrid').scrollIntoView({behavior:'smooth',block:'start'});
+    };
+  }
+
+  /* 统计栏入口②：分区总览。未解锁的只写解锁条件，不给进入。 */
+  function openAreas(){
+    var html='<button class="close" onclick="document.getElementById(\'mask\').classList.remove(\'show\')">×</button>'+
+      '<h3>四个化石分区</h3><p class="sub">完成当前分区的勘探目标，即可解锁下一区</p><div class="sitelist">';
+    L.AREAS.forEach(function(a,i){
+      var ok=L.canEnter(state,i), rows=byArea(a), n=L.foundIn(state,a,SITES);
+      html+='<div class="site'+(ok?'':' locked')+'" data-i="'+i+'"'+
+        (ok?'':' style="opacity:.55;cursor:not-allowed"')+'>'+
+        '<div><div class="nm">'+esc(a)+'</div><div class="mt">'+
+        (ok?('已探索 '+n+' / '+rows.length+' 处'):('通关「'+esc(L.AREAS[i-1])+'」后开放'))+
+        '</div></div><div class="go">'+(ok?'进入 →':'未解锁')+'</div></div>';
+    });
+    html+='</div><div class="acts"><button class="btn" id="closeAreas">关闭</button></div>';
+    open(html);
+    $('closeAreas').onclick=close;
+    Array.prototype.forEach.call($('modal').querySelectorAll('.site:not(.locked)'),function(el){
+      el.onclick=function(){
+        close();openArea(L.AREAS[parseInt(el.getAttribute('data-i'),10)]);
+      };
+    });
+  }
+
   /* ===== 盲盒猜物种：读真实鉴定特征，猜化石名。线索逐字出自图鉴 features ===== */
   function bestScore(){
     try{var v=parseInt(store.getItem(MY_BEST),10);return isNaN(v)?0:v;}catch(e){return 0;}
@@ -748,6 +806,16 @@
   $('mysteryBtn').onclick=function(){openMystery();};
   $('atlasBtn').onclick=openAtlas;
   $('badgeBtn').onclick=openBadges;
+  /* HUD 四个统计项都可点进去：已探索产地 / 图鉴本 / 分区总览 / 徽章墙 */
+  Array.prototype.forEach.call(document.querySelectorAll('.hud .stat'),function(el){
+    el.onclick=function(){
+      var go=el.getAttribute('data-go');
+      if(go==='found')openFound();
+      else if(go==='fossil')openAtlas();
+      else if(go==='area')openAreas();
+      else if(go==='badge')openBadges();
+    };
+  });
   Array.prototype.forEach.call(document.querySelectorAll('.lvbtn'),function(b){
     b.onclick=function(){
       state=L.setLevel(store,state,b.getAttribute('data-lv'));
