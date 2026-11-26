@@ -841,3 +841,32 @@ th.sortable.sorted::after {
 @media (max-width: 768px) {
   .species-card, #species-list .species-card { flex: 1 1 100%; }
 }
+
+/* ===== 地图定位高亮：飞过去之后，目标点要在一堆点里一眼认出 =====
+   呼吸光环画在 SVG path 上，用 stroke/fill 动画（不用 transform，
+   SVG path 的 transform 原点在画布左上角，缩放会跑偏）。 */
+.gbsy-focus-halo {
+  animation: gbsy-halo-pulse 1.8s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes gbsy-halo-pulse {
+  0%   { stroke-opacity: .95; stroke-width: 2px;  fill-opacity: .22; }
+  70%  { stroke-opacity: 0;   stroke-width: 14px; fill-opacity: 0; }
+  100% { stroke-opacity: 0;   stroke-width: 14px; fill-opacity: 0; }
+}
+.leaflet-tooltip.gbsy-focus-tip {
+  background: #1b5e20;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .28);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 9px;
+  white-space: nowrap;
+}
+.leaflet-tooltip-top.gbsy-focus-tip::before { border-top-color: #1b5e20; }
+/* 系统要求减少动画时，静态描边仍可辨认，不再闪烁 */
+@media (prefers-reduced-motion: reduce) {
+  .gbsy-focus-halo { animation: none; }
+}

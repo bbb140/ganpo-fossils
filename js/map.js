@@ -80,12 +80,27 @@ const COLOR_BY = 'level';                // 'level' 按保护级别 | 'area' 按
 /* 4.4 配色表 → js/fields.js（AREA_COLOR/colorByArea、LEVEL_COLOR/colorByLevel），列表页共用 */
 
 function markerColor(s) {
-  /* 小区"未定"（如清江盆地）：A岗裁定不参与分区着色，单列灰色 */
+  /* 小区"未定"（如清江盆地）：不参与分区着色，单列灰色 */
   const zone = field(s, F.zone);
   if (zone.indexOf('未定') > -1) return '#9E9E9E';
   return COLOR_BY === 'level'
     ? colorByLevel(field(s, F.level))
     : colorByArea(field(s, F.region));
+}
+
+/* 点位原始样式：占位=半透明虚线，实测=实心白描边。
+   抽出来给「创建点位」和「取消定位高亮后还原」共用，避免两处样式漂移。 */
+function baseMarkerStyle(s) {
+  const approx = isApprox(field(s, F.acc) || '未标注');
+  const mc = markerColor(s);
+  return {
+    radius: approx ? 7 : 6,
+    color: approx ? mc : '#fff',
+    weight: approx ? 2 : 1.5,
+    dashArray: approx ? '4 3' : null,
+    fillColor: mc,
+    fillOpacity: approx ? 0.25 : 0.9
+  };
 }
 
 /* 5. colorByLevel / colorByArea / 配色表 → js/fields.js（v2.9 统一，列表页同色） */
@@ -132,6 +147,68 @@ function openDetail(s, mk) {
   if (mk) {
     if (!mk.getPopup || !mk.getPopup()) mk.bindPopup(popupHTML(s));
     mk.openPopup();
+  }
+}
+
+/* 6.0.2 定位高亮：飞过去之后还要一眼认出是哪一个点。
+   做法＝原点位变亮（半径/描边/填充提高）+ 一圈呼吸光环 + 常驻名称标签。
+   只改视觉，不改坐标语义：占位点仍是虚线，不装成实测点。
+   与 detail.js 的 sitefocus/siteblur 同步：侧栏开→高亮，关→还原。 */
+let focusPoint = null;      // { rec, marker, baseStyle }
+let focusHalo = null;       // 呼吸光圈图层
+
+function clearFocusHighlight() {
+  if (!focusPoint) return;
+  const mk = focusPoint.marker;
+  if (mk && mk.setStyle) mk.setStyle(focusPoint.baseStyle);
+  if (mk && mk.unbindTooltip) mk.unbindTooltip();
+  if (focusHalo && map.removeLayer) map.removeLayer(focusHalo);
+  focusHalo = null;
+  focusPoint = null;
+}
+
+function applyFocusHighlight(rec) {
+  const code = rec && field(rec, F.code);
+  if (!code) return;
+  /* 侧栏 show 派发 sitefocus、focus(code) 也会兜底调用一次；
+     同一条记录不重复重建图层，免得标签闪一下。 */
+  if (focusPoint && field(focusPoint.rec, F.code) === code) return;
+  clearFocusHighlight();
+  /* 点在数据加载后才建好，从 GBSY 取而不是捕捉 then 内的局部变量 */
+  const list = (window.GBSY && window.GBSY.points) || [];
+  const p = list.filter(function (x) { return field(x.rec, F.code) === code; })[0];
+  if (!p) return;
+  if (!map.hasLayer(p.marker) && p.marker.addTo) p.marker.addTo(map);
+  const base = baseMarkerStyle(p.rec);
+  focusPoint = { rec: p.rec, marker: p.marker, baseStyle: base };
+
+  if (p.marker.setStyle) {
+    p.marker.setStyle({
+      radius: base.radius + 4,
+      weight: 3,
+      fillOpacity: Math.min(0.85, base.fillOpacity + 0.4)
+    });
+  }
+  if (p.marker.bindTooltip) {
+    p.marker.bindTooltip('◉ ' + field(p.rec, F.name) + '（定位点）', {
+      permanent: true, direction: 'top', offset: [0, -10],
+      className: 'gbsy-focus-tip'
+    });
+  }
+  focusHalo = L.circleMarker([p.lat, p.lon], {
+    radius: base.radius + 12,
+    color: base.fillColor,
+    weight: 2,
+    opacity: 0.9,
+    fillColor: base.fillColor,
+    fillOpacity: 0.12,
+    interactive: false,
+    bubblingMouseEvents: false,
+    className: 'gbsy-focus-halo'
+  }).addTo(map);
+  /* 老渲染器可能不吃 options.className，直接给 DOM 也补一次 */
+  if (focusHalo.getElement && focusHalo.getElement() && L.DomUtil && L.DomUtil.addClass) {
+    L.DomUtil.addClass(focusHalo.getElement(), 'gbsy-focus-halo');
   }
 }
 
@@ -261,24 +338,20 @@ dataSource
         levelCount[lvRaw] = (levelCount[lvRaw] || 0) + 1;
       }
 
-      /* 占位点样式（A岗要求）：半透明填充 + 同色虚线描边 = 一眼看出"不是实测"；
-         实测点（未来 A-05 升级后出现）才是实心 + 白描边 */
-      const mc = markerColor(s);
-      const mk = L.circleMarker([lat, lon], {
-        radius: approx ? 7 : 6,
+      /* 占位点样式：半透明填充 + 同色虚线描边 = 一眼看出"不是实测"；
+         实测点（未来升级后出现）才是实心 + 白描边 */
+      const mk = L.circleMarker([lat, lon], Object.assign({
         /* Leaflet 的 Path 图层默认会把 click 冒泡给 map。detail.js 在 map 上
            挂了"点空白关闭侧栏"，若不关掉冒泡，点位刚打开的侧栏会被同一次
            点击立刻关掉（内容写了但 hidden=true，看着像点了没反应）。 */
-        bubblingMouseEvents: false,
-        color: approx ? mc : '#fff',
-        weight: approx ? 2 : 1.5,
-        dashArray: approx ? '4 3' : null,            // 虚线描边 = 行政驻地占位
-        fillColor: mc,
-        fillOpacity: approx ? 0.25 : 0.9             // 半透明 = 占位
-      }).addTo(map);
+        bubblingMouseEvents: false
+      }, baseMarkerStyle(s))).addTo(map);
       /* 详情侧栏（P1-5）：detail.js 加载了走侧栏；没加载（极端情况）退回弹卡。
          弹卡不放默认绑定——手机上 popup 会被挡，且 16 字段塞不下 */
-      mk.on('click', function () { openDetail(s, mk); });
+      mk.on('click', function () {
+        openDetail(s, mk);
+        applyFocusHighlight(s);   // 无 detail.js 时也有高亮（弹卡降级路径）
+      });
       points.push({ rec: s, marker: mk, lat: lat, lon: lon });
 
       shown++;
@@ -356,6 +429,8 @@ dataSource
           if (!on && has) map.removeLayer(p.marker);
           if (on) n++;
         });
+        /* 筛选把高亮点藏了就撤掉光环，免得空地图上孤零零挂个标签 */
+        if (focusPoint && !map.hasLayer(focusPoint.marker)) clearFocusHighlight();
         return n;
       },
       focus: function (code) {
@@ -370,9 +445,29 @@ dataSource
           map.setView([p.lat, p.lon], z);  // 无动画兜底（测试桩/旧 Leaflet）
         }
         openDetail(p.rec, p.marker);       // 侧栏优先（名录页 ?code= 跳转走这里）
+        applyFocusHighlight(p.rec);        // 侧栏事件没派到时也要高亮（幂等）
         return true;
-      }
+      },
+      /* 外部手动控制高亮，测试与集成用；与侧栏状态互不影响 */
+      highlight: function (code) {
+        const p = points.filter(function (x) {
+          return field(x.rec, F.code) === code;
+        })[0];
+        if (!p) return false;
+        applyFocusHighlight(p.rec);
+        return true;
+      },
+      clearHighlight: function () { clearFocusHighlight(); }
     };
+
+    /* 侧栏打开/关闭 → 高亮跟随，点地图点位与从名录页跳转表现一致。
+       注：这里监听 document 事件而不是直接调 detail.js，保证联动只有一处。 */
+    if (document.addEventListener) {
+      document.addEventListener('gbsy:sitefocus', function (e) {
+        applyFocusHighlight(e && e.detail && e.detail.rec);
+      });
+      document.addEventListener('gbsy:siteblur', function () { clearFocusHighlight(); });
+    }
     /* 7.5 从名录页跳过来（map.html?code=JX-02-04-001）：定位到该点并打开弹卡。
            code 必须在 gbsy:ready 之前读——js/filter.js 在同一事件里同步 URL，
            会把 ?code= 改写成筛选参数，之后再读就没了。 */
