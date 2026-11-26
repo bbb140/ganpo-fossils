@@ -214,7 +214,8 @@
       });
     }
 
-    /* 点地图空白处关闭（Leaflet 图层的 click 不会冒泡到 map，安全） */
+    /* 点地图空白处关闭。注意：点位图层已在 map.js 里显式设 bubblingMouseEvents:false，
+       否则点标记时会同时命中这里，把刚打开的侧栏立刻关掉。 */
     if (map && map.on) map.on('click', hide);
   }
 

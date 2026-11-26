@@ -98,6 +98,7 @@ setTimeout(() => {
   const ok = markers.length === 109 &&
     colors['#8B0000'] === 5 && colors['#C62828'] === 17 && colors['#1565C0'] === 87 &&
     placeholder.length === markers.length &&
+    markers.every(m => m.bubblingMouseEvents === false) &&
     legend.indexOf('省级　87') > -1 &&
     legend.indexOf('占位坐标') > -1 &&
     dis.indexOf('不得作为实测坐标引用') > -1;

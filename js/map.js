@@ -56,6 +56,20 @@ function readCodeParam() {
   }
 }
 
+/* 4.2.2 定位时的放大级别：按坐标精度分档，不一律拉到同一个 zoom。
+   本站 109 条全是行政驻地/地名占位（无实测点），一味放得很大会给出
+   虚假的精确感。这里的级别让"误差范围"在屏幕上大致占 100–300 px：
+   村级 2–5 km → 14，乡级 5–10 km → 12，县级/地名 20–30 km → 10，
+   市级 60–100 km → 9（比全省视图明显近一档，又不把误差圈撑满屏幕）。 */
+function zoomForCode(rec) {
+  const acc = String((rec && field(rec, F.acc)) || '');
+  if (acc.indexOf('村级') > -1) return 14;
+  if (acc.indexOf('乡级') > -1) return 12;
+  if (acc.indexOf('县级') > -1 || acc.indexOf('地名') > -1) return 10;
+  if (acc.indexOf('市级') > -1) return 9;
+  return 10;
+}
+
 /* 4.3 配色口径（v2.9）
        v1.2 图册重建版带来逐条保护级别（世界级 5 / 国家级 17 / 省级 87，
        据图册名录判定），COLOR_BY 切回 'level'——红系三档是保护规划的
@@ -252,6 +266,10 @@ dataSource
       const mc = markerColor(s);
       const mk = L.circleMarker([lat, lon], {
         radius: approx ? 7 : 6,
+        /* Leaflet 的 Path 图层默认会把 click 冒泡给 map。detail.js 在 map 上
+           挂了"点空白关闭侧栏"，若不关掉冒泡，点位刚打开的侧栏会被同一次
+           点击立刻关掉（内容写了但 hidden=true，看着像点了没反应）。 */
+        bubblingMouseEvents: false,
         color: approx ? mc : '#fff',
         weight: approx ? 2 : 1.5,
         dashArray: approx ? '4 3' : null,            // 虚线描边 = 行政驻地占位
@@ -345,7 +363,12 @@ dataSource
           return field(x.rec, F.code) === code;
         })[0];
         if (!p) return false;
-        map.setView([p.lat, p.lon], Math.max(map.getZoom(), 10));
+        const z = zoomForCode(p.rec);      // 按精度放大：占位越粗，放得越克制
+        if (typeof map.flyTo === 'function') {
+          map.flyTo([p.lat, p.lon], z, { duration: 0.9 });
+        } else {
+          map.setView([p.lat, p.lon], z);  // 无动画兜底（测试桩/旧 Leaflet）
+        }
         openDetail(p.rec, p.marker);       // 侧栏优先（名录页 ?code= 跳转走这里）
         return true;
       }
