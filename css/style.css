@@ -1282,3 +1282,92 @@ body.page-home {
 @media (max-width: 768px) {
   .page-home nav ul { gap: .2rem 1rem; }
 }
+
+/* ===== 18. 内页浅色协调配色 =====
+   参考首页的墨绿 + 金 + 翠绿体系，但整体提亮：页面底米绿白、容器浅绿灰、卡片纯白，
+   正文用深绿灰而非纯黑，弱化大面积深色。只作用于非首页页面：
+   body:not(.page-home) 与第 16 节 .page-home 深色层互斥，首页完全不受影响。
+   语义色（精度橙、错误红、存疑金、大区色点）保留原值，信息层级不变。 */
+body:not(.page-home) {
+  --c-primary: #2b6b56;
+  --c-text: #25352d;
+  --c-bg: #f5f8f4;
+  --c-surface: #eaf1ea;
+  --c-border: #d9e3da;
+  --c-primary-d: #1f5442;
+  --c-gold: #8f6a1a;
+  --c-accent: #3d9a75;
+  --c-muted: #67796d;
+}
+
+/* 次要与辅助文字：统一到深绿灰梯度，正文不刺眼、层级仍清晰 */
+body:not(.page-home) .stat-card span,
+body:not(.page-home) .stat-note,
+body:not(.page-home) .taxa-card span,
+body:not(.page-home) .note,
+body:not(.page-home) .no-coord-list,
+body:not(.page-home) .filter-meta,
+body:not(.page-home) .species-row p,
+body:not(.page-home) .list-note,
+body:not(.page-home) .dl-notes,
+body:not(.page-home) .list-lead,
+body:not(.page-home) .map-disclaimer,
+body:not(.page-home) .data-table .c-code,
+body:not(.page-home) .gbsy-detail .d-badge,
+body:not(.page-home) .species-card .sp-meta { color: #5c6d62; }
+
+body:not(.page-home) .stat-note strong { color: #25352d; }
+body:not(.page-home) .region-lead,
+body:not(.page-home) .field-dict td:nth-child(2) { color: #566a5d; }
+
+body:not(.page-home) .taxa-card em,
+body:not(.page-home) .species-scope,
+body:not(.page-home) .zone-sub,
+body:not(.page-home) .taxa-chip span,
+body:not(.page-home) .taxa-summary .note,
+body:not(.page-home) .gbsy-detail .d-code,
+body:not(.page-home) .gbsy-detail dt,
+body:not(.page-home) .species-card .sp-author { color: #6b7c70; }
+
+body:not(.page-home) .empty-row,
+body:not(.page-home) .gbsy-detail .d-close { color: #87978c; }
+body:not(.page-home) .acc-km,
+body:not(.page-home) .gbsy-detail .d-note,
+body:not(.page-home) .species-card .sp-ref { color: #83938a; }
+
+body:not(.page-home) .data-table thead th,
+body:not(.page-home) .species-card .sp-sci,
+body:not(.page-home) .species-card .sp-feat,
+body:not(.page-home) .gbsy-detail .d-close:hover { color: #3f5146; }
+
+/* 容器与卡片：提亮、统一浅绿边框，减少灰扑扑的观感 */
+body:not(.page-home) .taxa-card,
+body:not(.page-home) .taxa-chip,
+body:not(.page-home) .gbsy-detail .d-foot { background: #f7faf7; }
+body:not(.page-home) .taxa-card,
+body:not(.page-home) .taxa-chip,
+body:not(.page-home) .badge-plain,
+body:not(.page-home) .gbsy-detail .d-badge,
+body:not(.page-home) .species-card,
+body:not(.page-home) .row-go { border-color: #d3dfd5; }
+body:not(.page-home) .gbsy-detail { border-color: #cddbd0; }
+body:not(.page-home) .species-card .sp-thumb { background: #eef2ec; }
+body:not(.page-home) .map-disclaimer { background: #f0f5ef; }
+body:not(.page-home) .badge-plain,
+body:not(.page-home) .gbsy-detail .d-badge-status { background: #eef2ec; }
+body:not(.page-home) .gbsy-detail .d-close:hover { background: #eaf1ea; }
+
+/* 表格：浅色斑马纹 + 悬停反馈，长表扫读不累眼 */
+body:not(.page-home) .data-table th,
+body:not(.page-home) .data-table td { border-bottom-color: #e0e9e1; }
+body:not(.page-home) .data-table thead th { border-bottom-color: #cddbd0; }
+body:not(.page-home) .data-table tbody tr:nth-child(even) { background: #f4f8f4; }
+body:not(.page-home) .data-table tbody tr:hover,
+body:not(.page-home) .table-placeholder tbody tr:hover { background: #eaf3ec; }
+
+/* 表单与按钮：边框降对比、重置/幽灵按钮沿用亮底 */
+body:not(.page-home) .filter-row input,
+body:not(.page-home) .filter-row select,
+body:not(.page-home) .filter-row button { border-color: #c4d3c7; }
+body:not(.page-home) .btn-reset,
+body:not(.page-home) .btn-ghost { background: #fff; }
