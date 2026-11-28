@@ -160,6 +160,13 @@
     function imgOf(sp) {
       return (Array.isArray(sp.images) && sp.images[0]) ? sp.images[0] : pick(sp, ['image', '图片', '照片']);
     }
+    /* 首页专用：把图册截图上的「横切面 ×N」文字裁掉的干净副本。
+       白名单外的图片（如日后新增物种）仍用原图，不会出现 404。 */
+    var CLEAN = { '010_1': 1, '011_1': 1, '015_1': 1, '022_1': 1, '026_1': 1, '027_1': 1, '046_1': 1 };
+    function homeImg(u) {
+      var m = String(u || '').match(/^(.*\/)?(\d+_\d+)\.webp$/);
+      return (m && CLEAN[m[2]]) ? (m[1] || '') + 'home/' + m[2] + '.webp' : u;
+    }
     function nameOf(sp) {
       return pick(sp, ['cn_name', '中文名', '中名']) ||
              [pick(sp, ['genus', '属名']), pick(sp, ['species', '种加词'])].filter(Boolean).join(' ') ||
@@ -181,7 +188,7 @@
     }
 
     whenSpecies(function (sp) {
-      var imgs = sp.filter(imgOf).slice(0, 6).map(imgOf);
+      var imgs = sp.filter(imgOf).slice(0, 6).map(function (s) { return homeImg(imgOf(s)); });
       if (!imgs.length) {
         $('heroGallery').innerHTML = '';
         $('heroGallery').className = 'hero-gallery no-img';
@@ -234,7 +241,7 @@
           var n = sites.filter(function (r) { return area(pick(r, ['region', '大区'])) === a; }).length;
           var item = rep[a];
           var photo = item
-            ? '<img src="' + esc(imgOf(item)) + '" alt="' + esc(nameOf(item)) + '" loading="lazy">'
+            ? '<img src="' + esc(homeImg(imgOf(item))) + '" alt="' + esc(nameOf(item)) + '" loading="lazy">'
             : '';
           var info = item
             ? '<b>' + esc(nameOf(item)) + '</b><br>' + esc(pick(item, ['taxa', '门类'])) + ' · ' + esc(pick(item, ['age', '地质年代']))
