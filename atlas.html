@@ -282,6 +282,22 @@
     </div>
   </header>
 
+<style>
+.gp-plate{position:relative;margin:18px 0 14px;padding:26px 28px 14px;background:#FBF8F1;border:1px solid #DAD3C2;outline:1px solid #DAD3C2;outline-offset:4px;overflow:hidden}
+.gp-plate::before{content:"+";position:absolute;left:10px;top:6px;color:#B9B2A0;font-family:serif;font-size:1.05rem}
+.gp-plate::after{content:"+";position:absolute;right:10px;bottom:4px;color:#B9B2A0;font-family:serif;font-size:1.05rem}
+.gp-main{display:block;width:min(640px,74%);margin:0 auto;filter:drop-shadow(0 0 14px rgba(31,92,77,.12))}
+.gp-amm{position:absolute;left:5%;top:9%;width:104px;opacity:.85;transform:rotate(-12deg)}
+.gp-tri{position:absolute;right:4%;top:11%;width:94px;opacity:.8;transform:rotate(8deg)}
+.gp-cap{text-align:center;font-size:12px;color:#7C8A82;margin-top:6px;letter-spacing:.05em}
+@media (max-width:720px){.gp-amm{width:64px}.gp-tri{width:56px}}
+</style>
+<div class="gp-plate">
+  <img class="gp-amm" src="assets/amm_lineart_ink.png" alt="菊石线描">
+  <img class="gp-tri" src="assets/tri_lineart_ink.png" alt="三叶虫线描">
+  <img class="gp-main" src="assets/skel_dino_ink.png" alt="棘龙骨架科学线描图">
+  <div class="gp-cap">图源：Wikimedia Commons · CC BY-SA 4.0</div>
+</div>
   <div class="hud">
     <button type="button" class="stat" data-go="found" title="查看已探索产地清单"><div class="n" id="sFound">0</div><div class="l">已探索产地<span class="go">→</span></div></button>
     <button type="button" class="stat" data-go="fossil" title="打开我的图鉴本"><div class="n" id="sFossil">0/0</div><div class="l">已收集化石（可探索）<span class="go">→</span></div></button>
