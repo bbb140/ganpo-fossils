@@ -6,11 +6,18 @@
   <title>赣鄱石语 - 江西省古生物化石资源专题科普平台</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="page-home">
 
   <header>
     <nav>
-      <a class="logo" href="index.html">赣鄱石语</a>
+      <a class="logo" href="index.html">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2c4 3 7 6 7 10a7 7 0 0 1-14 0c0-4 3-7 7-10z"/><path d="M5 12h14M12 2v20"/>
+          </svg>
+        </span>
+        <span>赣鄱石语</span>
+      </a>
       <ul>
         <li><a href="index.html" class="active">首页</a></li>
         <li><a href="map.html">产地地图</a></li>
@@ -23,18 +30,32 @@
 
   <main>
 
-    <!-- ① Hero 区 -->
-    <section class="hero">
-      <h1>江西省古生物化石资源专题科普平台</h1>
-      <p>以《江西省古生物化石保护规划（2016—2025 年）》与《江西省古生物化石图册》为底本，把全省 4 大保护分区、109 处重要化石产地做成可检索、可定位的公开档案。</p>
+    <!-- ① Hero：版式取自首页改版样张，文案保留本站原有口径 -->
+    <section class="hero home-hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="hero-badge"><i></i> 江西省古生物化石资源专题科普平台</span>
+          <h1>读懂赣鄱大地<br>深埋的<span class="hl">生命密码</span></h1>
+          <p class="sub">以《江西省古生物化石保护规划（2016—2025 年）》与《江西省古生物化石图册》为底本，把全省 4 大保护分区、109 处重要化石产地做成可检索、可定位的公开档案。</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="map.html">探索产地地图 →</a>
+            <a class="btn ghost" href="atlas.html">浏览化石图鉴</a>
+          </div>
+        </div>
+        <!-- 六张真实标本照由下方脚本从图鉴数据填充；先放骨架块，避免数据到达时双栏突然撑开 -->
+        <div class="hero-gallery" id="heroGallery" aria-label="化石标本图">
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+        </div>
+      </div>
     </section>
 
     <!-- ② 数据速览条：四个数字来自《保护规划（2016—2025年）》全省口径 -->
-    <section class="stats">
-      <div class="stat-card"><strong>109</strong><span>处重要化石产地</span></div>
-      <div class="stat-card"><strong>5</strong><span>处世界级产地</span></div>
-      <div class="stat-card"><strong>20</strong><span>处国家级产地</span></div>
-      <div class="stat-card"><strong>4</strong><span>处规划保护区</span></div>
+    <section class="stats home-stats">
+      <div class="stat-card"><strong>109</strong><span>处重要化石产地</span><em>LOCALITIES</em></div>
+      <div class="stat-card"><strong>5</strong><span>处世界级产地</span><em>WORLD CLASS</em></div>
+      <div class="stat-card"><strong>20</strong><span>处国家级产地</span><em>NATIONAL</em></div>
+      <div class="stat-card"><strong>4</strong><span>处规划保护区</span><em>RESERVES</em></div>
     </section>
     <!-- 口径必须写在这里：四个数字是全省规划口径，本站收录与图册判定口径需分别注明 -->
     <p class="stat-note">以上为《江西省古生物化石保护规划（2016—2025 年）》全省口径。
@@ -44,57 +65,65 @@
       属两套统计口径。地图按保护级别着色。
       <a href="map.html">进入产地地图 →</a></p>
 
-    <!-- ③ 四大保护分区卡片 -->
-    <section class="region-cards">
-      <h2>四大保护分区</h2>
-      <div class="card-wrap">
-        <a class="card" href="#region-nw">赣西北</a>
-        <a class="card" href="#region-ne">赣东北</a>
-        <a class="card" href="#region-w">赣西</a>
-        <a class="card" href="#region-se">赣东南</a>
+    <!-- ③ 四大保护分区图片卡：代表化石与收录条数由真实数据填充 -->
+    <section class="home-section" id="areas">
+      <div class="sec-head">
+        <div><small>EXPLORE BY REGION</small><h2>四大保护分区</h2></div>
+        <p>点击分区，查看该区产地与化石档案</p>
       </div>
+      <div class="area-grid" id="areaGrid"></div>
     </section>
 
-    <!-- ④ 四个分区：内容全部由 js/main.js 从 data/sites.json 渲染
-         不再写死任何数字/产地名，数据更新后刷新即变 -->
-    <section id="region-nw" class="region-block" data-region="赣西北">
-      <h2>赣西北</h2>
-      <p class="region-lead">正在载入…</p>
-      <table class="table-placeholder">
-        <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="species-cards"></div>
-    </section>
+    <!-- ④ 分区页签表格：四个 section[data-region] 仍由 js/main.js 渲染，一条数据都不写死 -->
+    <section class="home-section" id="table">
+      <div class="sec-head">
+        <div><small>FOSSIL LOCALITIES</small><h2>重要产地档案</h2></div>
+        <p id="tableNote">四大分区 · 共 109 处产地档案</p>
+      </div>
+      <div class="table-card">
+        <div class="table-tabs" id="tableTabs" role="tablist" aria-label="按保护分区查看产地"></div>
+        <div class="region-panes">
+          <section id="region-nw" class="region-block" data-region="赣西北">
+            <h2>赣西北</h2>
+            <p class="region-lead">正在载入…</p>
+            <table class="table-placeholder">
+              <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div class="species-cards"></div>
+          </section>
 
-    <section id="region-ne" class="region-block" data-region="赣东北">
-      <h2>赣东北</h2>
-      <p class="region-lead">正在载入…</p>
-      <table class="table-placeholder">
-        <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="species-cards"></div>
-    </section>
+          <section id="region-ne" class="region-block" data-region="赣东北" hidden>
+            <h2>赣东北</h2>
+            <p class="region-lead">正在载入…</p>
+            <table class="table-placeholder">
+              <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div class="species-cards"></div>
+          </section>
 
-    <section id="region-w" class="region-block" data-region="赣西">
-      <h2>赣西</h2>
-      <p class="region-lead">正在载入…</p>
-      <table class="table-placeholder">
-        <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="species-cards"></div>
-    </section>
+          <section id="region-w" class="region-block" data-region="赣西" hidden>
+            <h2>赣西</h2>
+            <p class="region-lead">正在载入…</p>
+            <table class="table-placeholder">
+              <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div class="species-cards"></div>
+          </section>
 
-    <section id="region-se" class="region-block" data-region="赣东南">
-      <h2>赣东南</h2>
-      <p class="region-lead">正在载入…</p>
-      <table class="table-placeholder">
-        <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="species-cards"></div>
+          <section id="region-se" class="region-block" data-region="赣东南" hidden>
+            <h2>赣东南</h2>
+            <p class="region-lead">正在载入…</p>
+            <table class="table-placeholder">
+              <thead><tr><th>产地名称</th><th>所在市县</th><th>地质年代</th><th>主要门类</th><th>数据状态</th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <div class="species-cards"></div>
+          </section>
+        </div>
+      </div>
     </section>
 
   </main>
@@ -108,5 +137,130 @@
   <!-- species.js：图鉴渲染层，无数据时自动回退到门类聚合（独立于 leaflet） -->
   <script src="js/species.js"></script>
   <script src="js/main.js"></script>
+
+  <!-- 首页版式的装饰与页签交互：只依赖已加载的数据，不改动 main.js 的渲染逻辑 -->
+  <script>
+  (function () {
+    'use strict';
+    var ORDER = ['赣西北', '赣东北', '赣西', '赣东南'];
+    var IDS = { '赣西北': 'region-nw', '赣东北': 'region-ne', '赣西': 'region-w', '赣东南': 'region-se' };
+    var $ = function (id) { return document.getElementById(id); };
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function pick(o, keys) {
+      for (var i = 0; i < keys.length; i++) {
+        var v = o && o[keys[i]];
+        if (v !== undefined && v !== null && String(v).trim()) return String(v).trim();
+      }
+      return '';
+    }
+    function area(v) { return String(v || '').replace(/大区|\s/g, ''); }
+    function imgOf(sp) {
+      return (Array.isArray(sp.images) && sp.images[0]) ? sp.images[0] : pick(sp, ['image', '图片', '照片']);
+    }
+    function nameOf(sp) {
+      return pick(sp, ['cn_name', '中文名', '中名']) ||
+             [pick(sp, ['genus', '属名']), pick(sp, ['species', '种加词'])].filter(Boolean).join(' ') ||
+             pick(sp, ['classification', '分类位置']) || '代表化石';
+    }
+    function speciesNow() {
+      var api = window.GBSYSpecies;
+      return (api && api.get) ? (api.get() || []) : [];
+    }
+
+    /* 图鉴数据在线时异步到达：到达后再补一次图与代表化石名 */
+    function whenSpecies(cb) {
+      var sp = speciesNow();
+      if (sp.length) { cb(sp); return; }
+      document.addEventListener('gbsy:species', function handler() {
+        document.removeEventListener('gbsy:species', handler);
+        cb(speciesNow());
+      });
+    }
+
+    whenSpecies(function (sp) {
+      var imgs = sp.filter(imgOf).slice(0, 6).map(imgOf);
+      if (!imgs.length) {
+        $('heroGallery').innerHTML = '';
+        $('heroGallery').className = 'hero-gallery no-img';
+        return;
+      }
+      $('heroGallery').innerHTML = imgs.map(function (u) {
+        return '<div><img src="' + esc(u) + '" alt="化石标本" loading="lazy"></div>';
+      }).join('');
+    });
+
+    /* 站点数据：离线版已内联，在线版与 main.js 并行读取一次 */
+    var siteSrc = window.SITES_DATA ? Promise.resolve(window.SITES_DATA)
+      : (typeof fetch === 'function'
+          ? fetch('./data/sites.json').then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
+          : Promise.resolve([]));
+
+    var current = ORDER[0];
+    function activate(a) {
+      current = a;
+      ORDER.forEach(function (x) {
+        var sec = $(IDS[x]);
+        if (sec) sec.hidden = (x !== a);
+      });
+      Array.prototype.forEach.call($('tableTabs').querySelectorAll('button'), function (b) {
+        var on = b.getAttribute('data-area') === a;
+        b.className = on ? 'on' : '';
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      var rows = document.querySelectorAll('#' + IDS[a] + ' tbody tr').length;
+      $('tableNote').textContent = a + ' · 共 ' + rows + ' 处产地档案';
+    }
+
+    siteSrc.then(function (raw) {
+      var sites = Array.isArray(raw) ? raw : ((raw && (raw.sites || raw.data)) || []);
+      $('tableTabs').innerHTML = ORDER.map(function (a) {
+        return '<button type="button" role="tab" data-area="' + esc(a) + '">' + esc(a) + '</button>';
+      }).join('');
+      Array.prototype.forEach.call($('tableTabs').querySelectorAll('button'), function (b) {
+        b.onclick = function () { activate(b.getAttribute('data-area')); };
+      });
+      activate(current);
+
+      whenSpecies(function (sp) {
+        var rep = {};
+        sp.forEach(function (item) {
+          var a = area(pick(item, ['region', '保护分区', '大区']));
+          if (ORDER.indexOf(a) > -1 && !rep[a] && imgOf(item)) rep[a] = item;
+        });
+        $('areaGrid').innerHTML = ORDER.map(function (a, i) {
+          var n = sites.filter(function (r) { return area(pick(r, ['region', '大区'])) === a; }).length;
+          var item = rep[a];
+          var photo = item
+            ? '<img src="' + esc(imgOf(item)) + '" alt="' + esc(nameOf(item)) + '" loading="lazy">'
+            : '';
+          var info = item
+            ? '<b>' + esc(nameOf(item)) + '</b><br>' + esc(pick(item, ['taxa', '门类'])) + ' · ' + esc(pick(item, ['age', '地质年代']))
+            : '代表化石整理中';
+          return '<a class="area-card" href="#' + IDS[a] + '" data-area="' + esc(a) + '">' +
+            '<div class="ph">' + photo + '</div><div class="body">' +
+            '<div class="idx">AREA 0' + (i + 1) + '</div><h3>' + esc(a) + '</h3>' +
+            '<div class="rep">' + info + '</div>' +
+            '<div class="meta"><span>收录产地 <span class="num">' + n + '</span> 处</span>' +
+            '<span class="go">查看 →</span></div></div></a>';
+        }).join('');
+      });
+    });
+
+    $('areaGrid').addEventListener('click', function (e) {
+      var card = e.target.closest ? e.target.closest('.area-card') : null;
+      if (!card) return;
+      /* 阻止 a[href="#region-…"] 的默认跳转：否则与这里的平滑滚动叠加，会出现二次跳动。
+         scrollIntoView 会自动遵守全局 section[id] 的 scroll-margin-top，桌面/手机留白都合适。 */
+      e.preventDefault();
+      var a = card.getAttribute('data-area');
+      if (a) activate(a);
+      var sec = a && $(IDS[a]);
+      if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+  </script>
 </body>
 </html>
